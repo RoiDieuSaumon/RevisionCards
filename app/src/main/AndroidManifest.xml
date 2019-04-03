@@ -11,11 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".cardsrevision.CardsRevisionActivity" />
-        <activity android:name=".cardsrevisionselector.CardsRevisionSelectorActivity" />
-        <activity android:name=".cardsmanager.CardsManagerActivity" />
+        <activity
+            android:name=".cardsrevision.CardsRevisionActivity"
+            android:label="Révision" />
+        <activity
+            android:name=".cardsrevisionselector.CardsRevisionSelectorActivity"
+            android:label="Révision : sélection" />
+        <activity
+            android:name=".cardsmanager.CardsManagerActivity"
+            android:label="Fiches" />
         <activity
             android:name=".home.HomeActivity"
+            android:label="Accueil"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
