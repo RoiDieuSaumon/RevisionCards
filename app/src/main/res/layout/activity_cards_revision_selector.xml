@@ -5,16 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".home.HomeActivity">
+    tools:context=".cardsrevisionselector.CardsRevisionSelectorActivity">
 
     <include
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
+    <Button
+        android:id="@+id/activity_cards_revision_selector_review_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sélectionner les fiches à réviser" />
+        android:layout_gravity="center_horizontal"
+        android:text="Réviser"
+        android:layout_marginTop="20dp"
+        android:width="210dp"
+        android:height="70dp"
+        android:textSize="25sp" />
 
 </LinearLayout>
