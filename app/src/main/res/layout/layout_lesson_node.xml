@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="48dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:background="@color/lesson_1">
+
+    <com.github.johnkil.print.PrintView
+        android:id="@+id/layout_lesson_node_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"
+        app:iconText="@string/ic_keyboard_arrow_right"
+        app:iconColor="@android:color/black"
+        app:iconFont="fonts/material-icon-font.ttf"
+        app:iconSize="20dp" />
+
+    <TextView
+        android:id="@+id/layout_lesson_node_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/layout_lesson_node_icon"
+        android:layout_toStartOf="@+id/layout_lesson_node_buttons_container"
+        android:textSize="16sp"
+        android:textColor="@android:color/black" />
+
+    <LinearLayout
+        android:id="@+id/layout_lesson_node_buttons_container"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.github.johnkil.print.PrintView
+            android:id="@+id/layout_lesson_node_add_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:iconText="@string/ic_add"
+            app:iconColor="@android:color/black"
+            app:iconFont="fonts/material-icon-font.ttf"
+            app:iconSize="20dp" />
+
+        <com.github.johnkil.print.PrintView
+            android:id="@+id/layout_lesson_node_edit_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:iconText="@string/ic_create"
+            app:iconColor="@android:color/black"
+            app:iconFont="fonts/material-icon-font.ttf"
+            app:iconSize="20dp" />
+
+        <com.github.johnkil.print.PrintView
+            android:id="@+id/layout_lesson_node_delete_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:iconText="@string/ic_delete"
+            app:iconColor="@android:color/black"
+            app:iconFont="fonts/material-icon-font.ttf"
+            app:iconSize="20dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

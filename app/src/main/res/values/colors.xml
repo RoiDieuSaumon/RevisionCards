@@ -3,4 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="subject_1">#F1FFBC</color>
+    <color name="subject_2">#C1CC97</color>
+    <color name="lesson_1">#BEFFF9</color>
+    <color name="lesson_2">#99CCC7</color>
+    <color name="part_1">#F3C7FF</color>
+    <color name="part_2">#C29FCC</color>
+    <color name="card_1">#FFFFFF</color>
+    <color name="card_2">#EEEEEE</color>
 </resources>
