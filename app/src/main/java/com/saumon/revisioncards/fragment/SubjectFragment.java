@@ -1,4 +1,4 @@
-package com.saumon.revisioncards.cardstreeview;
+package com.saumon.revisioncards.fragment;
 
 
 import android.os.Bundle;

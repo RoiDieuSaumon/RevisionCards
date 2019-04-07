@@ -12,19 +12,19 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".cardsrevision.CardsRevisionActivity"
-            android:parentActivityName=".home.HomeActivity"
+            android:name=".activity.CardsRevisionActivity"
+            android:parentActivityName=".activity.HomeActivity"
             android:label="Révision" />
         <activity
-            android:name=".cardsrevisionselector.CardsRevisionSelectorActivity"
-            android:parentActivityName=".home.HomeActivity"
+            android:name=".activity.CardsRevisionSelectorActivity"
+            android:parentActivityName=".activity.HomeActivity"
             android:label="Révision : sélection" />
         <activity
-            android:name=".cardsmanager.CardsManagerActivity"
-            android:parentActivityName=".home.HomeActivity"
+            android:name=".activity.CardsManagerActivity"
+            android:parentActivityName=".activity.HomeActivity"
             android:label="Fiches" />
         <activity
-            android:name=".home.HomeActivity"
+            android:name=".activity.HomeActivity"
             android:label="Accueil"
             android:screenOrientation="portrait">
             <intent-filter>

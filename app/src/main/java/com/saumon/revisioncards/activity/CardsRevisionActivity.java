@@ -1,7 +1,7 @@
-package com.saumon.revisioncards.cardsrevision;
+package com.saumon.revisioncards.activity;
 
 import com.saumon.revisioncards.R;
-import com.saumon.revisioncards.base.BaseActivity;
+import com.saumon.revisioncards.activity.BaseActivity;
 
 public class CardsRevisionActivity extends BaseActivity {
     @Override

@@ -1,12 +1,12 @@
-package com.saumon.revisioncards.home;
+package com.saumon.revisioncards.activity;
 
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 
 import com.saumon.revisioncards.R;
-import com.saumon.revisioncards.base.BaseActivity;
-import com.saumon.revisioncards.cardsmanager.CardsManagerActivity;
-import com.saumon.revisioncards.cardsrevisionselector.CardsRevisionSelectorActivity;
+import com.saumon.revisioncards.activity.BaseActivity;
+import com.saumon.revisioncards.activity.CardsManagerActivity;
+import com.saumon.revisioncards.activity.CardsRevisionSelectorActivity;
 
 import butterknife.OnClick;
 

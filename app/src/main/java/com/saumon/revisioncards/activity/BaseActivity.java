@@ -1,4 +1,4 @@
-package com.saumon.revisioncards.base;
+package com.saumon.revisioncards.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

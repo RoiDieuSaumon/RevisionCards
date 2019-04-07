@@ -1,10 +1,10 @@
-package com.saumon.revisioncards.cardsrevisionselector;
+package com.saumon.revisioncards.activity;
 
 import android.content.Intent;
 
 import com.saumon.revisioncards.R;
-import com.saumon.revisioncards.base.BaseActivity;
-import com.saumon.revisioncards.cardsrevision.CardsRevisionActivity;
+import com.saumon.revisioncards.activity.BaseActivity;
+import com.saumon.revisioncards.activity.CardsRevisionActivity;
 
 import butterknife.OnClick;
 
