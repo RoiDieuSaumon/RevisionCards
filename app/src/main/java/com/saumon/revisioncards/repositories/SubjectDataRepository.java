@@ -1,7 +1,5 @@
 package com.saumon.revisioncards.repositories;
 
-import android.arch.lifecycle.LiveData;
-
 import com.saumon.revisioncards.database.dao.SubjectDao;
 import com.saumon.revisioncards.models.Subject;
 
@@ -14,7 +12,7 @@ public class SubjectDataRepository {
         this.subjectDao = subjectDao;
     }
 
-    public LiveData<List<Subject>> getSubjects() {
+    public List<Subject> getSubjects() {
         return subjectDao.getSubjects();
     }
 

@@ -1,6 +1,5 @@
 package com.saumon.revisioncards.database.dao;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
@@ -13,7 +12,10 @@ import java.util.List;
 @Dao
 public interface GradeDao {
     @Query("SELECT * FROM Grade WHERE cardId = :cardId ORDER BY position ASC")
-    LiveData<List<Grade>> getGradesFromCard(long cardId);
+    List<Grade> getGradesFromCard(long cardId);
+
+    @Query("SELECT * FROM Grade ORDER BY position ASC")
+    List<Grade> getGrades();
 
     @Insert
     long createGrade(Grade grade);

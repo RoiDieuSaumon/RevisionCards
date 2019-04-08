@@ -1,5 +1,6 @@
 package com.saumon.revisioncards.fragment;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,22 +8,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.saumon.revisioncards.CardViewModel;
 import com.saumon.revisioncards.R;
 import com.saumon.revisioncards.holder.CardHolder;
 import com.saumon.revisioncards.holder.LessonHolder;
 import com.saumon.revisioncards.holder.PartHolder;
 import com.saumon.revisioncards.holder.SubjectHolder;
+import com.saumon.revisioncards.injection.Injection;
+import com.saumon.revisioncards.injections.ViewModelFactory;
 import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
 
 public class CardsTreeViewFragment extends Fragment {
+    private CardViewModel cardViewModel;
+
     public CardsTreeViewFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        configureViewModel();
+
         View rootView = inflater.inflate(R.layout.fragment_cards_tree_view, null, false);
         ViewGroup containerView = rootView.findViewById(R.id.fragment_cards_tree_view_container);
 
@@ -30,7 +37,7 @@ public class CardsTreeViewFragment extends Fragment {
         TreeNode subject1 = new TreeNode(new SubjectHolder.IconTreeItem("Matière 1", 1)).setViewHolder(new SubjectHolder(getActivity()));
         TreeNode subject2 = new TreeNode(new SubjectHolder.IconTreeItem( "Matière 2", 2)).setViewHolder(new SubjectHolder(getActivity()));
         TreeNode subject3 = new TreeNode(new SubjectHolder.IconTreeItem( "Matière 3", 3)).setViewHolder(new SubjectHolder(getActivity()));
-        TreeNode subject4 = new TreeNode(new SubjectHolder.IconTreeItem( "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 4)).setViewHolder(new SubjectHolder(getActivity()));
+        TreeNode subject4 = new TreeNode(new SubjectHolder.IconTreeItem( "Matière 4", 4)).setViewHolder(new SubjectHolder(getActivity()));
         TreeNode lesson1 = new TreeNode(new LessonHolder.IconTreeItem("Cours 1", 1)).setViewHolder(new LessonHolder(getActivity()));
         TreeNode lesson2 = new TreeNode(new LessonHolder.IconTreeItem("Cours 2", 2)).setViewHolder(new LessonHolder(getActivity()));
         TreeNode part1 = new TreeNode(new PartHolder.IconTreeItem("Partie 1", 1)).setViewHolder(new PartHolder(getActivity()));
@@ -46,5 +53,10 @@ public class CardsTreeViewFragment extends Fragment {
         containerView.addView(treeView.getView());
 
         return rootView;
+    }
+
+    private void configureViewModel() {
+        ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(getActivity());
+        cardViewModel = ViewModelProviders.of(this, viewModelFactory).get(CardViewModel.class);
     }
 }

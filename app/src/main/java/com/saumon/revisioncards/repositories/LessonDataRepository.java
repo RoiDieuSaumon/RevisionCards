@@ -1,7 +1,5 @@
 package com.saumon.revisioncards.repositories;
 
-import android.arch.lifecycle.LiveData;
-
 import com.saumon.revisioncards.database.dao.LessonDao;
 import com.saumon.revisioncards.models.Lesson;
 
@@ -14,8 +12,12 @@ public class LessonDataRepository {
         this.lessonDao = lessonDao;
     }
 
-    public LiveData<List<Lesson>> getLessonsFromSubject(long subjectId) {
+    public List<Lesson> getLessonsFromSubject(long subjectId) {
         return lessonDao.getLessonsFromSubject(subjectId);
+    }
+
+    public List<Lesson> getLessons() {
+        return lessonDao.getLessons();
     }
 
     public void createLesson(Lesson lesson) {

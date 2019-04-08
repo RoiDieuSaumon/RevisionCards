@@ -1,6 +1,5 @@
 package com.saumon.revisioncards.database.dao;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
@@ -13,7 +12,10 @@ import java.util.List;
 @Dao
 public interface PartDao {
     @Query("SELECT * FROM Part WHERE lessonId = :lessonId ORDER BY position ASC")
-    LiveData<List<Part>> getPartsFromLesson(long lessonId);
+    List<Part> getPartsFromLesson(long lessonId);
+
+    @Query("SELECT * FROM Part ORDER BY position ASC")
+    List<Part> getParts();
 
     @Insert
     long createPart(Part part);

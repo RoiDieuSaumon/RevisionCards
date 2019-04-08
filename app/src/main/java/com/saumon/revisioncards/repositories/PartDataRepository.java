@@ -1,7 +1,5 @@
 package com.saumon.revisioncards.repositories;
 
-import android.arch.lifecycle.LiveData;
-
 import com.saumon.revisioncards.database.dao.PartDao;
 import com.saumon.revisioncards.models.Part;
 
@@ -14,8 +12,12 @@ public class PartDataRepository {
         this.partDao = partDao;
     }
 
-    public LiveData<List<Part>> getPartsFromLesson(long lessonId) {
+    public List<Part> getPartsFromLesson(long lessonId) {
         return partDao.getPartsFromLesson(lessonId);
+    }
+
+    public List<Part> getParts() {
+        return partDao.getParts();
     }
 
     public void createPart(Part part) {

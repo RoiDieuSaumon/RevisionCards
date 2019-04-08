@@ -1,7 +1,5 @@
 package com.saumon.revisioncards.repositories;
 
-import android.arch.lifecycle.LiveData;
-
 import com.saumon.revisioncards.database.dao.GradeDao;
 import com.saumon.revisioncards.models.Grade;
 
@@ -14,8 +12,12 @@ public class GradeDataRepository {
         this.gradeDao = gradeDao;
     }
 
-    public LiveData<List<Grade>> getGradesFromCard(long cardId) {
+    public List<Grade> getGradesFromCard(long cardId) {
         return gradeDao.getGradesFromCard(cardId);
+    }
+
+    public List<Grade> getGrades() {
+        return gradeDao.getGrades();
     }
 
     public void createGrade(Grade grade) {

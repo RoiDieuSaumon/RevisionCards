@@ -1,7 +1,5 @@
 package com.saumon.revisioncards.repositories;
 
-import android.arch.lifecycle.LiveData;
-
 import com.saumon.revisioncards.database.dao.CardDao;
 import com.saumon.revisioncards.models.Card;
 
@@ -14,12 +12,16 @@ public class CardDataRepository {
         this.cardDao = cardDao;
     }
 
-    public LiveData<List<Card>> getCardsFromPart(long partId) {
+    public List<Card> getCardsFromPart(long partId) {
         return cardDao.getCardsFromPart(partId);
     }
 
-    public LiveData<List<Card>> getCardsFromIds(List<Long> cardIds) {
+    public List<Card> getCardsFromIds(List<Long> cardIds) {
         return cardDao.getCardsFromIds(cardIds);
+    }
+
+    public List<Card> getCards() {
+        return cardDao.getCards();
     }
 
     public void createCard(Card card) {

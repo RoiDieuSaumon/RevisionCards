@@ -1,8 +1,6 @@
 package com.saumon.revisioncards;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
-import android.support.annotation.Nullable;
 
 import com.saumon.revisioncards.models.Card;
 import com.saumon.revisioncards.models.Grade;
@@ -15,7 +13,10 @@ import com.saumon.revisioncards.repositories.LessonDataRepository;
 import com.saumon.revisioncards.repositories.PartDataRepository;
 import com.saumon.revisioncards.repositories.SubjectDataRepository;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 
 public class CardViewModel extends ViewModel {
@@ -42,7 +43,16 @@ public class CardViewModel extends ViewModel {
         this.executor = executor;
     }
 
-    public LiveData<List<Subject>> getSubjects() {
+    public Map getCardsWithParents() {
+        List<Subject> subjects = getSubjects();
+        List<Lesson> lessons = getLessons();
+        List<Part> parts = getParts();
+        List<Card> cards = getCards();
+        List<Grade> grades = getGrades();
+        return new Hashtable();
+    }
+
+    public List<Subject> getSubjects() {
         return subjectDataSource.getSubjects();
     }
 
@@ -58,8 +68,12 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> subjectDataSource.deleteSubject(subjectId));
     }
 
-    public LiveData<List<Lesson>> getLessonsFromSubject(long subjectId) {
+    public List<Lesson> getLessonsFromSubject(long subjectId) {
         return lessonDataSource.getLessonsFromSubject(subjectId);
+    }
+
+    public List<Lesson> getLessons() {
+        return lessonDataSource.getLessons();
     }
 
     public void createLesson(Lesson lesson) {
@@ -74,8 +88,12 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> lessonDataSource.deleteLesson(lessonId));
     }
 
-    public LiveData<List<Part>> getPartsFromLesson(long lessonId) {
+    public List<Part> getPartsFromLesson(long lessonId) {
         return partDataSource.getPartsFromLesson(lessonId);
+    }
+
+    public List<Part> getParts() {
+        return partDataSource.getParts();
     }
 
     public void createPart(Part part) {
@@ -90,12 +108,16 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> partDataSource.deletePart(partId));
     }
 
-    public LiveData<List<Card>> getCardsFromPart(long partId) {
+    public List<Card> getCardsFromPart(long partId) {
         return cardDataSource.getCardsFromPart(partId);
     }
 
-    public LiveData<List<Card>> getCardsFromIds(List<Long> cardIds) {
+    public List<Card> getCardsFromIds(List<Long> cardIds) {
         return cardDataSource.getCardsFromIds(cardIds);
+    }
+
+    public List<Card> getCards() {
+        return cardDataSource.getCards();
     }
 
     public void createCard(Card card) {
@@ -110,8 +132,12 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> cardDataSource.deleteCard(cardId));
     }
 
-    public LiveData<List<Grade>> getGradesFromCard(long cardId) {
+    public List<Grade> getGradesFromCard(long cardId) {
         return gradeDataSource.getGradesFromCard(cardId);
+    }
+
+    public List<Grade> getGrades() {
+        return gradeDataSource.getGrades();
     }
 
     public void createGrade(Grade grade) {
