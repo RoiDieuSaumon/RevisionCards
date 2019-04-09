@@ -11,10 +11,10 @@ import java.util.List;
 
 @Dao
 public interface PartDao {
-    @Query("SELECT * FROM Part WHERE lessonId = :lessonId ORDER BY position ASC")
+    @Query("SELECT * FROM Part WHERE lessonId = :lessonId ORDER BY lessonId ASC, position ASC")
     List<Part> getPartsFromLesson(long lessonId);
 
-    @Query("SELECT * FROM Part ORDER BY position ASC")
+    @Query("SELECT * FROM Part ORDER BY lessonId ASC, position ASC")
     List<Part> getParts();
 
     @Insert

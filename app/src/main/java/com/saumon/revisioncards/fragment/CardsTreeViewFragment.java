@@ -16,8 +16,17 @@ import com.saumon.revisioncards.holder.PartHolder;
 import com.saumon.revisioncards.holder.SubjectHolder;
 import com.saumon.revisioncards.injection.Injection;
 import com.saumon.revisioncards.injections.ViewModelFactory;
+import com.saumon.revisioncards.models.Card;
+import com.saumon.revisioncards.models.Grade;
+import com.saumon.revisioncards.models.Lesson;
+import com.saumon.revisioncards.models.Part;
+import com.saumon.revisioncards.models.Subject;
 import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class CardsTreeViewFragment extends Fragment {
     private CardViewModel cardViewModel;
@@ -58,5 +67,20 @@ public class CardsTreeViewFragment extends Fragment {
     private void configureViewModel() {
         ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(getActivity());
         cardViewModel = ViewModelProviders.of(this, viewModelFactory).get(CardViewModel.class);
+    }
+
+    private TreeNode getTreeNodeRoot() {
+        List<Subject> subjects = cardViewModel.getSubjects();
+        List<Lesson> lessons = cardViewModel.getLessons();
+        List<Part> parts = cardViewModel.getParts();
+        List<Card> cards = cardViewModel.getCards();
+        List<Grade> grades = cardViewModel.getGrades();
+
+        TreeNode root = TreeNode.root();
+        for (int is = 0; is < subjects.size(); is++) {
+            Subject subject = subjects.get(is);
+        }
+
+        return root;
     }
 }
