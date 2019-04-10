@@ -50,16 +50,16 @@ public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconT
         Toast.makeText(context, "Supprime le cours", Toast.LENGTH_LONG).show();
     }
 
-    private int getColorFromPosition(int position)
+    private int getColorFromPosition(long position)
     {
         return (0 != position % 2) ? R.color.lesson_1 : R.color.lesson_2;
     }
 
     public static class IconTreeItem {
         String text;
-        int position;
+        long position;
 
-        public IconTreeItem(String text, int position) {
+        public IconTreeItem(String text, long position) {
             this.text = text;
             this.position = position;
         }

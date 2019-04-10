@@ -40,7 +40,7 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
         iconView.setIconText(context.getResources().getString(active ? R.string.ic_keyboard_arrow_down : R.string.ic_keyboard_arrow_right));
     }
 
-    private int getColorFromPosition(int position) {
+    private int getColorFromPosition(long position) {
         return (0 != position % 2) ? R.color.subject_1 : R.color.subject_2;
     }
 
@@ -58,9 +58,9 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
 
     public static class IconTreeItem {
         String text;
-        int position;
+        long position;
 
-        public IconTreeItem(String text, int position) {
+        public IconTreeItem(String text, long position) {
             this.text = text;
             this.position = position;
         }

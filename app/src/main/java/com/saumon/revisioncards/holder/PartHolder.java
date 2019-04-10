@@ -50,16 +50,16 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
         Toast.makeText(context, "Supprime la partie", Toast.LENGTH_LONG).show();
     }
 
-    private int getColorFromPosition(int position)
+    private int getColorFromPosition(long position)
     {
         return (0 != position % 2) ? R.color.part_1 : R.color.part_2;
     }
 
     public static class IconTreeItem {
         String text;
-        int position;
+        long position;
 
-        public IconTreeItem(String text, int position) {
+        public IconTreeItem(String text, long position) {
             this.text = text;
             this.position = position;
         }

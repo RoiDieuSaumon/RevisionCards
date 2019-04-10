@@ -28,7 +28,7 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
         return view;
     }
 
-    private int getColorFromPosition(int position)
+    private int getColorFromPosition(long position)
     {
         return (0 != position % 2) ? R.color.card_1 : R.color.card_2;
     }
@@ -43,9 +43,9 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
 
     public static class IconTreeItem {
         String text;
-        int position;
+        long position;
 
-        public IconTreeItem(String text, int position) {
+        public IconTreeItem(String text, long position) {
             this.text = text;
             this.position = position;
         }
