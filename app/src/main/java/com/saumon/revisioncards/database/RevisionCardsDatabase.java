@@ -1,5 +1,6 @@
 package com.saumon.revisioncards.database;
 
+import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
@@ -9,7 +10,13 @@ import com.saumon.revisioncards.database.dao.GradeDao;
 import com.saumon.revisioncards.database.dao.LessonDao;
 import com.saumon.revisioncards.database.dao.PartDao;
 import com.saumon.revisioncards.database.dao.SubjectDao;
+import com.saumon.revisioncards.models.Card;
+import com.saumon.revisioncards.models.Grade;
+import com.saumon.revisioncards.models.Lesson;
+import com.saumon.revisioncards.models.Part;
+import com.saumon.revisioncards.models.Subject;
 
+@Database(entities = {Subject.class, Lesson.class, Part.class, Card.class, Grade.class}, version = 1, exportSchema = false)
 public abstract class RevisionCardsDatabase extends RoomDatabase {
     private static volatile RevisionCardsDatabase INSTANCE;
 
@@ -27,7 +34,7 @@ public abstract class RevisionCardsDatabase extends RoomDatabase {
                             context.getApplicationContext(),
                             RevisionCardsDatabase.class,
                             "RevisionCardsDatabase.db"
-                    ).build();
+                    ).allowMainThreadQueries().build();
                 }
             }
         }

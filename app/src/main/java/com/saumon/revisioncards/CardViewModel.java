@@ -15,9 +15,7 @@ import com.saumon.revisioncards.repositories.SubjectDataRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Executor;
 
 public class CardViewModel extends ViewModel {

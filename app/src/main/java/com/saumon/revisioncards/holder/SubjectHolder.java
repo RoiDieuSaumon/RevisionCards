@@ -10,8 +10,6 @@ import com.github.johnkil.print.PrintView;
 import com.saumon.revisioncards.R;
 import com.unnamed.b.atv.model.TreeNode;
 
-import butterknife.OnClick;
-
 public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.IconTreeItem> {
     private PrintView iconView;
 

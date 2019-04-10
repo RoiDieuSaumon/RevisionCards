@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.saumon.revisioncards.CardViewModel;
 import com.saumon.revisioncards.R;
@@ -17,15 +16,12 @@ import com.saumon.revisioncards.holder.SubjectHolder;
 import com.saumon.revisioncards.injection.Injection;
 import com.saumon.revisioncards.injections.ViewModelFactory;
 import com.saumon.revisioncards.models.Card;
-import com.saumon.revisioncards.models.Grade;
 import com.saumon.revisioncards.models.Lesson;
 import com.saumon.revisioncards.models.Part;
 import com.saumon.revisioncards.models.Subject;
 import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class CardsTreeViewFragment extends Fragment {
