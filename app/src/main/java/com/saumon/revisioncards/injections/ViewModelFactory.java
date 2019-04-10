@@ -13,6 +13,7 @@ import com.saumon.revisioncards.repositories.SubjectDataRepository;
 
 import java.util.concurrent.Executor;
 
+@SuppressWarnings("unchecked cast")
 public class ViewModelFactory implements ViewModelProvider.Factory {
     private final SubjectDataRepository subjectDataSource;
     private final LessonDataRepository lessonDataSource;

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.saumon.revisioncards.R;
-import com.saumon.revisioncards.activity.BaseActivity;
 import com.saumon.revisioncards.fragment.CardsTreeViewFragment;
 
 public class CardsManagerActivity extends BaseActivity {
@@ -16,6 +15,6 @@ public class CardsManagerActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportFragmentManager().beginTransaction().replace(R.id.activity_cards_manager_placeholder, new CardsTreeViewFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.activity_cards_manager_cards_tree_view_fragment, new CardsTreeViewFragment()).commit();
     }
 }

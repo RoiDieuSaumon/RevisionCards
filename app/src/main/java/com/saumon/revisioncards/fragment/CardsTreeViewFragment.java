@@ -2,6 +2,7 @@ package com.saumon.revisioncards.fragment;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,24 +24,25 @@ import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CardsTreeViewFragment extends Fragment {
     private CardViewModel cardViewModel;
+    private TreeNode root;
+    private AndroidTreeView treeView;
 
     public CardsTreeViewFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         configureViewModel();
+        configureButtonsOnClick();
+        initTreeView();
 
         View rootView = inflater.inflate(R.layout.fragment_cards_tree_view, null, false);
         ViewGroup containerView = rootView.findViewById(R.id.fragment_cards_tree_view_container);
-
-        TreeNode root = getTreeNodeRoot();
-
-        AndroidTreeView treeView = new AndroidTreeView(getActivity(), root);
         containerView.addView(treeView.getView());
 
         return rootView;
@@ -51,13 +53,23 @@ public class CardsTreeViewFragment extends Fragment {
         cardViewModel = ViewModelProviders.of(this, viewModelFactory).get(CardViewModel.class);
     }
 
-    private TreeNode getTreeNodeRoot() {
+    private void configureButtonsOnClick() {
+        Objects.requireNonNull(getActivity()).findViewById(R.id.activity_cards_manager_add_subject_btn).setOnClickListener(v -> addSubject());
+    }
+
+    private void addSubject() {
+        int position = root.getChildren().size() + 1;
+        TreeNode subject = new TreeNode(new SubjectHolder.IconTreeItem("Nouvelle matière", position)).setViewHolder(new SubjectHolder(getActivity()));
+        treeView.addNode(root, subject);
+    }
+
+    private void initTreeView() {
         List<Subject> subjects = cardViewModel.getSubjects();
         List<Lesson> lessons = cardViewModel.getLessons();
         List<Part> parts = cardViewModel.getParts();
         List<Card> cards = cardViewModel.getCards();
 
-        TreeNode root = TreeNode.root();
+        root = TreeNode.root();
         for (int is = 0; is < subjects.size(); is++) {
             Subject subject = subjects.get(is);
             TreeNode subjectNode = new TreeNode(new SubjectHolder.IconTreeItem(subject.getName(), subject.getPosition())).setViewHolder(new SubjectHolder(getActivity()));
@@ -88,6 +100,6 @@ public class CardsTreeViewFragment extends Fragment {
             root.addChild(subjectNode);
         }
 
-        return root;
+        treeView = new AndroidTreeView(getActivity(), root);
     }
 }

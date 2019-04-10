@@ -14,32 +14,32 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class Injection {
-    public static SubjectDataRepository provideSubjectDataSource(Context context) {
+    private static SubjectDataRepository provideSubjectDataSource(Context context) {
         RevisionCardsDatabase database = RevisionCardsDatabase.getInstance(context);
         return new SubjectDataRepository(database.subjectDao());
     }
 
-    public static LessonDataRepository provideLessonDataSource(Context context) {
+    private static LessonDataRepository provideLessonDataSource(Context context) {
         RevisionCardsDatabase database = RevisionCardsDatabase.getInstance(context);
         return new LessonDataRepository(database.lessonDao());
     }
 
-    public static PartDataRepository providePartDataSource(Context context) {
+    private static PartDataRepository providePartDataSource(Context context) {
         RevisionCardsDatabase database = RevisionCardsDatabase.getInstance(context);
         return new PartDataRepository(database.partDao());
     }
 
-    public static CardDataRepository provideCardDataSource(Context context) {
+    private static CardDataRepository provideCardDataSource(Context context) {
         RevisionCardsDatabase database = RevisionCardsDatabase.getInstance(context);
         return new CardDataRepository(database.cardDao());
     }
 
-    public static GradeDataRepository provideGradeDataSource(Context context) {
+    private static GradeDataRepository provideGradeDataSource(Context context) {
         RevisionCardsDatabase database = RevisionCardsDatabase.getInstance(context);
         return new GradeDataRepository(database.gradeDao());
     }
 
-    public static Executor provideExecutor() {
+    private static Executor provideExecutor() {
         return Executors.newSingleThreadExecutor();
     }
 
