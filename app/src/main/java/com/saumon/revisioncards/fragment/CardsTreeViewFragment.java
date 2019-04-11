@@ -1,5 +1,6 @@
 package com.saumon.revisioncards.fragment;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.saumon.revisioncards.CardViewModel;
 import com.saumon.revisioncards.R;
@@ -54,12 +56,31 @@ public class CardsTreeViewFragment extends Fragment {
     }
 
     private void configureButtonsOnClick() {
-        Objects.requireNonNull(getActivity()).findViewById(R.id.activity_cards_manager_add_subject_btn).setOnClickListener(v -> addSubject());
+        Objects.requireNonNull(getActivity()).findViewById(R.id.activity_cards_manager_add_subject_btn).setOnClickListener(v -> addSubjectGetName());
     }
 
-    private void addSubject() {
+    private void addSubjectGetName() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
+
+        builder .setView(inflater.inflate(R.layout.dialog_add_subject, null))
+                .setTitle("Ajouter une matière")
+                .setNegativeButton("Annuler", (dialog, which) -> {
+
+                })
+                .setPositiveButton("Ajouter", (dialog, which) -> {
+                    String name = ((EditText)((AlertDialog)dialog).findViewById(R.id.dialog_add_subject_name_text)).getText().toString();
+                    if (!name.isEmpty()) {
+                        addSubject(name);
+                    }
+                })
+                .create()
+                .show();
+    }
+
+    private void addSubject(String name) {
         int position = root.getChildren().size() + 1;
-        TreeNode subject = new TreeNode(new SubjectHolder.IconTreeItem("Nouvelle matière", position)).setViewHolder(new SubjectHolder(getActivity()));
+        TreeNode subject = new TreeNode(new SubjectHolder.IconTreeItem(name, position)).setViewHolder(new SubjectHolder(getActivity()));
         treeView.addNode(root, subject);
     }
 

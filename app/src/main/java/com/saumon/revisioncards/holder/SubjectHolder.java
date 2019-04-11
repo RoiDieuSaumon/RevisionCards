@@ -11,6 +11,7 @@ import com.saumon.revisioncards.R;
 import com.unnamed.b.atv.model.TreeNode;
 
 public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.IconTreeItem> {
+    private TreeNode node;
     private PrintView iconView;
 
     public SubjectHolder(Context context) {
@@ -19,6 +20,7 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
 
     @Override
     public View createNodeView(TreeNode node, IconTreeItem value) {
+        this.node = node;
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.layout_subject_node, null, false);
         TextView textView = view.findViewById(R.id.layout_subject_node_text);
@@ -43,7 +45,9 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
     }
 
     private void addLesson() {
-        Toast.makeText(context, "Ajoute un cours", Toast.LENGTH_LONG).show();
+        int position = node.getChildren().size() + 1;
+        TreeNode lesson = new TreeNode(new LessonHolder.IconTreeItem("Nouveau cours", position)).setViewHolder(new LessonHolder(context));
+        getTreeView().addNode(node, lesson);
     }
 
     private void editSubject() {
