@@ -16,10 +16,10 @@ public class Lesson {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
-    private long position;
+    private int position;
     private long subjectId;
 
-    public Lesson(String name, long position, long subjectId) {
+    public Lesson(String name, int position, long subjectId) {
         this.name = name;
         this.position = position;
         this.subjectId = subjectId;
@@ -41,11 +41,11 @@ public class Lesson {
         this.name = name;
     }
 
-    public long getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(long position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 

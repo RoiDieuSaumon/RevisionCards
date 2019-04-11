@@ -19,10 +19,10 @@ public class Card {
     private String text1;
     private String text2;
     private int sideToShow;
-    private long position;
+    private int position;
     private long partId;
 
-    public Card(String name, String text1, String text2, long position, long partId) {
+    public Card(String name, String text1, String text2, int position, long partId) {
         this.name = name;
         this.text1 = text1;
         this.text2 = text2;
@@ -71,11 +71,11 @@ public class Card {
         this.sideToShow = sideToShow;
     }
 
-    public long getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(long position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 

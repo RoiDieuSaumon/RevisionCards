@@ -9,9 +9,9 @@ public class Subject {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
-    private long position;
+    private int position;
 
-    public Subject(String name, long position) {
+    public Subject(String name, int position) {
         this.name = name;
         this.position = position;
     }
@@ -32,11 +32,11 @@ public class Subject {
         this.name = name;
     }
 
-    public long getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(long position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 }
