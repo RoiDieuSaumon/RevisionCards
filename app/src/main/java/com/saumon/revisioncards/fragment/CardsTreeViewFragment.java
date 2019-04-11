@@ -1,13 +1,17 @@
 package com.saumon.revisioncards.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 import com.saumon.revisioncards.CardViewModel;
@@ -43,7 +47,7 @@ public class CardsTreeViewFragment extends Fragment {
         configureButtonsOnClick();
         initTreeView();
 
-        View rootView = inflater.inflate(R.layout.fragment_cards_tree_view, null, false);
+        View rootView = inflater.inflate(R.layout.fragment_cards_tree_view, null);
         ViewGroup containerView = rootView.findViewById(R.id.fragment_cards_tree_view_container);
         containerView.addView(treeView.getView());
 
@@ -56,35 +60,58 @@ public class CardsTreeViewFragment extends Fragment {
     }
 
     private void configureButtonsOnClick() {
-        Objects.requireNonNull(getActivity()).findViewById(R.id.activity_cards_manager_add_subject_btn).setOnClickListener(v -> addSubjectGetName());
+        Activity activity = getActivity();
+        if (null == activity) {
+            return;
+        }
+        activity.findViewById(R.id.activity_cards_manager_add_subject_btn).setOnClickListener(v -> addSubjectGetName());
     }
 
     private void addSubjectGetName() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = Objects.requireNonNull(getActivity()).getLayoutInflater();
+        Activity activity = getActivity();
+        if (null == activity) {
+            return;
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        LayoutInflater inflater = activity.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_add_update_node, null);
 
-        builder .setView(inflater.inflate(R.layout.dialog_add_subject, null))
+        AlertDialog dialog = builder
+                .setView(dialogView)
                 .setTitle("Ajouter une matière")
-                .setNegativeButton("Annuler", (dialog, which) -> {
+                .setNegativeButton("Annuler", null)
+                .setPositiveButton("Ajouter", this::addSubject)
+                .create();
 
-                })
-                .setPositiveButton("Ajouter", (dialog, which) -> {
-                    String name = ((EditText)((AlertDialog)dialog).findViewById(R.id.dialog_add_subject_name_text)).getText().toString();
-                    if (!name.isEmpty()) {
-                        addSubject(name);
-                    }
-                })
-                .create()
-                .show();
+        EditText editText = dialogView.findViewById(R.id.dialog_add_update_node_name_text);
+        editText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                Window window = dialog.getWindow();
+                if (null == window) {
+                    return;
+                }
+                window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+            }
+        });
+
+        dialog.show();
     }
 
-    private void addSubject(String name) {
+    private void addSubject(DialogInterface dialog, int which) {
+        String name = ((EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_add_update_node_name_text)).getText().toString();
+        if (name.isEmpty()) {
+            return;
+        }
         int position = root.getChildren().size() + 1;
         TreeNode subject = new TreeNode(new SubjectHolder.IconTreeItem(name, position)).setViewHolder(new SubjectHolder(getActivity()));
         treeView.addNode(root, subject);
     }
 
     private void initTreeView() {
+        Activity activity = getActivity();
+        if (null == activity) {
+            return;
+        }
         List<Subject> subjects = cardViewModel.getSubjects();
         List<Lesson> lessons = cardViewModel.getLessons();
         List<Part> parts = cardViewModel.getParts();
@@ -93,25 +120,25 @@ public class CardsTreeViewFragment extends Fragment {
         root = TreeNode.root();
         for (int is = 0; is < subjects.size(); is++) {
             Subject subject = subjects.get(is);
-            TreeNode subjectNode = new TreeNode(new SubjectHolder.IconTreeItem(subject.getName(), subject.getPosition())).setViewHolder(new SubjectHolder(getActivity()));
+            TreeNode subjectNode = new TreeNode(new SubjectHolder.IconTreeItem(subject.getName(), subject.getPosition())).setViewHolder(new SubjectHolder(activity));
             for (int il = 0; il < lessons.size(); il++) {
                 Lesson lesson = lessons.get(il);
                 if (subject.getId() != lesson.getSubjectId()) {
                     continue;
                 }
-                TreeNode lessonNode = new TreeNode(new LessonHolder.IconTreeItem(lesson.getName(), lesson.getPosition())).setViewHolder(new LessonHolder(getActivity()));
+                TreeNode lessonNode = new TreeNode(new LessonHolder.IconTreeItem(lesson.getName(), lesson.getPosition())).setViewHolder(new LessonHolder(activity));
                 for (int ip = 0; ip < parts.size(); ip++) {
                     Part part = parts.get(ip);
                     if (lesson.getId() != part.getLessonId()) {
                         continue;
                     }
-                    TreeNode partNode = new TreeNode(new PartHolder.IconTreeItem(part.getName(), part.getPosition())).setViewHolder(new PartHolder(getActivity()));
+                    TreeNode partNode = new TreeNode(new PartHolder.IconTreeItem(part.getName(), part.getPosition())).setViewHolder(new PartHolder(activity));
                     for (int ic = 0; ic < cards.size(); ic++) {
                         Card card = cards.get(ic);
                         if (part.getId() != card.getPartId()) {
                             continue;
                         }
-                        TreeNode cardNode = new TreeNode(new CardHolder.IconTreeItem(card.getName(), card.getPosition())).setViewHolder(new CardHolder(getActivity()));
+                        TreeNode cardNode = new TreeNode(new CardHolder.IconTreeItem(card.getName(), card.getPosition())).setViewHolder(new CardHolder(activity));
                         partNode.addChild(cardNode);
                     }
                     lessonNode.addChild(partNode);

@@ -20,7 +20,7 @@ public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconT
     @Override
     public View createNodeView(TreeNode node, LessonHolder.IconTreeItem value) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.layout_lesson_node, null, false);
+        View view = inflater.inflate(R.layout.layout_lesson_node, null);
         TextView textView = view.findViewById(R.id.layout_lesson_node_text);
         textView.setText(value.text);
         view.setBackgroundResource(getColorFromPosition(value.position));

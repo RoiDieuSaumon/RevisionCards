@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <EditText
-        android:id="@+id/dialog_add_subject_name_text"
+        android:id="@+id/dialog_add_update_node_name_text"
         android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

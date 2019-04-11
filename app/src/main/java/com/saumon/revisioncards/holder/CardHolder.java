@@ -17,7 +17,7 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
     @Override
     public View createNodeView(TreeNode node, CardHolder.IconTreeItem value) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.layout_card_node, null, false);
+        View view = inflater.inflate(R.layout.layout_card_node, null);
         TextView textView = view.findViewById(R.id.layout_card_node_text);
         textView.setText(value.text);
         view.setBackgroundResource(getColorFromPosition(value.position));
