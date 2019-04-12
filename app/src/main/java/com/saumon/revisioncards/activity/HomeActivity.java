@@ -18,7 +18,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void configureToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = getToolbar();
         setSupportActionBar(toolbar);
     }
 

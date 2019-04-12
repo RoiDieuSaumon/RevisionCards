@@ -22,11 +22,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract int getLayoutContentViewID();
 
     protected void configureToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = getToolbar();
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    protected Toolbar getToolbar() {
+        return findViewById(R.id.toolbar);
     }
 }

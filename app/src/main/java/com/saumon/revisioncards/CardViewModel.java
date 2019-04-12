@@ -42,66 +42,6 @@ public class CardViewModel extends ViewModel {
         this.executor = executor;
     }
 
-    public ArrayList<HashMap> getCardsWithParents() {
-        List<Subject> subjects = getSubjects();
-        List<Lesson> lessons = getLessons();
-        List<Part> parts = getParts();
-        List<Card> cards = getCards();
-        List<Grade> grades = getGrades();
-
-        ArrayList<HashMap> subjectsList = new ArrayList<>();
-        for (int is = 0; is < subjects.size(); is++) {
-            Subject subject = subjects.get(is);
-            HashMap<String, Object> subjectMap = new HashMap<>();
-            subjectMap.put("subject", subject);
-            ArrayList<HashMap> lessonsList = new ArrayList<>();
-            for (int il = 0; il < lessons.size(); il++) {
-                Lesson lesson = lessons.get(il);
-                if (subject.getId() != lesson.getSubjectId()) {
-                    continue;
-                }
-                HashMap<String, Object> lessonMap = new HashMap<>();
-                lessonMap.put("lesson", lesson);
-                ArrayList<HashMap> partsList = new ArrayList<>();
-                for (int ip = 0; ip < parts.size(); ip++) {
-                    Part part = parts.get(ip);
-                    if (lesson.getId() != part.getLessonId()) {
-                        continue;
-                    }
-                    HashMap<String, Object> partMap = new HashMap<>();
-                    partMap.put("part", part);
-                    ArrayList<HashMap> cardsList = new ArrayList<>();
-                    for (int ic = 0; ic < cards.size(); ic++) {
-                        Card card = cards.get(ic);
-                        if (part.getId() != card.getPartId()) {
-                            continue;
-                        }
-                        HashMap<String, Object> cardMap = new HashMap<>();
-                        cardMap.put("card", card);
-                        ArrayList<Grade> gradesList = new ArrayList<>();
-                        for (int ig = 0; ig < grades.size(); ig++) {
-                            Grade grade = grades.get(ig);
-                            if (card.getId() != grade.getCardId()) {
-                                continue;
-                            }
-                            gradesList.add(grade);
-                        }
-                        cardMap.put("grades", gradesList);
-                        cardsList.add(cardMap);
-                    }
-                    partMap.put("cards", cardsList);
-                    partsList.add(partMap);
-                }
-                lessonMap.put("parts", partsList);
-                lessonsList.add(lessonMap);
-            }
-            subjectMap.put("lessons", lessonsList);
-            subjectsList.add(subjectMap);
-        }
-
-        return subjectsList;
-    }
-
     public List<Subject> getSubjects() {
         return subjectDataSource.getSubjects();
     }

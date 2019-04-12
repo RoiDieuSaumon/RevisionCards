@@ -1,8 +1,10 @@
 package com.saumon.revisioncards.holder;
 
 import android.app.AlertDialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -11,14 +13,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.johnkil.print.PrintView;
+import com.saumon.revisioncards.CardViewModel;
 import com.saumon.revisioncards.R;
+import com.saumon.revisioncards.injection.Injection;
+import com.saumon.revisioncards.injections.ViewModelFactory;
+import com.saumon.revisioncards.models.Subject;
 import com.unnamed.b.atv.model.TreeNode;
 
 import java.util.List;
 
 public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.IconTreeItem> {
     private TreeNode node;
+    private IconTreeItem iconTreeItem;
     private View nodeView;
+    private CardViewModel cardViewModel;
     private TextView textView;
     private PrintView iconView;
 
@@ -29,14 +37,16 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
     @Override
     public View createNodeView(TreeNode node, IconTreeItem iconTreeItem) {
         this.node = node;
+        this.iconTreeItem = iconTreeItem;
         LayoutInflater inflater = LayoutInflater.from(context);
 
         nodeView = inflater.inflate(R.layout.layout_subject_node, null);
-        setColorFromPosition(iconTreeItem.position);
+        setColorFromPosition(iconTreeItem.subject.getPosition());
         configureButtonsOnClick();
+        configureViewModel();
 
         textView = nodeView.findViewById(R.id.layout_subject_node_text);
-        textView.setText(iconTreeItem.text);
+        textView.setText(iconTreeItem.subject.getName());
 
         iconView = nodeView.findViewById(R.id.layout_subject_node_icon);
 
@@ -57,6 +67,11 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
         nodeView.findViewById(R.id.layout_subject_node_add_icon).setOnClickListener(v -> addLessonGetName());
         nodeView.findViewById(R.id.layout_subject_node_edit_icon).setOnClickListener(v -> editSubjectGetName());
         nodeView.findViewById(R.id.layout_subject_node_delete_icon).setOnClickListener(v -> deleteSubjectAskConfirmation());
+    }
+
+    private void configureViewModel() {
+        ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(context);
+        cardViewModel = ViewModelProviders.of((FragmentActivity) context, viewModelFactory).get(CardViewModel.class);
     }
 
     private void addLessonGetName() {
@@ -108,7 +123,7 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
                 .create();
 
         EditText editText = dialogView.findViewById(R.id.dialog_add_update_node_name_text);
-        editText.setText(textView.getText().toString());
+        editText.setText(iconTreeItem.subject.getName());
         editText.setSelection(editText.getText().length());
         editText.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
@@ -129,6 +144,8 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
             return;
         }
         textView.setText(name);
+        iconTreeItem.subject.setName(name);
+        cardViewModel.updateSubject(iconTreeItem.subject);
     }
 
     private void deleteSubjectAskConfirmation() {
@@ -160,20 +177,26 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
     private void deleteSubject(DialogInterface dialog, int which) {
         TreeNode parentNode = node.getParent();
         getTreeView().removeNode(node);
+        cardViewModel.deleteSubject(iconTreeItem.subject.getId());
         List<TreeNode> subjectNodes = parentNode.getChildren();
         int nbSubjectNodes = subjectNodes.size();
         for (int is = 0; is < nbSubjectNodes; is++) {
-            ((SubjectHolder) subjectNodes.get(is).getViewHolder()).setColorFromPosition(is + 1);
+            SubjectHolder subjectHolder = (SubjectHolder) subjectNodes.get(is).getViewHolder();
+            subjectHolder.setColorFromPosition(is + 1);
+            subjectHolder.getSubject().setPosition(is + 1);
+            cardViewModel.updateSubject(subjectHolder.getSubject());
         }
     }
 
-    public static class IconTreeItem {
-        String text;
-        long position;
+    private Subject getSubject() {
+        return iconTreeItem.subject;
+    }
 
-        public IconTreeItem(String text, long position) {
-            this.text = text;
-            this.position = position;
+    public static class IconTreeItem {
+        Subject subject;
+
+        public IconTreeItem(Subject subject) {
+            this.subject = subject;
         }
     }
 }

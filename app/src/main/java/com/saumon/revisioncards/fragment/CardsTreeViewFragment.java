@@ -30,7 +30,6 @@ import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
 
 import java.util.List;
-import java.util.Objects;
 
 public class CardsTreeViewFragment extends Fragment {
     private CardViewModel cardViewModel;
@@ -103,8 +102,10 @@ public class CardsTreeViewFragment extends Fragment {
             return;
         }
         int position = root.getChildren().size() + 1;
-        TreeNode subject = new TreeNode(new SubjectHolder.IconTreeItem(name, position)).setViewHolder(new SubjectHolder(getActivity()));
-        treeView.addNode(root, subject);
+        Subject subject = new Subject(name, position);
+        TreeNode subjectNode = new TreeNode(new SubjectHolder.IconTreeItem(subject)).setViewHolder(new SubjectHolder(getActivity()));
+        treeView.addNode(root, subjectNode);
+        cardViewModel.createSubject(subject);
     }
 
     private void initTreeView() {
@@ -120,7 +121,7 @@ public class CardsTreeViewFragment extends Fragment {
         root = TreeNode.root();
         for (int is = 0; is < subjects.size(); is++) {
             Subject subject = subjects.get(is);
-            TreeNode subjectNode = new TreeNode(new SubjectHolder.IconTreeItem(subject.getName(), subject.getPosition())).setViewHolder(new SubjectHolder(activity));
+            TreeNode subjectNode = new TreeNode(new SubjectHolder.IconTreeItem(subject)).setViewHolder(new SubjectHolder(activity));
             for (int il = 0; il < lessons.size(); il++) {
                 Lesson lesson = lessons.get(il);
                 if (subject.getId() != lesson.getSubjectId()) {
