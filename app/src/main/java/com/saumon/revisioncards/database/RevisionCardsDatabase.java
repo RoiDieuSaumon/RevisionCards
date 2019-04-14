@@ -19,7 +19,7 @@ import com.saumon.revisioncards.models.Lesson;
 import com.saumon.revisioncards.models.Part;
 import com.saumon.revisioncards.models.Subject;
 
-@Database(entities = {Subject.class, Lesson.class, Part.class, Card.class, Grade.class}, version = 2, exportSchema = false)
+@Database(entities = {Subject.class, Lesson.class, Part.class, Card.class, Grade.class}, version = 1, exportSchema = false)
 public abstract class RevisionCardsDatabase extends RoomDatabase {
     private static volatile RevisionCardsDatabase INSTANCE;
 
@@ -37,7 +37,7 @@ public abstract class RevisionCardsDatabase extends RoomDatabase {
                             context.getApplicationContext(),
                             RevisionCardsDatabase.class,
                             "RevisionCardsDatabase.db"
-                    ).fallbackToDestructiveMigration().allowMainThreadQueries().build();
+                    ).allowMainThreadQueries().build();
                 }
             }
         }

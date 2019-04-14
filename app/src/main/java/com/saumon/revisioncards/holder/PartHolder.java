@@ -11,7 +11,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.johnkil.print.PrintView;
 import com.saumon.revisioncards.CardViewModel;
@@ -179,10 +178,10 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
         cardViewModel.deletePart(iconTreeItem.part.getId());
         List<TreeNode> partNodes = parentNode.getChildren();
         int nbPartNodes = partNodes.size();
-        for (int il = 0; il < nbPartNodes; il++) {
-            PartHolder partHolder = (PartHolder) partNodes.get(il).getViewHolder();
-            partHolder.setColorFromPosition(il + 1);
-            partHolder.getPart().setPosition(il + 1);
+        for (int ip = 0; ip < nbPartNodes; ip++) {
+            PartHolder partHolder = (PartHolder) partNodes.get(ip).getViewHolder();
+            partHolder.setColorFromPosition(ip + 1);
+            partHolder.getPart().setPosition(ip + 1);
             cardViewModel.updatePart(partHolder.getPart());
         }
     }
