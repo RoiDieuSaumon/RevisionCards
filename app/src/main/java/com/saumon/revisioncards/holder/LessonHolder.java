@@ -109,6 +109,7 @@ public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconT
         Part part = new Part(name, position, iconTreeItem.lesson.getId());
         TreeNode partNode = new TreeNode(new PartHolder.IconTreeItem(part)).setViewHolder(new PartHolder(context));
         getTreeView().addNode(node, partNode);
+        getTreeView().expandNode(node);
         cardViewModel.createPart(part);
     }
 

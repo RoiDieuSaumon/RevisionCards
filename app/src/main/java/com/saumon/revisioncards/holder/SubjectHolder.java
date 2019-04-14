@@ -109,6 +109,7 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
         Lesson lesson = new Lesson(name, position, iconTreeItem.subject.getId());
         TreeNode lessonNode = new TreeNode(new LessonHolder.IconTreeItem(lesson)).setViewHolder(new LessonHolder(context));
         getTreeView().addNode(node, lessonNode);
+        getTreeView().expandNode(node);
         cardViewModel.createLesson(lesson);
     }
 

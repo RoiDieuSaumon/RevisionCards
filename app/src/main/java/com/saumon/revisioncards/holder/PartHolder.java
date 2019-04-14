@@ -114,6 +114,7 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
         Card card = new Card(name, text1, text2, position, iconTreeItem.part.getId());
         TreeNode cardNode = new TreeNode(new CardHolder.IconTreeItem(card)).setViewHolder(new CardHolder(context));
         getTreeView().addNode(node, cardNode);
+        getTreeView().expandNode(node);
         cardViewModel.createCard(card);
     }
 
