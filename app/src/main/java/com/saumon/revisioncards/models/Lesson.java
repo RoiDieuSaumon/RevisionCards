@@ -4,12 +4,15 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
 // Cours
 @Entity(
         foreignKeys = @ForeignKey(
                 entity = Subject.class,
                 parentColumns = "id",
-                childColumns = "subjectId"
+                childColumns = "subjectId",
+                onDelete = CASCADE
         )
 )
 public class Lesson {

@@ -21,7 +21,8 @@ public class GradeDataRepository {
     }
 
     public void createGrade(Grade grade) {
-        gradeDao.createGrade(grade);
+        long gradeId = gradeDao.createGrade(grade);
+        grade.setId(gradeId);
     }
 
     public void updateGrade(Grade grade) {

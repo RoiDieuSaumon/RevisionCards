@@ -21,7 +21,8 @@ public class LessonDataRepository {
     }
 
     public void createLesson(Lesson lesson) {
-        lessonDao.createLesson(lesson);
+        long lessonId = lessonDao.createLesson(lesson);
+        lesson.setId(lessonId);
     }
 
     public void updateLesson(Lesson lesson) {

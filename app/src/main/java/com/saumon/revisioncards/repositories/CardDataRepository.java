@@ -25,7 +25,8 @@ public class CardDataRepository {
     }
 
     public void createCard(Card card) {
-        cardDao.createCard(card);
+        long cardId = cardDao.createCard(card);
+        card.setId(cardId);
     }
 
     public void updateCard(Card card) {

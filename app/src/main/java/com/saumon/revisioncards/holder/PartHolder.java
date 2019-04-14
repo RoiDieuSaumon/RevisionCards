@@ -75,11 +75,10 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
         cardViewModel = ViewModelProviders.of((FragmentActivity) context, viewModelFactory).get(CardViewModel.class);
     }
 
-    // TODO : créer vue dialog pour récupérer textes
     private void addCardGetName() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
-        View dialogView = inflater.inflate(R.layout.dialog_add_update_node, null);
+        View dialogView = inflater.inflate(R.layout.dialog_add_update_card, null);
 
         AlertDialog dialog = builder
                 .setView(dialogView)
@@ -88,7 +87,7 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
                 .setPositiveButton("Ajouter", this::addCard)
                 .create();
 
-        EditText editText = dialogView.findViewById(R.id.dialog_add_update_node_name_text);
+        EditText editText = dialogView.findViewById(R.id.dialog_add_update_card_name_text);
         editText.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
                 Window window = dialog.getWindow();
@@ -102,14 +101,18 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
         dialog.show();
     }
 
-    // TODO : récupérer les textes
     private void addCard(DialogInterface dialog, int which) {
-        String name = ((EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_add_update_node_name_text)).getText().toString();
-        if (name.isEmpty()) {
+        String name = ((EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_add_update_card_name_text)).getText().toString();
+        String text1 = ((EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_add_update_card_text1_text)).getText().toString();
+        String text2 = ((EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_add_update_card_text2_text)).getText().toString();
+        if (text1.isEmpty() || text2.isEmpty()) {
             return;
         }
+        if (name.isEmpty()) {
+            name = text1 + " / " + text2;
+        }
         int position = node.getChildren().size() + 1;
-        Card card = new Card(name, "", "", position, iconTreeItem.part.getId());
+        Card card = new Card(name, text1, text2, position, iconTreeItem.part.getId());
         TreeNode cardNode = new TreeNode(new CardHolder.IconTreeItem(card)).setViewHolder(new CardHolder(context));
         getTreeView().addNode(node, cardNode);
         cardViewModel.createCard(card);
@@ -189,14 +192,7 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
     }
 
     public static class IconTreeItem {
-        String text;
-        long position;
         Part part;
-
-        public IconTreeItem(String text, long position) {
-            this.text = text;
-            this.position = position;
-        }
 
         public IconTreeItem(Part part) {
             this.part = part;

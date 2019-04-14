@@ -4,12 +4,15 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
 // Note
 @Entity(
         foreignKeys = @ForeignKey(
                 entity = Card.class,
                 parentColumns = "id",
-                childColumns = "cardId"
+                childColumns = "cardId",
+                onDelete = CASCADE
         )
 )
 public class Grade {

@@ -21,7 +21,8 @@ public class PartDataRepository {
     }
 
     public void createPart(Part part) {
-        partDao.createPart(part);
+        long partId = partDao.createPart(part);
+        part.setId(partId);
     }
 
     public void updatePart(Part part) {

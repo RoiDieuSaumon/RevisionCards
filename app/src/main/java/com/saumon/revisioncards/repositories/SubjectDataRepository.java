@@ -17,7 +17,8 @@ public class SubjectDataRepository {
     }
 
     public void createSubject(Subject subject) {
-        subjectDao.createSubject(subject);
+        long subjectId = subjectDao.createSubject(subject);
+        subject.setId(subjectId);
     }
 
     public void updateSubject(Subject subject) {

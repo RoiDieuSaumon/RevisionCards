@@ -103,9 +103,9 @@ public class CardsTreeViewFragment extends Fragment {
         }
         int position = root.getChildren().size() + 1;
         Subject subject = new Subject(name, position);
+        cardViewModel.createSubject(subject);
         TreeNode subjectNode = new TreeNode(new SubjectHolder.IconTreeItem(subject)).setViewHolder(new SubjectHolder(getActivity()));
         treeView.addNode(root, subjectNode);
-        cardViewModel.createSubject(subject);
     }
 
     private void initTreeView() {
@@ -133,13 +133,13 @@ public class CardsTreeViewFragment extends Fragment {
                     if (lesson.getId() != part.getLessonId()) {
                         continue;
                     }
-                    TreeNode partNode = new TreeNode(new PartHolder.IconTreeItem(part.getName(), part.getPosition())).setViewHolder(new PartHolder(activity));
+                    TreeNode partNode = new TreeNode(new PartHolder.IconTreeItem(part)).setViewHolder(new PartHolder(activity));
                     for (int ic = 0; ic < cards.size(); ic++) {
                         Card card = cards.get(ic);
                         if (part.getId() != card.getPartId()) {
                             continue;
                         }
-                        TreeNode cardNode = new TreeNode(new CardHolder.IconTreeItem(card.getName(), card.getPosition())).setViewHolder(new CardHolder(activity));
+                        TreeNode cardNode = new TreeNode(new CardHolder.IconTreeItem(card)).setViewHolder(new CardHolder(activity));
                         partNode.addChild(cardNode);
                     }
                     lessonNode.addChild(partNode);

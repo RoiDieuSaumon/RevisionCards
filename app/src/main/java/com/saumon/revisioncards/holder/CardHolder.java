@@ -20,8 +20,8 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.layout_card_node, null);
         TextView textView = view.findViewById(R.id.layout_card_node_text);
-        textView.setText(value.text);
-        view.setBackgroundResource(getColorFromPosition(value.position));
+        textView.setText(value.card.getName());
+        view.setBackgroundResource(getColorFromPosition(value.card.getPosition()));
 
         view.findViewById(R.id.layout_card_node_edit_icon).setOnClickListener(v -> editCard());
         view.findViewById(R.id.layout_card_node_delete_icon).setOnClickListener(v -> deleteCard());
@@ -43,14 +43,7 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
     }
 
     public static class IconTreeItem {
-        String text;
-        long position;
         Card card;
-
-        public IconTreeItem(String text, long position) {
-            this.text = text;
-            this.position = position;
-        }
 
         public IconTreeItem(Card card) {
             this.card = card;
