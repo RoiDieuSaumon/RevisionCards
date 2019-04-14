@@ -17,6 +17,7 @@ import com.saumon.revisioncards.CardViewModel;
 import com.saumon.revisioncards.R;
 import com.saumon.revisioncards.injection.Injection;
 import com.saumon.revisioncards.injections.ViewModelFactory;
+import com.saumon.revisioncards.models.Lesson;
 import com.saumon.revisioncards.models.Subject;
 import com.unnamed.b.atv.model.TreeNode;
 
@@ -39,15 +40,14 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
         this.node = node;
         this.iconTreeItem = iconTreeItem;
         LayoutInflater inflater = LayoutInflater.from(context);
-
         nodeView = inflater.inflate(R.layout.layout_subject_node, null);
+
         setColorFromPosition(iconTreeItem.subject.getPosition());
         configureButtonsOnClick();
         configureViewModel();
 
         textView = nodeView.findViewById(R.id.layout_subject_node_text);
         textView.setText(iconTreeItem.subject.getName());
-
         iconView = nodeView.findViewById(R.id.layout_subject_node_icon);
 
         return nodeView;
@@ -58,7 +58,7 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
         iconView.setIconText(context.getResources().getString(active ? R.string.ic_keyboard_arrow_down : R.string.ic_keyboard_arrow_right));
     }
 
-    private void setColorFromPosition(long position) {
+    private void setColorFromPosition(int position) {
         int color = (0 != position % 2) ? R.color.subject_1 : R.color.subject_2;
         nodeView.setBackgroundResource(color);
     }
@@ -106,8 +106,10 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
             return;
         }
         int position = node.getChildren().size() + 1;
-        TreeNode lesson = new TreeNode(new LessonHolder.IconTreeItem(name, position)).setViewHolder(new LessonHolder(context));
-        getTreeView().addNode(node, lesson);
+        Lesson lesson = new Lesson(name, position, iconTreeItem.subject.getId());
+        TreeNode lessonNode = new TreeNode(new LessonHolder.IconTreeItem(lesson)).setViewHolder(new LessonHolder(context));
+        getTreeView().addNode(node, lessonNode);
+        cardViewModel.createLesson(lesson);
     }
 
     private void editSubjectGetName() {
@@ -160,10 +162,11 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
                 nbCards += parts.get(ip).getChildren().size();
             }
         }
-        String message = "Êtes-vous sûr de vouloir supprimer la matière " + textView.getText().toString() + " ?";
-        if (0 < nbCards) {
-            message += "\nElle contient " + nbCards + " fiches.";
+        String message = "La matière " + textView.getText().toString() + " contient " + nbCards + " fiche";
+        if (1 != nbCards) {
+            message += "s";
         }
+        message += ".\nÊtes-vous sûr de vouloir la supprimer ?";
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder .setTitle("Supprimer une matière")

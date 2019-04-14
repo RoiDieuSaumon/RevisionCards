@@ -127,7 +127,7 @@ public class CardsTreeViewFragment extends Fragment {
                 if (subject.getId() != lesson.getSubjectId()) {
                     continue;
                 }
-                TreeNode lessonNode = new TreeNode(new LessonHolder.IconTreeItem(lesson.getName(), lesson.getPosition())).setViewHolder(new LessonHolder(activity));
+                TreeNode lessonNode = new TreeNode(new LessonHolder.IconTreeItem(lesson)).setViewHolder(new LessonHolder(activity));
                 for (int ip = 0; ip < parts.size(); ip++) {
                     Part part = parts.get(ip);
                     if (lesson.getId() != part.getLessonId()) {

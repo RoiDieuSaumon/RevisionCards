@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.saumon.revisioncards.R;
+import com.saumon.revisioncards.models.Card;
 import com.unnamed.b.atv.model.TreeNode;
 
 public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeItem> {
@@ -44,10 +45,15 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
     public static class IconTreeItem {
         String text;
         long position;
+        Card card;
 
         public IconTreeItem(String text, long position) {
             this.text = text;
             this.position = position;
+        }
+
+        public IconTreeItem(Card card) {
+            this.card = card;
         }
     }
 }
