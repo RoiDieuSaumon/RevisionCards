@@ -44,10 +44,11 @@ public class CardsTreeViewFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         configureViewModel();
         configureButtonsOnClick();
-        initTreeView();
 
         View rootView = inflater.inflate(R.layout.fragment_cards_tree_view, null);
         ViewGroup containerView = rootView.findViewById(R.id.fragment_cards_tree_view_container);
+
+        initTreeView();
         containerView.addView(treeView.getView());
 
         return rootView;
@@ -113,6 +114,7 @@ public class CardsTreeViewFragment extends Fragment {
         if (null == activity) {
             return;
         }
+
         List<Subject> subjects = cardViewModel.getSubjects();
         List<Lesson> lessons = cardViewModel.getLessons();
         List<Part> parts = cardViewModel.getParts();
@@ -149,6 +151,6 @@ public class CardsTreeViewFragment extends Fragment {
             root.addChild(subjectNode);
         }
 
-        treeView = new AndroidTreeView(getActivity(), root);
+        treeView = new AndroidTreeView(activity, root);
     }
 }
