@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,6 +9,7 @@
 
     <include
         layout="@layout/toolbar"
+        android:id="@+id/activity_cards_revision_selector_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -16,11 +17,20 @@
         android:id="@+id/activity_cards_revision_selector_review_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:text="Réviser"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:width="210dp"
         android:height="70dp"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/activity_cards_revision_selector_cards_tree_view_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/activity_cards_revision_selector_toolbar"
+        android:layout_above="@+id/activity_cards_revision_selector_review_btn" />
+
+</RelativeLayout>

@@ -7,10 +7,10 @@
     android:minHeight="48dp"
     android:paddingStart="10dp"
     android:paddingEnd="10dp"
-    android:background="@color/lesson_1">
+    android:background="@color/part_1">
 
     <com.github.johnkil.print.PrintView
-        android:id="@+id/layout_lesson_node_icon"
+        android:id="@+id/layout_cards_manager_part_node_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -22,18 +22,18 @@
         app:iconSize="20dp" />
 
     <TextView
-        android:id="@+id/layout_lesson_node_text"
+        android:id="@+id/layout_cards_manager_part_node_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
-        android:layout_toEndOf="@+id/layout_lesson_node_icon"
-        android:layout_toStartOf="@+id/layout_lesson_node_buttons_container"
+        android:layout_toEndOf="@+id/layout_cards_manager_part_node_icon"
+        android:layout_toStartOf="@+id/layout_cards_manager_part_node_buttons_container"
         android:textSize="16sp"
         android:textColor="@android:color/black" />
 
     <LinearLayout
-        android:id="@+id/layout_lesson_node_buttons_container"
+        android:id="@+id/layout_cards_manager_part_node_buttons_container"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
         android:layout_alignParentEnd="true"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content">
 
         <com.github.johnkil.print.PrintView
-            android:id="@+id/layout_lesson_node_add_icon"
+            android:id="@+id/layout_cards_manager_part_node_add_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
@@ -51,7 +51,7 @@
             app:iconSize="20dp" />
 
         <com.github.johnkil.print.PrintView
-            android:id="@+id/layout_lesson_node_edit_icon"
+            android:id="@+id/layout_cards_manager_part_node_edit_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
@@ -61,7 +61,7 @@
             app:iconSize="20dp" />
 
         <com.github.johnkil.print.PrintView
-            android:id="@+id/layout_lesson_node_delete_icon"
+            android:id="@+id/layout_cards_manager_part_node_delete_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"

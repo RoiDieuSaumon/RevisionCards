@@ -1,25 +1,21 @@
-package com.saumon.revisioncards.fragment;
+package com.saumon.revisioncards.fragment.cardsSelector;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.EditText;
 
 import com.saumon.revisioncards.CardViewModel;
 import com.saumon.revisioncards.R;
-import com.saumon.revisioncards.holder.CardHolder;
-import com.saumon.revisioncards.holder.LessonHolder;
-import com.saumon.revisioncards.holder.PartHolder;
-import com.saumon.revisioncards.holder.SubjectHolder;
+import com.saumon.revisioncards.holder.cardsSelector.CardHolder;
+import com.saumon.revisioncards.holder.cardsSelector.LessonHolder;
+import com.saumon.revisioncards.holder.cardsSelector.PartHolder;
+import com.saumon.revisioncards.holder.cardsSelector.SubjectHolder;
 import com.saumon.revisioncards.injection.Injection;
 import com.saumon.revisioncards.injections.ViewModelFactory;
 import com.saumon.revisioncards.models.Card;
@@ -40,10 +36,10 @@ public class CardsTreeViewFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         configureViewModel();
-        configureButtonsOnClick();
 
         View rootView = inflater.inflate(R.layout.fragment_cards_tree_view, null);
         ViewGroup containerView = rootView.findViewById(R.id.fragment_cards_tree_view_container);
@@ -57,56 +53,6 @@ public class CardsTreeViewFragment extends Fragment {
     private void configureViewModel() {
         ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(getActivity());
         cardViewModel = ViewModelProviders.of(this, viewModelFactory).get(CardViewModel.class);
-    }
-
-    private void configureButtonsOnClick() {
-        Activity activity = getActivity();
-        if (null == activity) {
-            return;
-        }
-        activity.findViewById(R.id.activity_cards_manager_add_subject_btn).setOnClickListener(v -> addSubjectGetName());
-    }
-
-    private void addSubjectGetName() {
-        Activity activity = getActivity();
-        if (null == activity) {
-            return;
-        }
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        LayoutInflater inflater = activity.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.dialog_add_update_node, null);
-
-        AlertDialog dialog = builder
-                .setView(dialogView)
-                .setTitle("Ajouter une matière")
-                .setNegativeButton("Annuler", null)
-                .setPositiveButton("Ajouter", this::addSubject)
-                .create();
-
-        EditText editText = dialogView.findViewById(R.id.dialog_add_update_node_name_text);
-        editText.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                Window window = dialog.getWindow();
-                if (null == window) {
-                    return;
-                }
-                window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-            }
-        });
-
-        dialog.show();
-    }
-
-    private void addSubject(DialogInterface dialog, int which) {
-        String name = ((EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_add_update_node_name_text)).getText().toString();
-        if (name.isEmpty()) {
-            return;
-        }
-        int position = root.getChildren().size() + 1;
-        Subject subject = new Subject(name, position);
-        cardViewModel.createSubject(subject);
-        TreeNode subjectNode = new TreeNode(new SubjectHolder.IconTreeItem(subject)).setViewHolder(new SubjectHolder(getActivity()));
-        treeView.addNode(root, subjectNode);
     }
 
     private void initTreeView() {

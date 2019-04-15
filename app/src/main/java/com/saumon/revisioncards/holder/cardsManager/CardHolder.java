@@ -1,4 +1,4 @@
-package com.saumon.revisioncards.holder;
+package com.saumon.revisioncards.holder.cardsManager;
 
 import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
@@ -37,13 +37,13 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
         this.node = node;
         this.iconTreeItem = iconTreeItem;
         LayoutInflater inflater = LayoutInflater.from(context);
-        nodeView = inflater.inflate(R.layout.layout_card_node, null);
+        nodeView = inflater.inflate(R.layout.layout_cards_manager_card_node, null);
 
         setColorFromPosition(iconTreeItem.card.getPosition());
         configureButtonsOnClick();
         configureViewModel();
 
-        textView = nodeView.findViewById(R.id.layout_card_node_text);
+        textView = nodeView.findViewById(R.id.layout_cards_managers_card_node_text);
         textView.setText(iconTreeItem.card.getName());
 
         return nodeView;
@@ -55,8 +55,8 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
     }
 
     private void configureButtonsOnClick() {
-        nodeView.findViewById(R.id.layout_card_node_edit_icon).setOnClickListener(v -> editCardGetTexts());
-        nodeView.findViewById(R.id.layout_card_node_delete_icon).setOnClickListener(v -> deleteCardAskConfirmation());
+        nodeView.findViewById(R.id.layout_cards_managers_card_node_edit_icon).setOnClickListener(v -> editCardGetTexts());
+        nodeView.findViewById(R.id.layout_cards_managers_card_node_delete_icon).setOnClickListener(v -> deleteCardAskConfirmation());
     }
 
     private void configureViewModel() {

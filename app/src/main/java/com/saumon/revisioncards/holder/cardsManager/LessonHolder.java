@@ -1,4 +1,4 @@
-package com.saumon.revisioncards.holder;
+package com.saumon.revisioncards.holder.cardsManager;
 
 import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
@@ -17,13 +17,13 @@ import com.saumon.revisioncards.CardViewModel;
 import com.saumon.revisioncards.R;
 import com.saumon.revisioncards.injection.Injection;
 import com.saumon.revisioncards.injections.ViewModelFactory;
-import com.saumon.revisioncards.models.Card;
+import com.saumon.revisioncards.models.Lesson;
 import com.saumon.revisioncards.models.Part;
 import com.unnamed.b.atv.model.TreeNode;
 
 import java.util.List;
 
-public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeItem> {
+public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconTreeItem> {
     private TreeNode node;
     private IconTreeItem iconTreeItem;
     private View nodeView;
@@ -31,24 +31,24 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
     private TextView textView;
     private PrintView iconView;
 
-    public PartHolder(Context context) {
+    public LessonHolder(Context context) {
         super(context);
     }
 
     @Override
-    public View createNodeView(TreeNode node, PartHolder.IconTreeItem iconTreeItem) {
+    public View createNodeView(TreeNode node, LessonHolder.IconTreeItem iconTreeItem) {
         this.node = node;
         this.iconTreeItem = iconTreeItem;
         LayoutInflater inflater = LayoutInflater.from(context);
-        nodeView = inflater.inflate(R.layout.layout_part_node, null);
+        nodeView = inflater.inflate(R.layout.layout_cards_manager_lesson_node, null);
 
-        setColorFromPosition(iconTreeItem.part.getPosition());
+        setColorFromPosition(iconTreeItem.lesson.getPosition());
         configureButtonsOnClick();
         configureViewModel();
 
-        textView = nodeView.findViewById(R.id.layout_part_node_text);
-        textView.setText(iconTreeItem.part.getName());
-        iconView = nodeView.findViewById(R.id.layout_part_node_icon);
+        textView = nodeView.findViewById(R.id.layout_cards_manager_lesson_node_text);
+        textView.setText(iconTreeItem.lesson.getName());
+        iconView = nodeView.findViewById(R.id.layout_cards_manager_lesson_node_icon);
 
         return nodeView;
     }
@@ -59,14 +59,14 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
     }
 
     private void setColorFromPosition(int position) {
-        int color = (0 != position % 2) ? R.color.part_1 : R.color.part_2;
+        int color = (0 != position % 2) ? R.color.lesson_1 : R.color.lesson_2;
         nodeView.setBackgroundResource(color);
     }
 
     private void configureButtonsOnClick() {
-        nodeView.findViewById(R.id.layout_part_node_add_icon).setOnClickListener(v -> addCardGetName());
-        nodeView.findViewById(R.id.layout_part_node_edit_icon).setOnClickListener(v -> editPartGetName());
-        nodeView.findViewById(R.id.layout_part_node_delete_icon).setOnClickListener(v -> deletePartAskConfirmation());
+        nodeView.findViewById(R.id.layout_cards_manager_lesson_node_add_icon).setOnClickListener(v -> addPartGetName());
+        nodeView.findViewById(R.id.layout_cards_manager_lesson_node_edit_icon).setOnClickListener(v -> editLessonGetName());
+        nodeView.findViewById(R.id.layout_cards_manager_lesson_node_delete_icon).setOnClickListener(v -> deleteLessonAskConfirmation());
     }
 
     private void configureViewModel() {
@@ -74,19 +74,19 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
         cardViewModel = ViewModelProviders.of((FragmentActivity) context, viewModelFactory).get(CardViewModel.class);
     }
 
-    private void addCardGetName() {
+    private void addPartGetName() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
-        View dialogView = inflater.inflate(R.layout.dialog_add_update_card, null);
+        View dialogView = inflater.inflate(R.layout.dialog_add_update_node, null);
 
         AlertDialog dialog = builder
                 .setView(dialogView)
-                .setTitle("Ajouter une fiche")
+                .setTitle("Ajouter une partie")
                 .setNegativeButton("Annuler", null)
-                .setPositiveButton("Ajouter", this::addCard)
+                .setPositiveButton("Ajouter", this::addPart)
                 .create();
 
-        EditText editText = dialogView.findViewById(R.id.dialog_add_update_card_name_text);
+        EditText editText = dialogView.findViewById(R.id.dialog_add_update_node_name_text);
         editText.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
                 Window window = dialog.getWindow();
@@ -100,38 +100,33 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
         dialog.show();
     }
 
-    private void addCard(DialogInterface dialog, int which) {
-        String name = ((EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_add_update_card_name_text)).getText().toString();
-        String text1 = ((EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_add_update_card_text1_text)).getText().toString();
-        String text2 = ((EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_add_update_card_text2_text)).getText().toString();
-        if (text1.isEmpty() || text2.isEmpty()) {
+    private void addPart(DialogInterface dialog, int which) {
+        String name = ((EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_add_update_node_name_text)).getText().toString();
+        if (name.isEmpty()) {
             return;
         }
-        if (name.isEmpty()) {
-            name = text1 + " / " + text2;
-        }
         int position = node.getChildren().size() + 1;
-        Card card = new Card(name, text1, text2, position, iconTreeItem.part.getId());
-        TreeNode cardNode = new TreeNode(new CardHolder.IconTreeItem(card)).setViewHolder(new CardHolder(context));
-        getTreeView().addNode(node, cardNode);
+        Part part = new Part(name, position, iconTreeItem.lesson.getId());
+        TreeNode partNode = new TreeNode(new PartHolder.IconTreeItem(part)).setViewHolder(new PartHolder(context));
+        getTreeView().addNode(node, partNode);
         getTreeView().expandNode(node);
-        cardViewModel.createCard(card);
+        cardViewModel.createPart(part);
     }
 
-    private void editPartGetName() {
+    private void editLessonGetName() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialogView = inflater.inflate(R.layout.dialog_add_update_node, null);
 
         AlertDialog dialog = builder
                 .setView(dialogView)
-                .setTitle("Modifier une partie")
+                .setTitle("Modifier un cours")
                 .setNegativeButton("Annuler", null)
-                .setPositiveButton("Modifier", this::editPart)
+                .setPositiveButton("Modifier", this::editLesson)
                 .create();
 
         EditText editText = dialogView.findViewById(R.id.dialog_add_update_node_name_text);
-        editText.setText(iconTreeItem.part.getName());
+        editText.setText(iconTreeItem.lesson.getName());
         editText.setSelection(editText.getText().length());
         editText.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
@@ -146,56 +141,61 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
         dialog.show();
     }
 
-    private void editPart(DialogInterface dialog, int which) {
+    private void editLesson(DialogInterface dialog, int which) {
         String name = ((EditText) ((AlertDialog) dialog).findViewById(R.id.dialog_add_update_node_name_text)).getText().toString();
         if (name.isEmpty()) {
             return;
         }
         textView.setText(name);
-        iconTreeItem.part.setName(name);
-        cardViewModel.updatePart(iconTreeItem.part);
+        iconTreeItem.lesson.setName(name);
+        cardViewModel.updateLesson(iconTreeItem.lesson);
     }
 
-    private void deletePartAskConfirmation() {
-        int nbCards = node.getChildren().size();
-        String message = "La partie " + textView.getText().toString() + " contient " + nbCards + " fiche";
+    private void deleteLessonAskConfirmation() {
+        List<TreeNode> parts = node.getChildren();
+        int nbParts = parts.size();
+        int nbCards = 0;
+        for (int ip = 0; ip < nbParts; ip++) {
+            nbCards += parts.get(ip).getChildren().size();
+        }
+        String message = "Le cours " + textView.getText().toString() + " contient " + nbCards + " fiche";
         if (1 != nbCards) {
             message += "s";
         }
-        message += ".\nÊtes-vous sûr de vouloir la supprimer ?";
+        message += ".\nÊtes-vous sûr de vouloir le supprimer ?";
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder .setTitle("Supprimer une partie")
+        builder .setTitle("Supprimer un cours")
                 .setMessage(message)
                 .setNegativeButton("Annuler", null)
-                .setPositiveButton("Supprimer", this::deletePart)
+                .setPositiveButton("Supprimer", this::deleteLesson)
                 .create()
                 .show();
     }
 
-    private void deletePart(DialogInterface dialog, int which) {
+    private void deleteLesson(DialogInterface dialog, int which) {
         TreeNode parentNode = node.getParent();
         getTreeView().removeNode(node);
-        cardViewModel.deletePart(iconTreeItem.part.getId());
-        List<TreeNode> partNodes = parentNode.getChildren();
-        int nbPartNodes = partNodes.size();
-        for (int ip = 0; ip < nbPartNodes; ip++) {
-            PartHolder partHolder = (PartHolder) partNodes.get(ip).getViewHolder();
-            partHolder.setColorFromPosition(ip + 1);
-            partHolder.getPart().setPosition(ip + 1);
-            cardViewModel.updatePart(partHolder.getPart());
+        cardViewModel.deleteLesson(iconTreeItem.lesson.getId());
+        List<TreeNode> lessonNodes = parentNode.getChildren();
+        int nbLessonNodes = lessonNodes.size();
+        for (int il = 0; il < nbLessonNodes; il++) {
+            LessonHolder lessonHolder = (LessonHolder) lessonNodes.get(il).getViewHolder();
+            lessonHolder.setColorFromPosition(il + 1);
+            lessonHolder.getLesson().setPosition(il + 1);
+            cardViewModel.updateLesson(lessonHolder.getLesson());
         }
     }
 
-    private Part getPart() {
-        return iconTreeItem.part;
+    private Lesson getLesson() {
+        return iconTreeItem.lesson;
     }
 
     public static class IconTreeItem {
-        Part part;
+        Lesson lesson;
 
-        public IconTreeItem(Part part) {
-            this.part = part;
+        public IconTreeItem(Lesson lesson) {
+            this.lesson = lesson;
         }
     }
 }
