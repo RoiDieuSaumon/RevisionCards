@@ -28,7 +28,7 @@ public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconT
         LayoutInflater inflater = LayoutInflater.from(context);
         nodeView = inflater.inflate(R.layout.layout_cards_selector_lesson_node, null);
 
-        setColorFromPosition(iconTreeItem.lesson.getPosition());
+        setColorFromPosition(iconTreeItem.position);
 
         textView = nodeView.findViewById(R.id.layout_cards_selector_lesson_node_text);
         textView.setText(iconTreeItem.lesson.getName());
@@ -49,9 +49,11 @@ public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconT
 
     public static class IconTreeItem {
         Lesson lesson;
+        int position;
 
-        public IconTreeItem(Lesson lesson) {
+        public IconTreeItem(Lesson lesson, int position) {
             this.lesson = lesson;
+            this.position = position;
         }
     }
 }

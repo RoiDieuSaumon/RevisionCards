@@ -28,7 +28,7 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
         LayoutInflater inflater = LayoutInflater.from(context);
         nodeView = inflater.inflate(R.layout.layout_cards_selector_subject_node, null);
 
-        setColorFromPosition(iconTreeItem.subject.getPosition());
+        setColorFromPosition(iconTreeItem.position);
 
         textView = nodeView.findViewById(R.id.layout_cards_selector_subject_node_text);
         textView.setText(iconTreeItem.subject.getName());
@@ -49,9 +49,11 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
 
     public static class IconTreeItem {
         Subject subject;
+        int position;
 
-        public IconTreeItem(Subject subject) {
+        public IconTreeItem(Subject subject, int position) {
             this.subject = subject;
+            this.position = position;
         }
     }
 }

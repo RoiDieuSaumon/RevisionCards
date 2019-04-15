@@ -28,7 +28,7 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
         LayoutInflater inflater = LayoutInflater.from(context);
         nodeView = inflater.inflate(R.layout.layout_cards_selector_part_node, null);
 
-        setColorFromPosition(iconTreeItem.part.getPosition());
+        setColorFromPosition(iconTreeItem.position);
 
         textView = nodeView.findViewById(R.id.layout_cards_selector_part_node_text);
         textView.setText(iconTreeItem.part.getName());
@@ -49,9 +49,11 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
 
     public static class IconTreeItem {
         Part part;
+        int position;
 
-        public IconTreeItem(Part part) {
+        public IconTreeItem(Part part, int position) {
             this.part = part;
+            this.position = position;
         }
     }
 }

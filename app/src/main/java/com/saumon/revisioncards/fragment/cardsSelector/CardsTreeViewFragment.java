@@ -67,21 +67,27 @@ public class CardsTreeViewFragment extends Fragment {
         List<Card> cards = cardViewModel.getCards();
 
         root = TreeNode.root();
+        int subjectPosition = 1;
         for (int is = 0; is < subjects.size(); is++) {
             Subject subject = subjects.get(is);
-            TreeNode subjectNode = new TreeNode(new SubjectHolder.IconTreeItem(subject)).setViewHolder(new SubjectHolder(activity));
+            TreeNode subjectNode = new TreeNode(new SubjectHolder.IconTreeItem(subject, subjectPosition)).setViewHolder(new SubjectHolder(activity));
+            int lessonPosition = 1;
+            int nbCardsSubject = 0;
             for (int il = 0; il < lessons.size(); il++) {
                 Lesson lesson = lessons.get(il);
                 if (subject.getId() != lesson.getSubjectId()) {
                     continue;
                 }
-                TreeNode lessonNode = new TreeNode(new LessonHolder.IconTreeItem(lesson)).setViewHolder(new LessonHolder(activity));
+                TreeNode lessonNode = new TreeNode(new LessonHolder.IconTreeItem(lesson, lessonPosition)).setViewHolder(new LessonHolder(activity));
+                int partPosition = 1;
+                int nbCardsLesson = 0;
                 for (int ip = 0; ip < parts.size(); ip++) {
                     Part part = parts.get(ip);
                     if (lesson.getId() != part.getLessonId()) {
                         continue;
                     }
-                    TreeNode partNode = new TreeNode(new PartHolder.IconTreeItem(part)).setViewHolder(new PartHolder(activity));
+                    TreeNode partNode = new TreeNode(new PartHolder.IconTreeItem(part, partPosition)).setViewHolder(new PartHolder(activity));
+                    int nbCards = 0;
                     for (int ic = 0; ic < cards.size(); ic++) {
                         Card card = cards.get(ic);
                         if (part.getId() != card.getPartId()) {
@@ -89,12 +95,24 @@ public class CardsTreeViewFragment extends Fragment {
                         }
                         TreeNode cardNode = new TreeNode(new CardHolder.IconTreeItem(card)).setViewHolder(new CardHolder(activity));
                         partNode.addChild(cardNode);
+                        nbCards++;
                     }
-                    lessonNode.addChild(partNode);
+                    nbCardsLesson += nbCards;
+                    nbCardsSubject += nbCards;
+                    if (0 < nbCards) {
+                        lessonNode.addChild(partNode);
+                        partPosition++;
+                    }
                 }
-                subjectNode.addChild(lessonNode);
+                if (0 < nbCardsLesson) {
+                    subjectNode.addChild(lessonNode);
+                    lessonPosition++;
+                }
             }
-            root.addChild(subjectNode);
+            if (0 < nbCardsSubject) {
+                root.addChild(subjectNode);
+                subjectPosition++;
+            }
         }
 
         treeView = new AndroidTreeView(activity, root);
