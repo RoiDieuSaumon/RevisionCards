@@ -10,17 +10,17 @@
     android:background="@color/card_1">
 
     <TextView
-        android:id="@+id/layout_cards_managers_card_node_text"
+        android:id="@+id/layout_cards_manager_card_node_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
-        android:layout_toStartOf="@+id/layout_cards_managers_card_node_buttons_container"
+        android:layout_toStartOf="@+id/layout_cards_manager_card_node_buttons_container"
         android:textSize="16sp"
         android:textColor="@android:color/black" />
 
     <LinearLayout
-        android:id="@+id/layout_cards_managers_card_node_buttons_container"
+        android:id="@+id/layout_cards_manager_card_node_buttons_container"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
         android:layout_alignParentEnd="true"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content">
 
         <com.github.johnkil.print.PrintView
-            android:id="@+id/layout_cards_managers_card_node_edit_icon"
+            android:id="@+id/layout_cards_manager_card_node_edit_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
@@ -38,7 +38,7 @@
             app:iconSize="20dp" />
 
         <com.github.johnkil.print.PrintView
-            android:id="@+id/layout_cards_managers_card_node_delete_icon"
+            android:id="@+id/layout_cards_manager_card_node_delete_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"

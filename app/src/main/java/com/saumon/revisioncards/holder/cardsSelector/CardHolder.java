@@ -24,11 +24,11 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
         this.node = node;
         this.iconTreeItem = iconTreeItem;
         LayoutInflater inflater = LayoutInflater.from(context);
-        nodeView = inflater.inflate(R.layout.layout_cards_manager_card_node, null);
+        nodeView = inflater.inflate(R.layout.layout_cards_selector_card_node, null);
 
         setColorFromPosition(iconTreeItem.card.getPosition());
 
-        textView = nodeView.findViewById(R.id.layout_cards_managers_card_node_text);
+        textView = nodeView.findViewById(R.id.layout_cards_selector_card_node_text);
         textView.setText(iconTreeItem.card.getName());
 
         return nodeView;

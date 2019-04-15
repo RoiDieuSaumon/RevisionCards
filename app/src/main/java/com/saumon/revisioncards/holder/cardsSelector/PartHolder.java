@@ -26,13 +26,13 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
         this.node = node;
         this.iconTreeItem = iconTreeItem;
         LayoutInflater inflater = LayoutInflater.from(context);
-        nodeView = inflater.inflate(R.layout.layout_cards_manager_part_node, null);
+        nodeView = inflater.inflate(R.layout.layout_cards_selector_part_node, null);
 
         setColorFromPosition(iconTreeItem.part.getPosition());
 
-        textView = nodeView.findViewById(R.id.layout_cards_manager_part_node_text);
+        textView = nodeView.findViewById(R.id.layout_cards_selector_part_node_text);
         textView.setText(iconTreeItem.part.getName());
-        iconView = nodeView.findViewById(R.id.layout_cards_manager_part_node_icon);
+        iconView = nodeView.findViewById(R.id.layout_cards_selector_part_node_icon);
 
         return nodeView;
     }
