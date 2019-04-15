@@ -8,12 +8,21 @@
     android:paddingEnd="10dp"
     android:background="@color/card_1">
 
+    <CheckBox
+        android:id="@+id/layout_cards_selector_card_node_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true" />
+
     <TextView
         android:id="@+id/layout_cards_selector_card_node_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/layout_cards_selector_card_node_check"
         android:textSize="16sp"
         android:textColor="@android:color/black" />
 
