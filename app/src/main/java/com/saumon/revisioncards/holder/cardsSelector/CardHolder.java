@@ -3,6 +3,7 @@ package com.saumon.revisioncards.holder.cardsSelector;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.saumon.revisioncards.R;
@@ -13,7 +14,7 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
     private TreeNode node;
     private IconTreeItem iconTreeItem;
     private View nodeView;
-    private TextView textView;
+    private CheckBox checkBox;
 
     public CardHolder(Context context) {
         super(context);
@@ -28,10 +29,16 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
 
         setColorFromPosition(iconTreeItem.card.getPosition());
 
-        textView = nodeView.findViewById(R.id.layout_cards_selector_card_node_text);
+        TextView textView = nodeView.findViewById(R.id.layout_cards_selector_card_node_text);
         textView.setText(iconTreeItem.card.getName());
+        checkBox = nodeView.findViewById(R.id.layout_cards_selector_card_node_check);
 
         return nodeView;
+    }
+
+    void toggleCheckbox(boolean isChecked) {
+        checkBox.setChecked(isChecked);
+        iconTreeItem.isChecked = isChecked;
     }
 
     private void setColorFromPosition(int position) {
@@ -41,6 +48,7 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
 
     public static class IconTreeItem {
         Card card;
+        boolean isChecked = false;
 
         public IconTreeItem(Card card) {
             this.card = card;
