@@ -1,5 +1,6 @@
 package com.saumon.revisioncards.holder.cardsSelector;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,11 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
             CardsSelection.getInstance().cardList.add(iconTreeItem.card);
         } else {
             CardsSelection.getInstance().cardList.remove(iconTreeItem.card);
+        }
+        if (CardsSelection.getInstance().cardList.isEmpty()) {
+            ((Activity) context).findViewById(R.id.activity_cards_revision_selector_review_btn).setEnabled(false);
+        } else {
+            ((Activity) context).findViewById(R.id.activity_cards_revision_selector_review_btn).setEnabled(true);
         }
     }
 
