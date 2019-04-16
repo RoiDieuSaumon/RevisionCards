@@ -47,6 +47,10 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
         iconView.setIconText(context.getResources().getString(active ? R.string.ic_keyboard_arrow_down : R.string.ic_keyboard_arrow_right));
     }
 
+    IconTreeItem getIconTreeItem() {
+        return iconTreeItem;
+    }
+
     void toggleCheckbox(boolean isChecked) {
         checkBox.setChecked(isChecked);
         iconTreeItem.isChecked = isChecked;
@@ -60,11 +64,37 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
         }
         List<TreeNode> cardNodes = node.getChildren();
         for (int ic = 0; ic < cardNodes.size(); ic++) {
-            TreeNode cardNode = cardNodes.get(ic);
-            ((CardHolder) cardNode.getViewHolder()).toggleCheckbox(iconTreeItem.isChecked);
+            ((CardHolder) cardNodes.get(ic).getViewHolder()).toggleCheckbox(iconTreeItem.isChecked);
         }
         if (!isPartNodeExpanded) {
             node.getViewHolder().getTreeView().collapseNode(node);
+        }
+        if (iconTreeItem.isChecked) {
+            boolean areAllChecked = true;
+            List<TreeNode> partNodes = node.getParent().getChildren();
+            for (int ip = 0; ip < partNodes.size(); ip++) {
+                if (!((PartHolder) partNodes.get(ip).getViewHolder()).iconTreeItem.isChecked) {
+                    areAllChecked = false;
+                    break;
+                }
+            }
+            if (areAllChecked) {
+                ((LessonHolder) node.getParent().getViewHolder()).toggleCheckbox(true);
+
+                List<TreeNode> lessonNodes = node.getParent().getParent().getChildren();
+                for (int il = 0; il < lessonNodes.size(); il++) {
+                    if (!((LessonHolder) lessonNodes.get(il).getViewHolder()).getIconTreeItem().isChecked) {
+                        areAllChecked = false;
+                        break;
+                    }
+                }
+                if (areAllChecked) {
+                    ((SubjectHolder) node.getParent().getParent().getViewHolder()).toggleCheckbox(true);
+                }
+            }
+        } else {
+            ((LessonHolder) node.getParent().getViewHolder()).toggleCheckbox(false);
+            ((SubjectHolder) node.getParent().getParent().getViewHolder()).toggleCheckbox(false);
         }
     }
 

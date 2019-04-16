@@ -10,6 +10,8 @@ import com.saumon.revisioncards.R;
 import com.saumon.revisioncards.models.Card;
 import com.unnamed.b.atv.model.TreeNode;
 
+import java.util.List;
+
 public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeItem> {
     private TreeNode node;
     private IconTreeItem iconTreeItem;
@@ -32,6 +34,7 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
         TextView textView = nodeView.findViewById(R.id.layout_cards_selector_card_node_text);
         textView.setText(iconTreeItem.card.getName());
         checkBox = nodeView.findViewById(R.id.layout_cards_selector_card_node_check);
+        checkBox.setOnClickListener(this::cascadeCheckBoxes);
 
         return nodeView;
     }
@@ -39,6 +42,49 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
     void toggleCheckbox(boolean isChecked) {
         checkBox.setChecked(isChecked);
         iconTreeItem.isChecked = isChecked;
+    }
+
+    private void cascadeCheckBoxes(View view) {
+        iconTreeItem.isChecked = ((CheckBox) view).isChecked();
+        if (iconTreeItem.isChecked) {
+            boolean areAllChecked = true;
+            List<TreeNode> cardNodes = node.getParent().getChildren();
+            for (int ic = 0; ic < cardNodes.size(); ic++) {
+                if (!((CardHolder) cardNodes.get(ic).getViewHolder()).iconTreeItem.isChecked) {
+                    areAllChecked = false;
+                    break;
+                }
+            }
+            if (areAllChecked) {
+                ((PartHolder) node.getParent().getViewHolder()).toggleCheckbox(true);
+
+                List<TreeNode> partNodes = node.getParent().getParent().getChildren();
+                for (int ip = 0; ip < partNodes.size(); ip++) {
+                    if (!((PartHolder) partNodes.get(ip).getViewHolder()).getIconTreeItem().isChecked) {
+                        areAllChecked = false;
+                        break;
+                    }
+                }
+                if (areAllChecked) {
+                    ((LessonHolder) node.getParent().getParent().getViewHolder()).toggleCheckbox(true);
+
+                    List<TreeNode> lessonNodes = node.getParent().getParent().getParent().getChildren();
+                    for (int il = 0; il < lessonNodes.size(); il++) {
+                        if (!((LessonHolder) lessonNodes.get(il).getViewHolder()).getIconTreeItem().isChecked) {
+                            areAllChecked = false;
+                            break;
+                        }
+                    }
+                    if (areAllChecked) {
+                        ((SubjectHolder) node.getParent().getParent().getParent().getViewHolder()).toggleCheckbox(true);
+                    }
+                }
+            }
+        } else {
+            ((PartHolder) node.getParent().getViewHolder()).toggleCheckbox(false);
+            ((LessonHolder) node.getParent().getParent().getViewHolder()).toggleCheckbox(false);
+            ((SubjectHolder) node.getParent().getParent().getParent().getViewHolder()).toggleCheckbox(false);
+        }
     }
 
     private void setColorFromPosition(int position) {

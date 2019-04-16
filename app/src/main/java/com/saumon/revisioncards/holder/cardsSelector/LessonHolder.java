@@ -47,6 +47,10 @@ public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconT
         iconView.setIconText(context.getResources().getString(active ? R.string.ic_keyboard_arrow_down : R.string.ic_keyboard_arrow_right));
     }
 
+    IconTreeItem getIconTreeItem() {
+        return iconTreeItem;
+    }
+
     void toggleCheckbox(boolean isChecked) {
         checkBox.setChecked(isChecked);
         iconTreeItem.isChecked = isChecked;
@@ -68,8 +72,7 @@ public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconT
             }
             List<TreeNode> cardNodes = partNode.getChildren();
             for (int ic = 0; ic < cardNodes.size(); ic++) {
-                TreeNode cardNode = cardNodes.get(ic);
-                ((CardHolder) cardNode.getViewHolder()).toggleCheckbox(iconTreeItem.isChecked);
+                ((CardHolder) cardNodes.get(ic).getViewHolder()).toggleCheckbox(iconTreeItem.isChecked);
             }
             if (!isPartNodeExpanded) {
                 partNode.getViewHolder().getTreeView().collapseNode(partNode);
@@ -82,8 +85,7 @@ public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconT
             boolean areAllChecked = true;
             List<TreeNode> lessonNodes = node.getParent().getChildren();
             for (int il = 0; il < lessonNodes.size(); il++) {
-                TreeNode lessonNode = lessonNodes.get(il);
-                if (!((LessonHolder) lessonNode.getViewHolder()).iconTreeItem.isChecked) {
+                if (!((LessonHolder) lessonNodes.get(il).getViewHolder()).iconTreeItem.isChecked) {
                     areAllChecked = false;
                     break;
                 }
