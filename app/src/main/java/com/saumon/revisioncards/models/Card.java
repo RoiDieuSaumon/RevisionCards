@@ -29,7 +29,7 @@ public class Card {
         this.name = name;
         this.text1 = text1;
         this.text2 = text2;
-        this.position = 1;
+        this.sideToShow = 1;
         this.position = position;
         this.partId = partId;
     }
