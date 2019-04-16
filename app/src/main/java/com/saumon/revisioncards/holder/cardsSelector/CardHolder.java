@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.saumon.revisioncards.CardsSelection;
 import com.saumon.revisioncards.R;
 import com.saumon.revisioncards.models.Card;
 import com.unnamed.b.atv.model.TreeNode;
@@ -35,6 +37,7 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
         textView.setText(iconTreeItem.card.getName());
         checkBox = nodeView.findViewById(R.id.layout_cards_selector_card_node_check);
         checkBox.setOnClickListener(this::cascadeCheckBoxes);
+        checkBox.setOnCheckedChangeListener(this::addCardToSelection);
 
         return nodeView;
     }
@@ -42,6 +45,14 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
     void toggleCheckbox(boolean isChecked) {
         checkBox.setChecked(isChecked);
         iconTreeItem.isChecked = isChecked;
+    }
+
+    private void addCardToSelection(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            CardsSelection.getInstance().cardList.add(iconTreeItem.card);
+        } else {
+            CardsSelection.getInstance().cardList.remove(iconTreeItem.card);
+        }
     }
 
     private void cascadeCheckBoxes(View view) {
