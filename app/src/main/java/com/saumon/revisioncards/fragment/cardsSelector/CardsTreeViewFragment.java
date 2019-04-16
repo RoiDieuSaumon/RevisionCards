@@ -29,7 +29,6 @@ import java.util.List;
 
 public class CardsTreeViewFragment extends Fragment {
     private CardViewModel cardViewModel;
-    private TreeNode root;
     private AndroidTreeView treeView;
 
     public CardsTreeViewFragment() {
@@ -66,7 +65,7 @@ public class CardsTreeViewFragment extends Fragment {
         List<Part> parts = cardViewModel.getParts();
         List<Card> cards = cardViewModel.getCards();
 
-        root = TreeNode.root();
+        TreeNode root = TreeNode.root();
         int subjectPosition = 1;
         for (int is = 0; is < subjects.size(); is++) {
             Subject subject = subjects.get(is);

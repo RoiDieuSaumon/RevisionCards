@@ -13,8 +13,6 @@ import com.saumon.revisioncards.repositories.LessonDataRepository;
 import com.saumon.revisioncards.repositories.PartDataRepository;
 import com.saumon.revisioncards.repositories.SubjectDataRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.Executor;
 

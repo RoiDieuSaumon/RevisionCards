@@ -8,8 +8,6 @@ import android.widget.Toast;
 
 import com.saumon.revisioncards.CardsSelection;
 import com.saumon.revisioncards.R;
-import com.saumon.revisioncards.activity.BaseActivity;
-import com.saumon.revisioncards.activity.CardsRevisionActivity;
 import com.saumon.revisioncards.fragment.cardsSelector.CardsTreeViewFragment;
 
 import butterknife.OnClick;
