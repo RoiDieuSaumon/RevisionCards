@@ -108,7 +108,7 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
             return;
         }
         if (name.isEmpty()) {
-            name = text1 + " / " + text2;
+            name = null;
         }
         int position = node.getChildren().size() + 1;
         Card card = new Card(name, text1, text2, position, iconTreeItem.part.getId());

@@ -34,8 +34,12 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
 
         setColorFromPosition(iconTreeItem.card.getPosition());
 
+        String nameToDisplay = iconTreeItem.card.getName();
+        if (null == nameToDisplay || nameToDisplay.isEmpty()) {
+            nameToDisplay = iconTreeItem.card.getText1() + " / " + iconTreeItem.card.getText2();
+        }
         TextView textView = nodeView.findViewById(R.id.layout_cards_selector_card_node_text);
-        textView.setText(iconTreeItem.card.getName());
+        textView.setText(nameToDisplay);
         checkBox = nodeView.findViewById(R.id.layout_cards_selector_card_node_check);
         checkBox.setOnClickListener(this::cascadeCheckBoxes);
         checkBox.setOnCheckedChangeListener(this::addCardToSelection);

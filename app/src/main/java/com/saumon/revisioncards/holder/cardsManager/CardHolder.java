@@ -43,8 +43,12 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
         configureButtonsOnClick();
         configureViewModel();
 
+        String nameToDisplay = iconTreeItem.card.getName();
+        if (null == nameToDisplay || nameToDisplay.isEmpty()) {
+            nameToDisplay = iconTreeItem.card.getText1() + " / " + iconTreeItem.card.getText2();
+        }
         textView = nodeView.findViewById(R.id.layout_cards_manager_card_node_text);
-        textView.setText(iconTreeItem.card.getName());
+        textView.setText(nameToDisplay);
 
         return nodeView;
     }
@@ -105,10 +109,12 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
         if (text1.isEmpty() || text2.isEmpty()) {
             return;
         }
+        String nameToDisplay = name;
         if (name.isEmpty()) {
-            name = text1 + " / " + text2;
+            name = null;
+            nameToDisplay = text1 + " / " + text2;
         }
-        textView.setText(name);
+        textView.setText(nameToDisplay);
         iconTreeItem.card.setName(name);
         iconTreeItem.card.setText1(text1);
         iconTreeItem.card.setText2(text2);
