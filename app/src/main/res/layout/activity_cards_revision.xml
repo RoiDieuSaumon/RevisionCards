@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,6 +9,7 @@
 
     <include
         layout="@layout/toolbar"
+        android:id="@+id/activity_cards_revision_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -16,10 +17,80 @@
         android:id="@+id/activity_cards_revision_current_card_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/activity_cards_revision_toolbar"
         android:gravity="center"
-        android:background="@drawable/borders"
-        android:padding="20dp"
+        android:paddingTop="20dp"
         android:textSize="25sp"
         android:textColor="@android:color/black" />
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/activity_cards_revision_btns_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        style="?android:attr/buttonBarStyle">
+
+        <Button
+            android:id="@+id/activity_cards_revision_ko_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/black"
+            android:background="@android:color/holo_red_light"
+            android:text="Raté"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/activity_cards_revision_middle_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/black"
+            android:background="@android:color/holo_orange_light"
+            android:text="Moyen"
+            style="?android:attr/buttonBarButtonStyle" />
+
+        <Button
+            android:id="@+id/activity_cards_revision_ok_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:textColor="@android:color/black"
+            android:background="@android:color/holo_green_light"
+            android:text="Réussi"
+            style="?android:attr/buttonBarButtonStyle" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_cards_revision_texts_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:layout_below="@+id/activity_cards_revision_current_card_text"
+        android:layout_above="@+id/activity_cards_revision_btns_container"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/activity_cards_revision_text1_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/borders"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/activity_cards_revision_text2_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/borders"
+            android:padding="10dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
