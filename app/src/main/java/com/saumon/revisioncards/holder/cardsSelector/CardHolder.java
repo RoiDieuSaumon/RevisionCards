@@ -42,7 +42,7 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
         textView.setText(nameToDisplay);
         checkBox = nodeView.findViewById(R.id.layout_cards_selector_card_node_check);
         checkBox.setOnClickListener(this::cascadeCheckBoxes);
-        checkBox.setOnCheckedChangeListener(this::addCardToSelection);
+        checkBox.setOnCheckedChangeListener(this::addRemoveCardToSelection);
 
         return nodeView;
     }
@@ -52,7 +52,7 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
         iconTreeItem.isChecked = isChecked;
     }
 
-    private void addCardToSelection(CompoundButton buttonView, boolean isChecked) {
+    private void addRemoveCardToSelection(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
             CardsSelection.getInstance().cardList.add(iconTreeItem.card);
         } else {

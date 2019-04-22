@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/activity_cards_revision_toolbar"
         android:gravity="center"
-        android:paddingTop="20dp"
+        android:layout_marginTop="20dp"
         android:textSize="25sp"
         android:textColor="@android:color/black" />
 
@@ -37,9 +37,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:textColor="@android:color/black"
-            android:background="@android:color/holo_red_light"
+            android:textColor="@color/grayTxt"
+            android:background="@color/gray"
             android:text="Raté"
+            android:enabled="false"
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
@@ -48,9 +49,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:textColor="@android:color/black"
-            android:background="@android:color/holo_orange_light"
+            android:textColor="@color/grayTxt"
+            android:background="@color/gray"
             android:text="Moyen"
+            android:enabled="false"
             style="?android:attr/buttonBarButtonStyle" />
 
         <Button
@@ -59,12 +61,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:textColor="@android:color/black"
-            android:background="@android:color/holo_green_light"
+            android:textColor="@color/grayTxt"
+            android:background="@color/gray"
             android:text="Réussi"
+            android:enabled="false"
             style="?android:attr/buttonBarButtonStyle" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/activity_cards_revision_score_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/activity_cards_revision_btns_container"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:padding="20dp"
+        android:textSize="25sp"
+        android:textColor="@android:color/black" />
 
     <LinearLayout
         android:id="@+id/activity_cards_revision_texts_container"
@@ -72,7 +86,7 @@
         android:layout_height="match_parent"
         android:layout_margin="20dp"
         android:layout_below="@+id/activity_cards_revision_current_card_text"
-        android:layout_above="@+id/activity_cards_revision_btns_container"
+        android:layout_above="@+id/activity_cards_revision_score_text"
         android:orientation="vertical">
 
         <TextView
@@ -81,7 +95,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/borders"
-            android:padding="10dp" />
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/activity_cards_revision_text2_text"
@@ -89,7 +105,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/borders"
-            android:padding="10dp" />
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:gravity="center" />
 
     </LinearLayout>
 

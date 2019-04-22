@@ -14,7 +14,7 @@ public interface CardDao {
     @Query("SELECT * FROM Card WHERE id IN (:cardIdList) ORDER BY partId ASC, position ASC")
     List<Card> getCardsFromIds(List<Long> cardIdList);
 
-    @Query("SELECT * FROM Card WHERE partId = :partId ORDER BY partId ASC, position ASC")
+    @Query("SELECT * FROM Card WHERE partId = :partId ORDER BY position ASC")
     List<Card> getCardsFromPart(long partId);
 
     @Query("SELECT * FROM Card ORDER BY partId ASC, position ASC")

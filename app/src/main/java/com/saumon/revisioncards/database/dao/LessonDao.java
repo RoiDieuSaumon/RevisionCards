@@ -11,7 +11,7 @@ import java.util.List;
 
 @Dao
 public interface LessonDao {
-    @Query("SELECT * FROM Lesson WHERE subjectId = :subjectId ORDER BY subjectId ASC, position ASC")
+    @Query("SELECT * FROM Lesson WHERE subjectId = :subjectId ORDER BY position ASC")
     List<Lesson> getLessonsFromSubject(long subjectId);
 
     @Query("SELECT * FROM Lesson ORDER BY subjectId ASC, position ASC")

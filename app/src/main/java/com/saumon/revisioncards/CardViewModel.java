@@ -139,4 +139,36 @@ public class CardViewModel extends ViewModel {
     public void deleteGrade(long gradeId) {
         executor.execute(() -> gradeDataSource.deleteGrade(gradeId));
     }
+
+    public void addGradeToCard(Card card, int gradeValue) {
+        List<Grade> gradeList = getGradesFromCard(card.getId());
+        int position;
+        if (10 == gradeList.size()) {
+            for (int i = 0; i < 10; i++) {
+                if (0 == i) {
+                    deleteGrade(gradeList.get(0).getId());
+                } else {
+                    gradeList.get(i).setPosition(i);
+                    updateGrade(gradeList.get(i));
+                }
+            }
+            position = 10;
+        } else {
+            position = gradeList.size() + 1;
+        }
+        Grade grade = new Grade(gradeValue, position + 1, card.getId());
+        createGrade(grade);
+    }
+
+    public int getCardScore(long cardId) {
+        List<Grade> gradeList = getGradesFromCard(cardId);
+        int score = 0;
+        for (int i = 0; i < gradeList.size(); i++) {
+            score += gradeList.get(i).getValue();
+        }
+        score /= 2;
+        score *= 100;
+        score /= gradeList.size();
+        return score;
+    }
 }

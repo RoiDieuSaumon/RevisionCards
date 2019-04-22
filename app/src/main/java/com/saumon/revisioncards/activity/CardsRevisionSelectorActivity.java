@@ -21,8 +21,8 @@ public class CardsRevisionSelectorActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        CardsSelection.getInstance().cardList.clear();
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_cards_revision_selector_cards_tree_view_fragment, new CardsTreeViewFragment()).commit();
-        findViewById(R.id.activity_cards_revision_selector_review_btn).setEnabled(false);
     }
 
     @OnClick(R.id.activity_cards_revision_selector_review_btn)

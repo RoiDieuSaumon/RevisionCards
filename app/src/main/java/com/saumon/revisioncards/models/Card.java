@@ -89,4 +89,28 @@ public class Card {
     public void setPartId(long partId) {
         this.partId = partId;
     }
+
+    public String getTextToShow() {
+        if (1 == sideToShow) {
+            return text1;
+        } else {
+            return text2;
+        }
+    }
+
+    public String getTextToHide() {
+        if (1 == sideToShow) {
+            return text2;
+        } else {
+            return text1;
+        }
+    }
+
+    public void reverseSideToShow() {
+        if (1 == sideToShow) {
+            sideToShow = 2;
+        } else {
+            sideToShow = 1;
+        }
+    }
 }
