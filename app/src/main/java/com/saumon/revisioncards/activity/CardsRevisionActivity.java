@@ -79,6 +79,7 @@ public class CardsRevisionActivity extends BaseActivity {
 
     private void onClickGradeButton(int gradeValue) {
         addGradeToCard(gradeValue);
+        cardViewModel.reverseSideToShow(card);
         showNextCard();
     }
 
@@ -91,7 +92,7 @@ public class CardsRevisionActivity extends BaseActivity {
             Collections.shuffle(shuffledCardList);
             nextCardIndex = 0;
         }
-        card = CardsSelection.getInstance().cardList.get(nextCardIndex);
+        card = shuffledCardList.get(nextCardIndex);
         ((TextView) findViewById(R.id.activity_cards_revision_current_card_text)).setText("Fiche " + nbCard);
         ((TextView) findViewById(R.id.activity_cards_revision_text1_text)).setText(card.getTextToShow());
         findViewById(R.id.activity_cards_revision_text2_text).setBackgroundColor(Color.BLACK);
@@ -128,6 +129,10 @@ public class CardsRevisionActivity extends BaseActivity {
     private void showScore() {
         int score = cardViewModel.getCardScore(card.getId());
         TextView textView = findViewById(R.id.activity_cards_revision_score_text);
+        if (score == -1) {
+            textView.setText("Pas de score");
+            return;
+        }
         textView.setText("Score : " + score + "%");
         int color;
         if (score < 33) {

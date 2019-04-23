@@ -1,6 +1,7 @@
 package com.saumon.revisioncards;
 
 import android.arch.lifecycle.ViewModel;
+import android.os.Handler;
 
 import com.saumon.revisioncards.models.Card;
 import com.saumon.revisioncards.models.Grade;
@@ -15,6 +16,7 @@ import com.saumon.revisioncards.repositories.SubjectDataRepository;
 
 import java.util.List;
 import java.util.concurrent.Executor;
+import java.util.logging.LogRecord;
 
 public class CardViewModel extends ViewModel {
     private final SubjectDataRepository subjectDataSource;
@@ -156,19 +158,35 @@ public class CardViewModel extends ViewModel {
         } else {
             position = gradeList.size() + 1;
         }
-        Grade grade = new Grade(gradeValue, position + 1, card.getId());
+        Grade grade = new Grade(gradeValue, position, card.getId());
         createGrade(grade);
+        Handler handler = new Handler();
+        do {
+            handler.postDelayed(() -> {}, 200);
+        } while (0 == grade.getId());
     }
 
     public int getCardScore(long cardId) {
         List<Grade> gradeList = getGradesFromCard(cardId);
+        if (0 == gradeList.size()) {
+            return -1;
+        }
         int score = 0;
         for (int i = 0; i < gradeList.size(); i++) {
             score += gradeList.get(i).getValue();
         }
-        score /= 2;
         score *= 100;
+        score /= 2;
         score /= gradeList.size();
         return score;
+    }
+
+    public void reverseSideToShow(Card card) {
+        if (1 == card.getSideToShow()) {
+            card.setSideToShow(2);
+        } else {
+            card.setSideToShow(1);
+        }
+        updateCard(card);
     }
 }
