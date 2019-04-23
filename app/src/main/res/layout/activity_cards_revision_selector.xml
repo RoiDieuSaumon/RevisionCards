@@ -27,11 +27,22 @@
         android:height="70dp"
         android:textSize="20sp" />
 
+    <TextView
+        android:id="@+id/activity_cards_revision_selector_nb_selected_cards_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:text="Fiches sélectionnées : 0"
+        android:layout_above="@+id/activity_cards_revision_selector_review_btn" />
+
     <FrameLayout
         android:id="@+id/activity_cards_revision_selector_cards_tree_view_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/activity_cards_revision_selector_toolbar"
-        android:layout_above="@+id/activity_cards_revision_selector_review_btn" />
+        android:layout_above="@+id/activity_cards_revision_selector_nb_selected_cards_text" />
 
 </RelativeLayout>
