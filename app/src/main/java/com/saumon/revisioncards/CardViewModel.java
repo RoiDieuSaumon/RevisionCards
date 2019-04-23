@@ -16,7 +16,6 @@ import com.saumon.revisioncards.repositories.SubjectDataRepository;
 
 import java.util.List;
 import java.util.concurrent.Executor;
-import java.util.logging.LogRecord;
 
 public class CardViewModel extends ViewModel {
     private final SubjectDataRepository subjectDataSource;

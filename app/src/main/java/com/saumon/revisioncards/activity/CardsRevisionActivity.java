@@ -2,7 +2,6 @@ package com.saumon.revisioncards.activity;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
