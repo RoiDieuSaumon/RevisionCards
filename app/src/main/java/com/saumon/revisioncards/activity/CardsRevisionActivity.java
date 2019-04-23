@@ -129,7 +129,7 @@ public class CardsRevisionActivity extends BaseActivity {
     private void showScore() {
         int score = cardViewModel.getCardScore(card.getId());
         TextView textView = findViewById(R.id.activity_cards_revision_score_text);
-        if (score == -1) {
+        if (-1 == score) {
             textView.setText("Pas de score");
             return;
         }

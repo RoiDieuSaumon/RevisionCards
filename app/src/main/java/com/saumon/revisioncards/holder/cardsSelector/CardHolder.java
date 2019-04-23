@@ -129,10 +129,11 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
 
     private void showScore() {
         int score = cardViewModel.getCardScore(iconTreeItem.card.getId());
+        TextView textView = nodeView.findViewById(R.id.layout_cards_selector_card_node_score_text);
         if (-1 == score) {
+            textView.setVisibility(View.GONE);
             return;
         }
-        TextView textView = nodeView.findViewById(R.id.layout_cards_selector_card_node_score_text);
         textView.setText(String.valueOf(score));
         int color;
         if (score < 33) {

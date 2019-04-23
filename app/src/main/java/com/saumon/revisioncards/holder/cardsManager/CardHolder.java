@@ -49,6 +49,7 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
         }
         textView = nodeView.findViewById(R.id.layout_cards_manager_card_node_text);
         textView.setText(nameToDisplay);
+        showScore();
 
         return nodeView;
     }
@@ -56,6 +57,25 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
     private void setColorFromPosition(int position) {
         int color = (0 != position % 2) ? R.color.card_1 : R.color.card_2;
         nodeView.setBackgroundResource(color);
+    }
+
+    private void showScore() {
+        int score = cardViewModel.getCardScore(iconTreeItem.card.getId());
+        TextView textView = nodeView.findViewById(R.id.layout_cards_manager_card_node_score_text);
+        if (-1 == score) {
+            textView.setVisibility(View.GONE);
+            return;
+        }
+        textView.setText(String.valueOf(score));
+        int color;
+        if (score < 33) {
+            color = R.color.red;
+        } else if (score < 66) {
+            color = R.color.orange;
+        } else {
+            color = R.color.green;
+        }
+        textView.setBackgroundResource(color);
     }
 
     private void configureButtonsOnClick() {
