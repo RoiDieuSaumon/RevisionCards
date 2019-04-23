@@ -1,15 +1,20 @@
 package com.saumon.revisioncards.holder.cardsSelector;
 
 import android.app.Activity;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.saumon.revisioncards.CardViewModel;
 import com.saumon.revisioncards.CardsSelection;
 import com.saumon.revisioncards.R;
+import com.saumon.revisioncards.injection.Injection;
+import com.saumon.revisioncards.injections.ViewModelFactory;
 import com.saumon.revisioncards.models.Card;
 import com.unnamed.b.atv.model.TreeNode;
 
@@ -19,6 +24,7 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
     private TreeNode node;
     private IconTreeItem iconTreeItem;
     private View nodeView;
+    private CardViewModel cardViewModel;
     private CheckBox checkBox;
 
     public CardHolder(Context context) {
@@ -33,6 +39,7 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
         nodeView = inflater.inflate(R.layout.layout_cards_selector_card_node, null);
 
         setColorFromPosition(iconTreeItem.card.getPosition());
+        configureViewModel();
 
         String nameToDisplay = iconTreeItem.card.getName();
         if (null == nameToDisplay || nameToDisplay.isEmpty()) {
@@ -43,6 +50,7 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
         checkBox = nodeView.findViewById(R.id.layout_cards_selector_card_node_check);
         checkBox.setOnClickListener(this::cascadeCheckBoxes);
         checkBox.setOnCheckedChangeListener(this::addRemoveCardToSelection);
+        showScore();
 
         return nodeView;
     }
@@ -50,6 +58,11 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
     void toggleCheckbox(boolean isChecked) {
         checkBox.setChecked(isChecked);
         iconTreeItem.isChecked = isChecked;
+    }
+
+    private void configureViewModel() {
+        ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(context);
+        cardViewModel = ViewModelProviders.of((FragmentActivity) context, viewModelFactory).get(CardViewModel.class);
     }
 
     private void addRemoveCardToSelection(CompoundButton buttonView, boolean isChecked) {
@@ -112,6 +125,24 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
     private void setColorFromPosition(int position) {
         int color = (0 != position % 2) ? R.color.card_1 : R.color.card_2;
         nodeView.setBackgroundResource(color);
+    }
+
+    private void showScore() {
+        int score = cardViewModel.getCardScore(iconTreeItem.card.getId());
+        if (-1 == score) {
+            return;
+        }
+        TextView textView = nodeView.findViewById(R.id.layout_cards_selector_card_node_score_text);
+        textView.setText(String.valueOf(score));
+        int color;
+        if (score < 33) {
+            color = R.color.red;
+        } else if (score < 66) {
+            color = R.color.orange;
+        } else {
+            color = R.color.green;
+        }
+        textView.setBackgroundResource(color);
     }
 
     public static class IconTreeItem {

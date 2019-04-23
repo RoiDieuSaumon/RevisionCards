@@ -38,9 +38,7 @@
             android:layout_height="match_parent"
             android:minWidth="48dp"
             android:gravity="center"
-            android:text="100"
-            android:textColor="@color/blackTxt"
-            android:background="@color/green" />
+            android:textColor="@color/blackTxt" />
 
     </RelativeLayout>
 
