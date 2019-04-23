@@ -18,8 +18,8 @@ public interface SubjectDao {
     long createSubject(Subject subject);
 
     @Update
-    int updateSubject(Subject subject);
+    void updateSubject(Subject subject);
 
     @Query("DELETE FROM Subject WHERE id = :subjectId")
-    int deleteSubject(long subjectId);
+    void deleteSubject(long subjectId);
 }

@@ -12,14 +12,6 @@ public class CardDataRepository {
         this.cardDao = cardDao;
     }
 
-    public List<Card> getCardsFromPart(long partId) {
-        return cardDao.getCardsFromPart(partId);
-    }
-
-    public List<Card> getCardsFromIds(List<Long> cardIds) {
-        return cardDao.getCardsFromIds(cardIds);
-    }
-
     public List<Card> getCards() {
         return cardDao.getCards();
     }

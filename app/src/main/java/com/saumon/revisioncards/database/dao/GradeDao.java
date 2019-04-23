@@ -14,15 +14,12 @@ public interface GradeDao {
     @Query("SELECT * FROM Grade WHERE cardId = :cardId ORDER BY position ASC")
     List<Grade> getGradesFromCard(long cardId);
 
-    @Query("SELECT * FROM Grade ORDER BY cardId ASC, position ASC")
-    List<Grade> getGrades();
-
     @Insert
     long createGrade(Grade grade);
 
     @Update
-    int updateGrade(Grade grade);
+    void updateGrade(Grade grade);
 
     @Query("DELETE FROM Grade WHERE id = :gradeId")
-    int deleteGrade(long gradeId);
+    void deleteGrade(long gradeId);
 }

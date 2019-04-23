@@ -57,10 +57,6 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> subjectDataSource.deleteSubject(subjectId));
     }
 
-    public List<Lesson> getLessonsFromSubject(long subjectId) {
-        return lessonDataSource.getLessonsFromSubject(subjectId);
-    }
-
     public List<Lesson> getLessons() {
         return lessonDataSource.getLessons();
     }
@@ -75,10 +71,6 @@ public class CardViewModel extends ViewModel {
 
     public void deleteLesson(long lessonId) {
         executor.execute(() -> lessonDataSource.deleteLesson(lessonId));
-    }
-
-    public List<Part> getPartsFromLesson(long lessonId) {
-        return partDataSource.getPartsFromLesson(lessonId);
     }
 
     public List<Part> getParts() {
@@ -97,14 +89,6 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> partDataSource.deletePart(partId));
     }
 
-    public List<Card> getCardsFromPart(long partId) {
-        return cardDataSource.getCardsFromPart(partId);
-    }
-
-    public List<Card> getCardsFromIds(List<Long> cardIds) {
-        return cardDataSource.getCardsFromIds(cardIds);
-    }
-
     public List<Card> getCards() {
         return cardDataSource.getCards();
     }
@@ -121,23 +105,19 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> cardDataSource.deleteCard(cardId));
     }
 
-    public List<Grade> getGradesFromCard(long cardId) {
+    private List<Grade> getGradesFromCard(long cardId) {
         return gradeDataSource.getGradesFromCard(cardId);
     }
 
-    public List<Grade> getGrades() {
-        return gradeDataSource.getGrades();
-    }
-
-    public void createGrade(Grade grade) {
+    private void createGrade(Grade grade) {
         executor.execute(() -> gradeDataSource.createGrade(grade));
     }
 
-    public void updateGrade(Grade grade) {
+    private void updateGrade(Grade grade) {
         executor.execute(() -> gradeDataSource.updateGrade(grade));
     }
 
-    public void deleteGrade(long gradeId) {
+    private void deleteGrade(long gradeId) {
         executor.execute(() -> gradeDataSource.deleteGrade(gradeId));
     }
 

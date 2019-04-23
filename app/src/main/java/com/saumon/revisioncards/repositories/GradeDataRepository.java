@@ -16,10 +16,6 @@ public class GradeDataRepository {
         return gradeDao.getGradesFromCard(cardId);
     }
 
-    public List<Grade> getGrades() {
-        return gradeDao.getGrades();
-    }
-
     public void createGrade(Grade grade) {
         long gradeId = gradeDao.createGrade(grade);
         grade.setId(gradeId);

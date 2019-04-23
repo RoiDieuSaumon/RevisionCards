@@ -12,10 +12,6 @@ public class LessonDataRepository {
         this.lessonDao = lessonDao;
     }
 
-    public List<Lesson> getLessonsFromSubject(long subjectId) {
-        return lessonDao.getLessonsFromSubject(subjectId);
-    }
-
     public List<Lesson> getLessons() {
         return lessonDao.getLessons();
     }

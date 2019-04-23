@@ -11,12 +11,6 @@ import java.util.List;
 
 @Dao
 public interface CardDao {
-    @Query("SELECT * FROM Card WHERE id IN (:cardIdList) ORDER BY partId ASC, position ASC")
-    List<Card> getCardsFromIds(List<Long> cardIdList);
-
-    @Query("SELECT * FROM Card WHERE partId = :partId ORDER BY position ASC")
-    List<Card> getCardsFromPart(long partId);
-
     @Query("SELECT * FROM Card ORDER BY partId ASC, position ASC")
     List<Card> getCards();
 
@@ -24,8 +18,8 @@ public interface CardDao {
     long createCard(Card card);
 
     @Update
-    int updateCard(Card card);
+    void updateCard(Card card);
 
     @Query("DELETE FROM Card WHERE id = :cardId")
-    int deleteCard(long cardId);
+    void deleteCard(long cardId);
 }

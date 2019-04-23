@@ -12,10 +12,6 @@ public class PartDataRepository {
         this.partDao = partDao;
     }
 
-    public List<Part> getPartsFromLesson(long lessonId) {
-        return partDao.getPartsFromLesson(lessonId);
-    }
-
     public List<Part> getParts() {
         return partDao.getParts();
     }

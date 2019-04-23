@@ -11,9 +11,6 @@ import java.util.List;
 
 @Dao
 public interface LessonDao {
-    @Query("SELECT * FROM Lesson WHERE subjectId = :subjectId ORDER BY position ASC")
-    List<Lesson> getLessonsFromSubject(long subjectId);
-
     @Query("SELECT * FROM Lesson ORDER BY subjectId ASC, position ASC")
     List<Lesson> getLessons();
 
@@ -21,8 +18,8 @@ public interface LessonDao {
     long createLesson(Lesson lesson);
 
     @Update
-    int updateLesson(Lesson lesson);
+    void updateLesson(Lesson lesson);
 
     @Query("DELETE FROM Lesson WHERE id = :lessonId")
-    int deleteLesson(long lessonId);
+    void deleteLesson(long lessonId);
 }
