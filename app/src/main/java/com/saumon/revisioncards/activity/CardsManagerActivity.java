@@ -14,6 +14,11 @@ public class CardsManagerActivity extends BaseActivity {
     }
 
     @Override
+    protected String getToolbarTitle() {
+        return "Fiches";
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_cards_manager_cards_tree_view_fragment, new CardsTreeViewFragment()).commit();

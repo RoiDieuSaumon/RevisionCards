@@ -13,19 +13,15 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".activity.CardsRevisionActivity"
-            android:parentActivityName=".activity.HomeActivity"
-            android:label="Révision" />
+            android:parentActivityName=".activity.HomeActivity" />
         <activity
             android:name=".activity.CardsRevisionSelectorActivity"
-            android:parentActivityName=".activity.HomeActivity"
-            android:label="Révision : sélection" />
+            android:parentActivityName=".activity.HomeActivity" />
         <activity
             android:name=".activity.CardsManagerActivity"
-            android:parentActivityName=".activity.HomeActivity"
-            android:label="Fiches" />
+            android:parentActivityName=".activity.HomeActivity" />
         <activity
             android:name=".activity.HomeActivity"
-            android:label="Accueil"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

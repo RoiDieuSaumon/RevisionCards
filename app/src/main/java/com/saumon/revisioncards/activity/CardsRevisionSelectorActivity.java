@@ -19,6 +19,11 @@ public class CardsRevisionSelectorActivity extends BaseActivity {
     }
 
     @Override
+    protected String getToolbarTitle() {
+        return "Révision : sélection";
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         CardsSelection.getInstance().cardList.clear();

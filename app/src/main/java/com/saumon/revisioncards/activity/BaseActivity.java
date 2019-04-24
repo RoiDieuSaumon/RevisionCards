@@ -23,6 +23,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void configureToolbar() {
         Toolbar toolbar = getToolbar();
+        toolbar.setTitle(getToolbarTitle());
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (null != actionBar) {
@@ -33,4 +34,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected Toolbar getToolbar() {
         return findViewById(R.id.toolbar);
     }
+
+    protected abstract String getToolbarTitle();
 }

@@ -16,7 +16,13 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void configureToolbar() {
         Toolbar toolbar = getToolbar();
+        toolbar.setTitle(getToolbarTitle());
         setSupportActionBar(toolbar);
+    }
+
+    @Override
+    protected String getToolbarTitle() {
+        return "Accueil";
     }
 
     @OnClick(R.id.activity_main_review_btn)

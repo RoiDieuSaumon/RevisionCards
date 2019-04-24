@@ -38,6 +38,11 @@ public class CardsRevisionActivity extends BaseActivity {
     }
 
     @Override
+    protected String getToolbarTitle() {
+        return "Révision";
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         configureViewModel();
