@@ -15,7 +15,7 @@ public class CardsManagerActivity extends BaseActivity {
 
     @Override
     protected String getToolbarTitle() {
-        return "Fiches";
+        return getString(R.string.Cards);
     }
 
     @Override

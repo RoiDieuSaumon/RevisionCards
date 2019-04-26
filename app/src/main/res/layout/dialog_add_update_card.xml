@@ -15,7 +15,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="Nom"
+        android:hint="@string/Name"
         android:imeOptions="actionNext"
         tools:ignore="Autofill" />
 
@@ -28,7 +28,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="Texte 1"
+        android:hint="@string/Text_1"
         android:imeOptions="actionNext"
         tools:ignore="Autofill" />
 
@@ -41,7 +41,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
-        android:hint="Texte 2"
+        android:hint="@string/Text_2"
         android:imeOptions="actionDone"
         tools:ignore="Autofill" />
 

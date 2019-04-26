@@ -20,7 +20,7 @@ public class CardsRevisionSelectorActivity extends BaseActivity {
 
     @Override
     protected String getToolbarTitle() {
-        return "Révision : sélection";
+        return getString(R.string.Revision_selection);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class CardsRevisionSelectorActivity extends BaseActivity {
     @OnClick(R.id.activity_cards_revision_selector_review_btn)
     public void onClickReviewButton() {
         if (CardsSelection.getInstance().cardList.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Veuillez sélectionner des fiches", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.Must_select_cards), Toast.LENGTH_LONG).show();
             return;
         }
         Intent intent = new Intent(this, CardsRevisionActivity.class);

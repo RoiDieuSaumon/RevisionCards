@@ -39,7 +39,7 @@
             android:layout_margin="5dp"
             android:textColor="@color/grayTxt"
             android:background="@color/gray"
-            android:text="Raté"
+            android:text="@string/Failed"
             android:enabled="false"
             style="?android:attr/buttonBarButtonStyle" />
 
@@ -51,7 +51,7 @@
             android:layout_margin="5dp"
             android:textColor="@color/grayTxt"
             android:background="@color/gray"
-            android:text="Moyen"
+            android:text="@string/Average"
             android:enabled="false"
             style="?android:attr/buttonBarButtonStyle" />
 
@@ -63,7 +63,7 @@
             android:layout_margin="5dp"
             android:textColor="@color/grayTxt"
             android:background="@color/gray"
-            android:text="Réussi"
+            android:text="@string/Successful"
             android:enabled="false"
             style="?android:attr/buttonBarButtonStyle" />
 

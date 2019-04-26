@@ -161,11 +161,7 @@ public class CardViewModel extends ViewModel {
     }
 
     public void reverseSideToShow(Card card) {
-        if (1 == card.getSideToShow()) {
-            card.setSideToShow(2);
-        } else {
-            card.setSideToShow(1);
-        }
+        card.reverseSideToShow();
         updateCard(card);
     }
 }

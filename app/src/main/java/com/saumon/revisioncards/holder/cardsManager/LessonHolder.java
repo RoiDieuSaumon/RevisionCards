@@ -81,9 +81,9 @@ public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconT
 
         AlertDialog dialog = builder
                 .setView(dialogView)
-                .setTitle("Ajouter une partie")
-                .setNegativeButton("Annuler", null)
-                .setPositiveButton("Ajouter", this::addPart)
+                .setTitle(context.getString(R.string.Add_part))
+                .setNegativeButton(context.getString(R.string.Cancel), null)
+                .setPositiveButton(context.getString(R.string.Add), this::addPart)
                 .create();
 
         EditText editText = dialogView.findViewById(R.id.dialog_add_update_node_name_text);
@@ -120,9 +120,9 @@ public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconT
 
         AlertDialog dialog = builder
                 .setView(dialogView)
-                .setTitle("Modifier un cours")
-                .setNegativeButton("Annuler", null)
-                .setPositiveButton("Modifier", this::editLesson)
+                .setTitle(context.getString(R.string.Edit_lesson))
+                .setNegativeButton(context.getString(R.string.Cancel), null)
+                .setPositiveButton(context.getString(R.string.Edit), this::editLesson)
                 .create();
 
         EditText editText = dialogView.findViewById(R.id.dialog_add_update_node_name_text);
@@ -158,17 +158,13 @@ public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconT
         for (int ip = 0; ip < nbParts; ip++) {
             nbCards += parts.get(ip).getChildren().size();
         }
-        String message = "Le cours " + textView.getText().toString() + " contient " + nbCards + " fiche";
-        if (1 != nbCards) {
-            message += "s";
-        }
-        message += ".\nÊtes-vous sûr de vouloir le supprimer ?";
+        String message = context.getResources().getQuantityString(R.plurals.Lesson_deletion_confirmation, nbCards, textView.getText().toString(), nbCards);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder .setTitle("Supprimer un cours")
+        builder .setTitle(context.getString(R.string.Delete_lesson))
                 .setMessage(message)
-                .setNegativeButton("Annuler", null)
-                .setPositiveButton("Supprimer", this::deleteLesson)
+                .setNegativeButton(context.getString(R.string.Cancel), null)
+                .setPositiveButton(context.getString(R.string.Delete), this::deleteLesson)
                 .create()
                 .show();
     }

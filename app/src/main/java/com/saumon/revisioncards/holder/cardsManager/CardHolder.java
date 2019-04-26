@@ -95,9 +95,9 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
 
         AlertDialog dialog = builder
                 .setView(dialogView)
-                .setTitle("Modifier une fiche")
-                .setNegativeButton("Annuler", null)
-                .setPositiveButton("Modifier", this::editCard)
+                .setTitle(context.getString(R.string.Edit_card))
+                .setNegativeButton(context.getString(R.string.Cancel), null)
+                .setPositiveButton(context.getString(R.string.Edit), this::editCard)
                 .create();
 
         EditText editTextName = dialogView.findViewById(R.id.dialog_add_update_card_name_text);
@@ -142,13 +142,13 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
     }
 
     private void deleteCardAskConfirmation() {
-        String message = "Êtes-vous sûr de supprimer la fiche " + textView.getText().toString() + " ?";
+        String message = context.getString(R.string.Card_deletion_confirmation, textView.getText().toString());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder .setTitle("Supprimer une fiche")
+        builder .setTitle(context.getString(R.string.Delete_card))
                 .setMessage(message)
-                .setNegativeButton("Annuler", null)
-                .setPositiveButton("Supprimer", this::deleteCard)
+                .setNegativeButton(context.getString(R.string.Cancel), null)
+                .setPositiveButton(context.getString(R.string.Delete), this::deleteCard)
                 .create()
                 .show();
     }

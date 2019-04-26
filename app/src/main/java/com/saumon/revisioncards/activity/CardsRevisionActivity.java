@@ -39,7 +39,7 @@ public class CardsRevisionActivity extends BaseActivity {
 
     @Override
     protected String getToolbarTitle() {
-        return "Révision";
+        return getString(R.string.Revision);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class CardsRevisionActivity extends BaseActivity {
             nextCardIndex = 0;
         }
         card = shuffledCardList.get(nextCardIndex);
-        ((TextView) findViewById(R.id.activity_cards_revision_current_card_text)).setText("Fiche " + nbCard);
+        ((TextView) findViewById(R.id.activity_cards_revision_current_card_text)).setText(getString(R.string.Card_nb, nbCard));
         ((TextView) findViewById(R.id.activity_cards_revision_text1_text)).setText(card.getTextToShow());
         findViewById(R.id.activity_cards_revision_text2_text).setBackgroundColor(Color.BLACK);
         showScore();
@@ -134,10 +134,10 @@ public class CardsRevisionActivity extends BaseActivity {
         int score = cardViewModel.getCardScore(card.getId());
         TextView textView = findViewById(R.id.activity_cards_revision_score_text);
         if (-1 == score) {
-            textView.setText("Pas de score");
+            textView.setText(getString(R.string.No_score));
             return;
         }
-        textView.setText("Score : " + score + "%");
+        textView.setText(getString(R.string.Score_display, score));
         int color;
         if (score < 33) {
             color = R.color.red;

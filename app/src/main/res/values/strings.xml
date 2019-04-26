@@ -1,6 +1,59 @@
 <resources>
     <string name="app_name">RevisionCards</string>
 
+    <string name="Add">Ajouter</string>
+    <string name="Edit">Modifier</string>
+    <string name="Delete">Supprimer</string>
+    <string name="Cancel">Annuler</string>
+    <string name="Successful">Réussi</string>
+    <string name="Average">Moyen</string>
+    <string name="Failed">Raté</string>
+
+    <string name="Add_subject">Ajouter une matière</string>
+    <string name="Edit_subject">Modifier une matière</string>
+    <string name="Delete_subject">Supprimer une matière</string>
+    <plurals name="Subject_deletion_confirmation">
+        <item quantity="one">La matière %s contient %d fiche.\nÊtes-vous sûr de vouloir la supprimer ?</item>
+        <item quantity="other">La matière %s contient %d fiches.\nÊtes-vous sûr de vouloir la supprimer ?</item>
+    </plurals>
+
+    <string name="Add_lesson">Ajouter un cours</string>
+    <string name="Edit_lesson">Modifier un cours</string>
+    <string name="Delete_lesson">Supprimer un cours</string>
+    <plurals name="Lesson_deletion_confirmation">
+        <item quantity="one">Le cours %s contient %d fiche.\nÊtes-vous sûr de vouloir le supprimer ?</item>
+        <item quantity="other">Le cours %s contient %d fiches.\nÊtes-vous sûr de vouloir le supprimer ?</item>
+    </plurals>
+
+    <string name="Add_part">Ajouter une partie</string>
+    <string name="Edit_part">Modifier une partie</string>
+    <string name="Delete_part">Supprimer une partie</string>
+    <plurals name="Part_deletion_confirmation">
+        <item quantity="one">La partie %s contient %d fiche.\nÊtes-vous sûr de vouloir la supprimer ?</item>
+        <item quantity="other">La partie %s contient %d fiches.\nÊtes-vous sûr de vouloir la supprimer ?</item>
+    </plurals>
+
+    <string name="Cards">Fiches</string>
+    <string name="Card_nb">Fiche %d</string>
+    <string name="Must_select_cards">Veuillez sélectionner des fiches</string>
+    <string name="Nb_selected_cards">Fiches sélectionnées : %d</string>
+    <string name="Nb_selected_cards_init">Fiches sélectionnées : 0</string>
+    <string name="Add_card">Ajouter une fiche</string>
+    <string name="Edit_card">Modifier une fiche</string>
+    <string name="Delete_card">Supprimer une fiche</string>
+    <string name="Card_deletion_confirmation">Êtes-vous sûr de supprimer la fiche %s ?</string>
+
+    <string name="No_score">Pas de score</string>
+    <string name="Score_display">Score : %d%%</string>
+
+    <string name="Home">Accueil</string>
+    <string name="Revision">Révision</string>
+    <string name="Revision_selection">Révision : sélection</string>
+    <string name="Review">Réviser</string>
+    <string name="Name">Nom</string>
+    <string name="Text_1">Texte 1</string>
+    <string name="Text_2">Texte 2</string>
+
     <string name="ic_access_alarms">&#xe000;</string>
     <string name="ic_access_time">&#xe001;</string>
     <string name="ic_accessibility">&#xe002;</string>

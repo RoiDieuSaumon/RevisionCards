@@ -22,7 +22,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected String getToolbarTitle() {
-        return "Accueil";
+        return getString(R.string.Home);
     }
 
     @OnClick(R.id.activity_main_review_btn)

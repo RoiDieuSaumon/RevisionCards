@@ -80,9 +80,9 @@ public class CardsTreeViewFragment extends Fragment {
 
         AlertDialog dialog = builder
                 .setView(dialogView)
-                .setTitle("Ajouter une matière")
-                .setNegativeButton("Annuler", null)
-                .setPositiveButton("Ajouter", this::addSubject)
+                .setTitle(getString(R.string.Add_subject))
+                .setNegativeButton(getString(R.string.Cancel), null)
+                .setPositiveButton(getString(R.string.Add), this::addSubject)
                 .create();
 
         EditText editText = dialogView.findViewById(R.id.dialog_add_update_node_name_text);

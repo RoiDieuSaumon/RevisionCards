@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:text="Ajouter une matière"
+        android:text="@string/Add_subject"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:width="210dp"

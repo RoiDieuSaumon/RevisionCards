@@ -71,7 +71,7 @@ public class CardHolder  extends TreeNode.BaseNodeViewHolder<CardHolder.IconTree
         } else {
             CardsSelection.getInstance().cardList.remove(iconTreeItem.card);
         }
-        ((TextView) ((Activity) context).findViewById(R.id.activity_cards_revision_selector_nb_selected_cards_text)).setText("Fiches sélectionnées : " + CardsSelection.getInstance().cardList.size());
+        ((TextView) ((Activity) context).findViewById(R.id.activity_cards_revision_selector_nb_selected_cards_text)).setText(context.getString(R.string.Nb_selected_cards, CardsSelection.getInstance().cardList.size()));
         if (CardsSelection.getInstance().cardList.isEmpty()) {
             ((Activity) context).findViewById(R.id.activity_cards_revision_selector_review_btn).setEnabled(false);
         } else {

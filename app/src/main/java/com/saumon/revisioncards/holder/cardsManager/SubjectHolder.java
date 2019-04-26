@@ -81,9 +81,9 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
 
         AlertDialog dialog = builder
                 .setView(dialogView)
-                .setTitle("Ajouter un cours")
-                .setNegativeButton("Annuler", null)
-                .setPositiveButton("Ajouter", this::addLesson)
+                .setTitle(context.getString(R.string.Add_lesson))
+                .setNegativeButton(context.getString(R.string.Cancel), null)
+                .setPositiveButton(context.getString(R.string.Add), this::addLesson)
                 .create();
 
         EditText editText = dialogView.findViewById(R.id.dialog_add_update_node_name_text);
@@ -120,9 +120,9 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
 
         AlertDialog dialog = builder
                 .setView(dialogView)
-                .setTitle("Modifier une matière")
-                .setNegativeButton("Annuler", null)
-                .setPositiveButton("Modifier", this::editSubject)
+                .setTitle(context.getString(R.string.Edit_subject))
+                .setNegativeButton(context.getString(R.string.Cancel), null)
+                .setPositiveButton(context.getString(R.string.Edit), this::editSubject)
                 .create();
 
         EditText editText = dialogView.findViewById(R.id.dialog_add_update_node_name_text);
@@ -163,17 +163,13 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
                 nbCards += parts.get(ip).getChildren().size();
             }
         }
-        String message = "La matière " + textView.getText().toString() + " contient " + nbCards + " fiche";
-        if (1 != nbCards) {
-            message += "s";
-        }
-        message += ".\nÊtes-vous sûr de vouloir la supprimer ?";
+        String message = context.getResources().getQuantityString(R.plurals.Subject_deletion_confirmation, nbCards, textView.getText().toString(), nbCards);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder .setTitle("Supprimer une matière")
+        builder .setTitle(context.getString(R.string.Delete_subject))
                 .setMessage(message)
-                .setNegativeButton("Annuler", null)
-                .setPositiveButton("Supprimer", this::deleteSubject)
+                .setNegativeButton(context.getString(R.string.Cancel), null)
+                .setPositiveButton(context.getString(R.string.Delete), this::deleteSubject)
                 .create()
                 .show();
     }

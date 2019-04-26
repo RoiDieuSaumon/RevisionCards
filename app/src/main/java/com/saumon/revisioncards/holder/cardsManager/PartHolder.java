@@ -81,9 +81,9 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
 
         AlertDialog dialog = builder
                 .setView(dialogView)
-                .setTitle("Ajouter une fiche")
-                .setNegativeButton("Annuler", null)
-                .setPositiveButton("Ajouter", this::addCard)
+                .setTitle(context.getString(R.string.Add_card))
+                .setNegativeButton(context.getString(R.string.Cancel), null)
+                .setPositiveButton(context.getString(R.string.Add), this::addCard)
                 .create();
 
         EditText editText = dialogView.findViewById(R.id.dialog_add_update_card_name_text);
@@ -125,9 +125,9 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
 
         AlertDialog dialog = builder
                 .setView(dialogView)
-                .setTitle("Modifier une partie")
-                .setNegativeButton("Annuler", null)
-                .setPositiveButton("Modifier", this::editPart)
+                .setTitle(context.getString(R.string.Edit_part))
+                .setNegativeButton(context.getString(R.string.Cancel), null)
+                .setPositiveButton(context.getString(R.string.Edit), this::editPart)
                 .create();
 
         EditText editText = dialogView.findViewById(R.id.dialog_add_update_node_name_text);
@@ -158,17 +158,13 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
 
     private void deletePartAskConfirmation() {
         int nbCards = node.getChildren().size();
-        String message = "La partie " + textView.getText().toString() + " contient " + nbCards + " fiche";
-        if (1 != nbCards) {
-            message += "s";
-        }
-        message += ".\nÊtes-vous sûr de vouloir la supprimer ?";
+        String message = context.getResources().getQuantityString(R.plurals.Part_deletion_confirmation, nbCards, textView.getText().toString(), nbCards);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder .setTitle("Supprimer une partie")
+        builder .setTitle(context.getString(R.string.Delete_part))
                 .setMessage(message)
-                .setNegativeButton("Annuler", null)
-                .setPositiveButton("Supprimer", this::deletePart)
+                .setNegativeButton(context.getString(R.string.Cancel), null)
+                .setPositiveButton(context.getString(R.string.Delete), this::deletePart)
                 .create()
                 .show();
     }
