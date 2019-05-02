@@ -34,7 +34,6 @@
     </plurals>
 
     <string name="Cards">Fiches</string>
-    <string name="Card_nb">Fiche %d</string>
     <string name="Must_select_cards">Veuillez sélectionner des fiches</string>
     <string name="Nb_selected_cards">Fiches sélectionnées : %d</string>
     <string name="Nb_selected_cards_init">Fiches sélectionnées : 0</string>

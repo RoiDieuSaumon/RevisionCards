@@ -29,7 +29,6 @@ public class CardsRevisionActivity extends BaseActivity {
     private CardViewModel cardViewModel;
     private List<Card> shuffledCardList;
     private int nextCardIndex = 0;
-    private int nbCard = 1;
     private Card card;
 
     @Override
@@ -97,13 +96,16 @@ public class CardsRevisionActivity extends BaseActivity {
             nextCardIndex = 0;
         }
         card = shuffledCardList.get(nextCardIndex);
-        ((TextView) findViewById(R.id.activity_cards_revision_current_card_text)).setText(getString(R.string.Card_nb, nbCard));
+        if (null == card.getName() || card.getName().isEmpty()) {
+            ((TextView) findViewById(R.id.activity_cards_revision_current_card_text)).setText("");
+        } else {
+            ((TextView) findViewById(R.id.activity_cards_revision_current_card_text)).setText(card.getName());
+        }
         ((TextView) findViewById(R.id.activity_cards_revision_text1_text)).setText(card.getTextToShow());
         findViewById(R.id.activity_cards_revision_text2_text).setBackgroundColor(Color.BLACK);
         showScore();
         disableButtons();
         nextCardIndex++;
-        nbCard++;
     }
 
     private void disableButtons() {
