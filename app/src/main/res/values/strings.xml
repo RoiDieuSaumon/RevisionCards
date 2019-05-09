@@ -53,6 +53,9 @@
     <string name="Text_1">Texte 1</string>
     <string name="Text_2">Texte 2</string>
 
+    <string name="Data_saved">Données sauvegardées</string>
+    <string name="Error_happened">Une erreur est survenue</string>
+
     <string name="ic_access_alarms">&#xe000;</string>
     <string name="ic_access_time">&#xe001;</string>
     <string name="ic_accessibility">&#xe002;</string>
