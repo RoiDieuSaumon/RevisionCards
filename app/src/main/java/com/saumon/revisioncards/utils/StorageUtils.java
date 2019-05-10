@@ -1,6 +1,7 @@
 package com.saumon.revisioncards.utils;
 
 import android.content.Context;
+import android.os.Environment;
 import android.widget.Toast;
 
 import com.saumon.revisioncards.R;
@@ -15,6 +16,26 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 
 public class StorageUtils {
+    public static boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
+    public static boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        return (Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state));
+    }
+
+    public static String getTextFromStorage(File rootDestination, Context context, String fileName, String folderName) {
+        File file = createOrGetFile(rootDestination, fileName, folderName);
+        return readOnFile(context, file);
+    }
+
+    public static void setTextInStorage(File rootDestination, Context context, String fileName, String folderName, String text) {
+        File file = createOrGetFile(rootDestination, fileName, folderName);
+        writeOnFile(context, text, file);
+    }
+
     private static File createOrGetFile(File destination, String fileName, String folderName) {
         File folder = new File(destination, folderName);
         return new File(folder, fileName);
