@@ -44,10 +44,8 @@ public class StorageUtils {
     private static String readOnFile(Context context, File file) {
         String result = null;
         if (file.exists()) {
-            BufferedReader br;
             try {
-                br = new BufferedReader(new FileReader(file));
-                try {
+                try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                     StringBuilder sb = new StringBuilder();
                     String line = br.readLine();
                     while (null != line) {
@@ -56,8 +54,6 @@ public class StorageUtils {
                         line = br.readLine();
                     }
                     result = sb.toString();
-                } finally {
-                    br.close();
                 }
             } catch (IOException e) {
                 Toast.makeText(context, context.getString(R.string.Error_happened), Toast.LENGTH_LONG).show();
@@ -69,17 +65,18 @@ public class StorageUtils {
 
     private static void writeOnFile(Context context, String text, File file) {
         try {
-            file.getParentFile().mkdirs();
-            FileOutputStream fos = new FileOutputStream(file);
-            Writer w = new BufferedWriter(new OutputStreamWriter(fos));
+            if (file.getParentFile().mkdirs()) {
+                FileOutputStream fos = new FileOutputStream(file);
 
-            try {
-                w.write(text);
-                w.flush();
-                fos.getFD().sync();
-            } finally {
-                w.close();
-                Toast.makeText(context, context.getString(R.string.Data_saved), Toast.LENGTH_LONG).show();
+                try (Writer w = new BufferedWriter(new OutputStreamWriter(fos))) {
+                    w.write(text);
+                    w.flush();
+                    fos.getFD().sync();
+                } finally {
+                    Toast.makeText(context, context.getString(R.string.Data_saved), Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(context, context.getString(R.string.Error_happened), Toast.LENGTH_LONG).show();
             }
         } catch (IOException e) {
             Toast.makeText(context, context.getString(R.string.Error_happened), Toast.LENGTH_LONG).show();
