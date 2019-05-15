@@ -65,6 +65,7 @@ public class StorageUtils {
 
     private static void writeOnFile(Context context, String text, File file) {
         try {
+            // TODO : créer les répertoires seulement s'ils existent pas encore
             if (file.getParentFile().mkdirs()) {
                 FileOutputStream fos = new FileOutputStream(file);
 
