@@ -65,20 +65,18 @@ public class StorageUtils {
 
     private static void writeOnFile(Context context, String text, File file) {
         try {
-            // TODO : créer les répertoires seulement s'ils existent pas encore
-            if (file.getParentFile().mkdirs()) {
-                FileOutputStream fos = new FileOutputStream(file);
-
-                try (Writer w = new BufferedWriter(new OutputStreamWriter(fos))) {
-                    w.write(text);
-                    w.flush();
-                    fos.getFD().sync();
-                } finally {
-                    Toast.makeText(context, context.getString(R.string.Data_saved), Toast.LENGTH_LONG).show();
-                }
-            } else {
+            if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
                 Toast.makeText(context, context.getString(R.string.Error_happened), Toast.LENGTH_LONG).show();
+                return;
             }
+
+            FileOutputStream fos = new FileOutputStream(file);
+            try (Writer w = new BufferedWriter(new OutputStreamWriter(fos))) {
+                w.write(text);
+                w.flush();
+                fos.getFD().sync();
+            }
+            Toast.makeText(context, context.getString(R.string.Data_saved), Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             Toast.makeText(context, context.getString(R.string.Error_happened), Toast.LENGTH_LONG).show();
         }
