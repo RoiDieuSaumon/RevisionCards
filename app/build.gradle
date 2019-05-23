@@ -38,8 +38,4 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.github.bmelnychuk:atv:1.2.9'
     implementation 'com.github.johnkil.print:print:1.2.2'
-    implementation 'pub.devrel:easypermissions:1.1.1'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.5'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.8.5'
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.8.5'
 }
