@@ -1,4 +1,4 @@
-package com.saumon.revisioncards;
+package com.saumon.revisioncards.utils;
 
 import com.saumon.revisioncards.models.Card;
 

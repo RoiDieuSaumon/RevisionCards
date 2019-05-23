@@ -15,7 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 
-import com.saumon.revisioncards.CardViewModel;
+import com.saumon.revisioncards.utils.CardViewModel;
 import com.saumon.revisioncards.R;
 import com.saumon.revisioncards.holder.cardsManager.CardHolder;
 import com.saumon.revisioncards.holder.cardsManager.LessonHolder;

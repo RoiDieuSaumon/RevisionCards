@@ -1,4 +1,4 @@
-package com.saumon.revisioncards;
+package com.saumon.revisioncards.utils;
 
 import android.arch.lifecycle.ViewModel;
 import android.os.Handler;

@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.johnkil.print.PrintView;
-import com.saumon.revisioncards.CardViewModel;
+import com.saumon.revisioncards.utils.CardViewModel;
 import com.saumon.revisioncards.R;
 import com.saumon.revisioncards.injection.Injection;
 import com.saumon.revisioncards.injections.ViewModelFactory;

@@ -10,8 +10,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.saumon.revisioncards.CardViewModel;
-import com.saumon.revisioncards.CardsSelection;
+import com.saumon.revisioncards.utils.CardViewModel;
+import com.saumon.revisioncards.utils.CardsSelection;
 import com.saumon.revisioncards.R;
 import com.saumon.revisioncards.injection.Injection;
 import com.saumon.revisioncards.injections.ViewModelFactory;

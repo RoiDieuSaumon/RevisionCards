@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-import com.saumon.revisioncards.CardViewModel;
+import com.saumon.revisioncards.utils.CardViewModel;
 import com.saumon.revisioncards.repositories.CardDataRepository;
 import com.saumon.revisioncards.repositories.GradeDataRepository;
 import com.saumon.revisioncards.repositories.LessonDataRepository;

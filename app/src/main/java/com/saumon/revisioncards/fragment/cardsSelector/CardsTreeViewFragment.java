@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.saumon.revisioncards.CardViewModel;
+import com.saumon.revisioncards.utils.CardViewModel;
 import com.saumon.revisioncards.R;
 import com.saumon.revisioncards.holder.cardsSelector.CardHolder;
 import com.saumon.revisioncards.holder.cardsSelector.LessonHolder;

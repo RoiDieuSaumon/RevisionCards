@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
-import com.saumon.revisioncards.CardsSelection;
+import com.saumon.revisioncards.utils.CardsSelection;
 import com.saumon.revisioncards.R;
 import com.saumon.revisioncards.fragment.cardsSelector.CardsTreeViewFragment;
 
