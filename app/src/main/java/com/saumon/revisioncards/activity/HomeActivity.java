@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 
 import com.saumon.revisioncards.R;
+import com.saumon.revisioncards.utils.DatabaseFiller;
 
 import butterknife.OnClick;
 
@@ -42,5 +43,10 @@ public class HomeActivity extends BaseActivity {
     public void onClickCardsManageButton() {
         Intent intent = new Intent(this, CardsManagerActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.activity_main_fill_database_btn)
+    public void onClickFillDatabaseButton() {
+        DatabaseFiller.fillDatabase(this);
     }
 }
