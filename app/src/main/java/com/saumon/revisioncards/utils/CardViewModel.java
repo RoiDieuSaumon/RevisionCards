@@ -49,6 +49,10 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> subjectDataSource.createSubject(subject));
     }
 
+    public void createSubjectSync(Subject subject) {
+        subjectDataSource.createSubject(subject);
+    }
+
     public void updateSubject(Subject subject) {
         executor.execute(() -> subjectDataSource.updateSubject(subject));
     }
@@ -63,6 +67,10 @@ public class CardViewModel extends ViewModel {
 
     public void createLesson(Lesson lesson) {
         executor.execute(() -> lessonDataSource.createLesson(lesson));
+    }
+
+    public void createLessonSync(Lesson lesson) {
+        lessonDataSource.createLesson(lesson);
     }
 
     public void updateLesson(Lesson lesson) {
@@ -81,6 +89,10 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> partDataSource.createPart(part));
     }
 
+    public void createPartSync(Part part) {
+        partDataSource.createPart(part);
+    }
+
     public void updatePart(Part part) {
         executor.execute(() -> partDataSource.updatePart(part));
     }
@@ -95,6 +107,10 @@ public class CardViewModel extends ViewModel {
 
     public void createCard(Card card) {
         executor.execute(() -> cardDataSource.createCard(card));
+    }
+
+    public void createCardSync(Card card) {
+        cardDataSource.createCard(card);
     }
 
     public void updateCard(Card card) {

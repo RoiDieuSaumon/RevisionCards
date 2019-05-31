@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.saumon.revisioncards.R;
 import com.saumon.revisioncards.utils.DatabaseFiller;
@@ -48,5 +49,6 @@ public class HomeActivity extends BaseActivity {
     @OnClick(R.id.activity_main_fill_database_btn)
     public void onClickFillDatabaseButton() {
         DatabaseFiller.fillDatabase(this);
+        Toast.makeText(this, "Base de données remplit", Toast.LENGTH_LONG).show();
     }
 }
