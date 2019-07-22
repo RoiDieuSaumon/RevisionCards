@@ -56,5 +56,6 @@ public class HomeActivity extends BaseActivity {
     public void onClickFillDatabaseButton() {
         DatabaseFiller.fillDatabase(this);
         Toast.makeText(this, "Base de données remplit", Toast.LENGTH_LONG).show();
+        fillDatabaseButton.setVisibility(View.GONE);
     }
 }
