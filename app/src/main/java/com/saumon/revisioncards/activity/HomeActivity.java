@@ -4,17 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.saumon.revisioncards.R;
 import com.saumon.revisioncards.utils.DatabaseFiller;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class HomeActivity extends BaseActivity {
+    @BindView(R.id.activity_main_fill_database_btn) Button fillDatabaseButton;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fillDatabaseButton.setVisibility(View.GONE);
     }
 
     @Override
