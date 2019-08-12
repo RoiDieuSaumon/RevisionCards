@@ -52,8 +52,16 @@
     <string name="Name">Nom</string>
     <string name="Text_1">Texte 1</string>
     <string name="Text_2">Texte 2</string>
+    
+    <string name="Write_permissions_request_message">Les droits d\'écriture sont nécessaires pour la sauvegarde des données.\nVoulez-vous continuer ?</string>
+    <string name="Write_permissions_request_positive_btn">Oui</string>
+    <string name="Write_permissions_request_negative_btn">Non</string>
+    <string name="Backup">Sauvegarde</string>
+    <string name="Backup_success">Données sauvegardées</string>
+    <string name="Backup_fail">Erreur à la sauvegarde des données</string>
 
     <string name="Fill_database">Remplissage</string>
+    <string name="Fill_database_end">Base de données remplit</string>
 
     <string name="ic_access_alarms">&#xe000;</string>
     <string name="ic_access_time">&#xe001;</string>
