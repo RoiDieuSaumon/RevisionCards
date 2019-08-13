@@ -12,6 +12,10 @@ public class GradeDataRepository {
         this.gradeDao = gradeDao;
     }
 
+    public List<Grade> getGrades() {
+        return gradeDao.getGrades();
+    }
+
     public List<Grade> getGradesFromCard(long cardId) {
         return gradeDao.getGradesFromCard(cardId);
     }

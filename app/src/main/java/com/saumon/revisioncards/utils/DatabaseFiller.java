@@ -26,7 +26,7 @@ public class DatabaseFiller {
                     Part part = new Part("Partie " + is + "::" + il + "::" + ip, ip, lesson.getId());
                     cardViewModel.createPartSync(part);
                     for (int ic = 1; ic < 6; ic++) {
-                        Card card = new Card("Carte " + is + "::" + il + "::" + ip + "::" + ic, "Texte " + is + "::" + il + "::" + ip + "::" + ic + "::1", "Texte " + is + "::" + il + "::" + ip + "::" + ic + "::2", ic, part.getId());
+                        Card card = new Card("Fiche " + is + "::" + il + "::" + ip + "::" + ic, "Texte " + is + "::" + il + "::" + ip + "::" + ic + "::1", "Texte " + is + "::" + il + "::" + ip + "::" + ic + "::2", ic, part.getId());
                         cardViewModel.createCardSync(card);
                     }
                 }

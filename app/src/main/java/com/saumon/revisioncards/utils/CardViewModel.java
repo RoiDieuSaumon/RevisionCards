@@ -121,6 +121,10 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> cardDataSource.deleteCard(cardId));
     }
 
+    public List<Grade> getGrades() {
+        return gradeDataSource.getGrades();
+    }
+
     private List<Grade> getGradesFromCard(long cardId) {
         return gradeDataSource.getGradesFromCard(cardId);
     }

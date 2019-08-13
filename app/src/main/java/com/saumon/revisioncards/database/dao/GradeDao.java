@@ -11,6 +11,9 @@ import java.util.List;
 
 @Dao
 public interface GradeDao {
+    @Query("SELECT * FROM Grade ORDER BY cardId ASC, position ASC")
+    List<Grade> getGrades();
+
     @Query("SELECT * FROM Grade WHERE cardId = :cardId ORDER BY position ASC")
     List<Grade> getGradesFromCard(long cardId);
 

@@ -59,6 +59,12 @@
     <string name="Backup">Sauvegarde</string>
     <string name="Backup_success">Données sauvegardées</string>
     <string name="Backup_fail">Erreur à la sauvegarde des données</string>
+    <string name="Get_subjects_fail">Erreur à la récupération des matières</string>
+    <string name="Get_lessons_fail">Erreur à la récupération des cours</string>
+    <string name="Get_parts_fail">Erreur à la récupération des parties</string>
+    <string name="Get_cards_fail">Erreur à la récupération des fiches</string>
+    <string name="Get_grades_fail">Erreur à la récupération des notes</string>
+    <string name="Get_data_fail">Erreur à la récupération des données</string>
 
     <string name="Fill_database">Remplissage</string>
     <string name="Fill_database_end">Base de données remplit</string>

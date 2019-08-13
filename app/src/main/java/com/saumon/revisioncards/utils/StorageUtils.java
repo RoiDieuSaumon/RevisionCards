@@ -1,11 +1,23 @@
 package com.saumon.revisioncards.utils;
 
 import android.app.Activity;
-import android.content.Context;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Environment;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 import com.saumon.revisioncards.R;
+import com.saumon.revisioncards.injection.Injection;
+import com.saumon.revisioncards.injections.ViewModelFactory;
+import com.saumon.revisioncards.models.Card;
+import com.saumon.revisioncards.models.Grade;
+import com.saumon.revisioncards.models.Lesson;
+import com.saumon.revisioncards.models.Part;
+import com.saumon.revisioncards.models.Subject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -31,7 +43,7 @@ public class StorageUtils {
         return new File(folder, fileName);
     }
 
-    public static boolean setTextInStorage(File rootDestination, String fileName, String folderName, String text) {
+    private static boolean setTextInStorage(File rootDestination, String fileName, String folderName, String text) {
         File file = createOrGetFile(rootDestination, fileName, folderName);
         return writeOnFile(text, file);
     }
@@ -52,7 +64,7 @@ public class StorageUtils {
         return true;
     }
 
-    public static boolean isExternalStorageWritable() {
+    private static boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED.equals(state);
     }
@@ -72,13 +84,117 @@ public class StorageUtils {
         return EasyPermissions.somePermissionPermanentlyDenied(activity, perms);
     }
 
-    public static void backup(Context context) {
+    public static void backup(Activity activity) {
         if (isExternalStorageWritable()) {
-            if (setTextInStorage(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), BACKUP_FILENAME, BACKUP_FOLDERNAME, "{}")) {
-                Toast.makeText(context, R.string.Backup_success, Toast.LENGTH_LONG).show();
+            String json = databaseToJson(activity).toString();
+            if (setTextInStorage(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), BACKUP_FILENAME, BACKUP_FOLDERNAME, json)) {
+                Toast.makeText(activity, R.string.Backup_success, Toast.LENGTH_LONG).show();
                 return;
             }
         }
-        Toast.makeText(context, R.string.Backup_fail, Toast.LENGTH_LONG).show();
+        Toast.makeText(activity, R.string.Backup_fail, Toast.LENGTH_LONG).show();
+    }
+
+    private static JSONObject databaseToJson(Activity activity) {
+        JSONObject json = new JSONObject();
+
+        ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(activity);
+        CardViewModel cardViewModel = ViewModelProviders.of((FragmentActivity) activity, viewModelFactory).get(CardViewModel.class);
+
+        List<Subject> subjects = cardViewModel.getSubjects();
+        List<Lesson> lessons = cardViewModel.getLessons();
+        List<Part> parts = cardViewModel.getParts();
+        List<Card> cards = cardViewModel.getCards();
+        List<Grade> grades = cardViewModel.getGrades();
+
+        JSONArray subjectsJson = new JSONArray();
+        for (int is = 0; is < subjects.size(); is++) {
+            Subject subject = subjects.get(is);
+            JSONObject subjectJson = new JSONObject();
+            try {
+                subjectJson.put("id", subject.getId());
+                subjectJson.put("name", subject.getName());
+                subjectJson.put("position", subject.getPosition());
+            } catch (JSONException e) {
+                Toast.makeText(activity, R.string.Get_subjects_fail, Toast.LENGTH_LONG).show();
+                return json;
+            }
+            subjectsJson.put(subjectJson);
+        }
+        JSONArray lessonsJson = new JSONArray();
+        for (int il = 0; il < lessons.size(); il++) {
+            Lesson lesson = lessons.get(il);
+            JSONObject lessonJson = new JSONObject();
+            try {
+                lessonJson.put("id", lesson.getId());
+                lessonJson.put("name", lesson.getName());
+                lessonJson.put("position", lesson.getPosition());
+                lessonJson.put("subjectId", lesson.getSubjectId());
+            } catch (JSONException e) {
+                Toast.makeText(activity, R.string.Get_lessons_fail, Toast.LENGTH_LONG).show();
+                return json;
+            }
+            lessonsJson.put(lessonJson);
+        }
+        JSONArray partsJson = new JSONArray();
+        for (int ip = 0; ip < parts.size(); ip++) {
+            Part part = parts.get(ip);
+            JSONObject partJson = new JSONObject();
+            try {
+                partJson.put("id", part.getId());
+                partJson.put("name", part.getName());
+                partJson.put("position", part.getPosition());
+                partJson.put("lessonId", part.getLessonId());
+            } catch (JSONException e) {
+                Toast.makeText(activity, R.string.Get_parts_fail, Toast.LENGTH_LONG).show();
+                return json;
+            }
+            partsJson.put(partJson);
+        }
+        JSONArray cardsJson = new JSONArray();
+        for (int ic = 0; ic < cards.size(); ic++) {
+            Card card = cards.get(ic);
+            JSONObject cardJson = new JSONObject();
+            try {
+                cardJson.put("id", card.getId());
+                cardJson.put("name", card.getName());
+                cardJson.put("text1", card.getText1());
+                cardJson.put("text2", card.getText2());
+                cardJson.put("sideToShow", card.getSideToShow());
+                cardJson.put("position", card.getPosition());
+                cardJson.put("partId", card.getPartId());
+            } catch (JSONException e) {
+                Toast.makeText(activity, R.string.Get_cards_fail, Toast.LENGTH_LONG).show();
+                return json;
+            }
+            cardsJson.put(cardJson);
+        }
+        JSONArray gradesJson = new JSONArray();
+        for (int ig = 0; ig < grades.size(); ig++) {
+            Grade grade = grades.get(ig);
+            JSONObject gradeJson = new JSONObject();
+            try {
+                gradeJson.put("id", grade.getId());
+                gradeJson.put("value", grade.getValue());
+                gradeJson.put("position", grade.getPosition());
+                gradeJson.put("cardId", grade.getCardId());
+            } catch (JSONException e) {
+                Toast.makeText(activity, R.string.Get_grades_fail, Toast.LENGTH_LONG).show();
+                return json;
+            }
+            gradesJson.put(gradeJson);
+        }
+
+        try {
+            json.put("subject", subjectsJson);
+            json.put("lesson", lessonsJson);
+            json.put("part", partsJson);
+            json.put("card", cardsJson);
+            json.put("grade", gradesJson);
+        } catch (JSONException e) {
+            Toast.makeText(activity, R.string.Get_data_fail, Toast.LENGTH_LONG).show();
+        }
+
+        return json;
     }
 }
