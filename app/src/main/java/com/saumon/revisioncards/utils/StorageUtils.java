@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
+import android.util.JsonReader;
 import android.widget.Toast;
 
 import com.saumon.revisioncards.R;
@@ -18,10 +19,13 @@ import com.saumon.revisioncards.models.Subject;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -48,6 +52,11 @@ public class StorageUtils {
         return writeOnFile(text, file);
     }
 
+    private static String getTextFromStorage(File rootDestination, String fileName, String folderName) {
+        File file = createOrGetFile(rootDestination, fileName, folderName);
+        return readOnFile(file);
+    }
+
     private static boolean writeOnFile(String text, File file) {
         try {
             file.getParentFile().mkdirs();
@@ -64,9 +73,34 @@ public class StorageUtils {
         return true;
     }
 
+    private static String readOnFile(File file) {
+        String result = null;
+        if (file.exists()) {
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                StringBuilder sb = new StringBuilder();
+                String line = br.readLine();
+                while (line != null) {
+                    sb.append(line);
+                    sb.append("\n");
+                    line = br.readLine();
+                }
+                result = sb.toString();
+            } catch (IOException ignored) {
+
+            }
+        }
+
+        return result;
+    }
+
     private static boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         return Environment.MEDIA_MOUNTED.equals(state);
+    }
+
+    private static boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
     }
 
     public static void requestBackupPermissions(Activity activity) {
@@ -196,5 +230,25 @@ public class StorageUtils {
         }
 
         return json;
+    }
+
+    public static void restore(Activity activity) {
+        if (isExternalStorageReadable()) {
+            try {
+                JSONObject json = new JSONObject(getTextFromStorage(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), BACKUP_FILENAME, BACKUP_FOLDERNAME));
+                if (!jsonToDatabase(activity, json)) {
+                    Toast.makeText(activity, R.string.Restore_fail, Toast.LENGTH_LONG).show();
+                    return;
+                }
+            } catch (JSONException e) {
+                Toast.makeText(activity, R.string.Restore_fail, Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+        Toast.makeText(activity, R.string.Restore_success, Toast.LENGTH_LONG).show();
+    }
+
+    private static boolean jsonToDatabase(Activity activity, JSONObject json) {
+        return true;
     }
 }

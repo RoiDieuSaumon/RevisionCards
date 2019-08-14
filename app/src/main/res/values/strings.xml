@@ -56,7 +56,7 @@
     <string name="Write_permissions_request_message">Les droits d\'écriture sont nécessaires pour la sauvegarde des données.\nVoulez-vous continuer ?</string>
     <string name="Write_permissions_request_positive_btn">Oui</string>
     <string name="Write_permissions_request_negative_btn">Non</string>
-    <string name="Backup">Sauvegarde</string>
+    <string name="Backup">Sauvegarder</string>
     <string name="Backup_success">Données sauvegardées</string>
     <string name="Backup_fail">Erreur à la sauvegarde des données</string>
     <string name="Get_subjects_fail">Erreur à la récupération des matières</string>
@@ -65,6 +65,9 @@
     <string name="Get_cards_fail">Erreur à la récupération des fiches</string>
     <string name="Get_grades_fail">Erreur à la récupération des notes</string>
     <string name="Get_data_fail">Erreur à la récupération des données</string>
+    <string name="Restore">Restaurer</string>
+    <string name="Restore_success">Données restaurées</string>
+    <string name="Restore_fail">Erreur à la restauration des données</string>
 
     <string name="Fill_database">Remplissage</string>
     <string name="Fill_database_end">Base de données remplit</string>

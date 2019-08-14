@@ -24,8 +24,10 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class HomeActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
     @BindView(R.id.activity_main_fill_database_btn) Button fillDatabaseButton;
     @BindView(R.id.activity_main_backup_btn) Button backupButton;
+    @BindView(R.id.activity_main_restore_btn) Button restoreButton;
 
     private boolean hasClickBackupButton = false;
+    private boolean hasClickRestoreButton = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +49,10 @@ public class HomeActivity extends BaseActivity implements EasyPermissions.Permis
         if (hasClickBackupButton) {
             hasClickBackupButton = false;
             StorageUtils.backup(this);
+        }
+        if (hasClickRestoreButton) {
+            hasClickRestoreButton = false;
+            StorageUtils.restore(this);
         }
     }
 
@@ -94,6 +100,16 @@ public class HomeActivity extends BaseActivity implements EasyPermissions.Permis
             return;
         }
         StorageUtils.backup(this);
+    }
+
+    @OnClick(R.id.activity_main_restore_btn)
+    public void onClickRestoreButton() {
+        if (!EasyPermissions.hasPermissions(this, WRITE_EXTERNAL_STORAGE)) {
+            hasClickRestoreButton = true;
+            StorageUtils.requestBackupPermissions(this);
+            return;
+        }
+        StorageUtils.restore(this);
     }
 
     @OnClick(R.id.activity_main_fill_database_btn)
