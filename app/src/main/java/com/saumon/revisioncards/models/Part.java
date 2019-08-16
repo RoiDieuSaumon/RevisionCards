@@ -2,6 +2,7 @@ package com.saumon.revisioncards.models;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -25,6 +26,14 @@ public class Part {
     private String name;
     private int position;
     private long lessonId;
+
+    @Ignore
+    public Part(long id, String name, int position, long lessonId) {
+        this.id = id;
+        this.name = name;
+        this.position = position;
+        this.lessonId = lessonId;
+    }
 
     public Part(String name, int position, long lessonId) {
         this.name = name;

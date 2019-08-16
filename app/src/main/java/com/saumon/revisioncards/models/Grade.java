@@ -2,6 +2,7 @@ package com.saumon.revisioncards.models;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -25,6 +26,14 @@ public class Grade {
     private int value;
     private int position;
     private long cardId;
+
+    @Ignore
+    public Grade(long id, int value, int position, long cardId) {
+        this.id = id;
+        this.value = value;
+        this.position = position;
+        this.cardId = cardId;
+    }
 
     public Grade(int value, int position, long cardId) {
         this.value = value;

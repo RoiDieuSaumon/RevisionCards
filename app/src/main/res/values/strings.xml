@@ -66,10 +66,11 @@
     <string name="Get_grades_fail">Erreur à la récupération des notes</string>
     <string name="Get_data_fail">Erreur à la récupération des données</string>
     <string name="Restore">Restaurer</string>
+    <string name="No_data_to_restore">Aucune donnée à restaurer</string>
     <string name="Restore_success">Données restaurées</string>
     <string name="Restore_fail">Erreur à la restauration des données</string>
 
-    <string name="Fill_database">Remplissage</string>
+    <string name="Fill_database">Remplir</string>
     <string name="Fill_database_end">Base de données remplit</string>
 
     <string name="ic_access_alarms">&#xe000;</string>

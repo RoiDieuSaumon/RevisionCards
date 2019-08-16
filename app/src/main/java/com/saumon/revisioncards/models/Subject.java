@@ -1,6 +1,7 @@
 package com.saumon.revisioncards.models;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 // Matière
@@ -10,6 +11,13 @@ public class Subject {
     private long id;
     private String name;
     private int position;
+
+    @Ignore
+    public Subject(long id, String name, int position) {
+        this.id = id;
+        this.name = name;
+        this.position = position;
+    }
 
     public Subject(String name, int position) {
         this.name = name;

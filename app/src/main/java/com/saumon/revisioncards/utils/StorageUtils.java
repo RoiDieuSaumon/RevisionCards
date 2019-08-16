@@ -3,8 +3,8 @@ package com.saumon.revisioncards.utils;
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
-import android.util.JsonReader;
 import android.widget.Toast;
 
 import com.saumon.revisioncards.R;
@@ -19,7 +19,6 @@ import com.saumon.revisioncards.models.Subject;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -42,6 +41,7 @@ public class StorageUtils {
     private static final String BACKUP_FILENAME = "backup.json";
     private static final String BACKUP_FOLDERNAME = "revisionCards";
 
+    @NonNull
     private static File createOrGetFile(File destination, String fileName, String folderName) {
         File folder = new File(destination, folderName);
         return new File(folder, fileName);
@@ -57,7 +57,7 @@ public class StorageUtils {
         return readOnFile(file);
     }
 
-    private static boolean writeOnFile(String text, File file) {
+    private static boolean writeOnFile(String text, @NonNull File file) {
         try {
             file.getParentFile().mkdirs();
             FileOutputStream fos = new FileOutputStream(file);
@@ -73,8 +73,8 @@ public class StorageUtils {
         return true;
     }
 
-    private static String readOnFile(File file) {
-        String result = null;
+    private static String readOnFile(@NonNull File file) {
+        String result = "";
         if (file.exists()) {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 StringBuilder sb = new StringBuilder();
@@ -235,7 +235,16 @@ public class StorageUtils {
     public static void restore(Activity activity) {
         if (isExternalStorageReadable()) {
             try {
-                JSONObject json = new JSONObject(getTextFromStorage(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), BACKUP_FILENAME, BACKUP_FOLDERNAME));
+                String fileContent = getTextFromStorage(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), BACKUP_FILENAME, BACKUP_FOLDERNAME);
+                if (fileContent.isEmpty()) {
+                    Toast.makeText(activity, R.string.No_data_to_restore, Toast.LENGTH_LONG).show();
+                    return;
+                }
+                JSONObject json = new JSONObject(fileContent);
+                if (!json.has("subject")) {
+                    Toast.makeText(activity, R.string.No_data_to_restore, Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if (!jsonToDatabase(activity, json)) {
                     Toast.makeText(activity, R.string.Restore_fail, Toast.LENGTH_LONG).show();
                     return;
@@ -248,7 +257,22 @@ public class StorageUtils {
         Toast.makeText(activity, R.string.Restore_success, Toast.LENGTH_LONG).show();
     }
 
-    private static boolean jsonToDatabase(Activity activity, JSONObject json) {
+    private static boolean jsonToDatabase(@NonNull Activity activity, @NonNull JSONObject json) {
+        activity.deleteDatabase("RevisionCardsDatabase.db");
+        ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(activity);
+        CardViewModel cardViewModel = ViewModelProviders.of((FragmentActivity) activity, viewModelFactory).get(CardViewModel.class);
+
+        try {
+            JSONArray subjectsJson = json.getJSONArray("subject");
+            for (int is = 0; is < subjectsJson.length(); is++) {
+                JSONObject subjectJson = subjectsJson.getJSONObject(is);
+                Subject subject = new Subject(subjectJson.getLong("id"), subjectJson.getString("name"), subjectJson.getInt("position"));
+                cardViewModel.createSubjectSync(subject);
+            }
+        } catch (JSONException e) {
+            return false;
+        }
+
         return true;
     }
 }
