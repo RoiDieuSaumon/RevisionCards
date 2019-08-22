@@ -28,4 +28,8 @@ public class PartDataRepository {
     public void deletePart(long partId) {
         partDao.deletePart(partId);
     }
+
+    public void deleteAll() {
+        partDao.deleteAll();
+    }
 }

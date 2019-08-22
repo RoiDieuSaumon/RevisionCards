@@ -258,9 +258,9 @@ public class StorageUtils {
     }
 
     private static boolean jsonToDatabase(@NonNull Activity activity, @NonNull JSONObject json) {
-        activity.deleteDatabase("RevisionCardsDatabase.db");
         ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(activity);
         CardViewModel cardViewModel = ViewModelProviders.of((FragmentActivity) activity, viewModelFactory).get(CardViewModel.class);
+        cardViewModel.deleteAll();
 
         try {
             JSONArray subjectsJson = json.getJSONArray("subject");

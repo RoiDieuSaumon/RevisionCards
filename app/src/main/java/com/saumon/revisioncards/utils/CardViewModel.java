@@ -184,4 +184,12 @@ public class CardViewModel extends ViewModel {
         card.reverseSideToShow();
         updateCard(card);
     }
+
+    public void deleteAll() {
+        gradeDataSource.deleteAll();
+        cardDataSource.deleteAll();
+        partDataSource.deleteAll();
+        lessonDataSource.deleteAll();
+        subjectDataSource.deleteAll();
+    }
 }

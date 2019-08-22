@@ -28,4 +28,8 @@ public class CardDataRepository {
     public void deleteCard(long cardId) {
         cardDao.deleteCard(cardId);
     }
+
+    public void deleteAll() {
+        cardDao.deleteAll();
+    }
 }

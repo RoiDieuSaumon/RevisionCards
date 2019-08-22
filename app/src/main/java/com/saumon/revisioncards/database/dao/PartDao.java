@@ -22,4 +22,7 @@ public interface PartDao {
 
     @Query("DELETE FROM Part WHERE id = :partId")
     void deletePart(long partId);
+
+    @Query("DELETE FROM Part")
+    void deleteAll();
 }

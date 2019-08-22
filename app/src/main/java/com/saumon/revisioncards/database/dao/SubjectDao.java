@@ -22,4 +22,7 @@ public interface SubjectDao {
 
     @Query("DELETE FROM Subject WHERE id = :subjectId")
     void deleteSubject(long subjectId);
+
+    @Query("DELETE FROM Subject")
+    void deleteAll();
 }

@@ -32,7 +32,7 @@ public class HomeActivity extends BaseActivity implements EasyPermissions.Permis
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       fillDatabaseButton.setVisibility(View.GONE);
+       // fillDatabaseButton.setVisibility(View.GONE);
         if (!EasyPermissions.hasPermissions(this, WRITE_EXTERNAL_STORAGE)) {
             StorageUtils.requestBackupPermissions(this);
         }

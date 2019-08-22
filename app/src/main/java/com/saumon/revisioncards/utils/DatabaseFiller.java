@@ -13,9 +13,9 @@ import com.saumon.revisioncards.models.Subject;
 
 public class DatabaseFiller {
     public static void fillDatabase(Context context) {
-        context.deleteDatabase("RevisionCardsDatabase.db");
         ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(context);
         CardViewModel cardViewModel = ViewModelProviders.of((FragmentActivity) context, viewModelFactory).get(CardViewModel.class);
+        cardViewModel.deleteAll();
         for (int is = 1; is < 6; is++) {
             Subject subject = new Subject("Matière " + is, is);
             cardViewModel.createSubjectSync(subject);

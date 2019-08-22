@@ -32,4 +32,8 @@ public class GradeDataRepository {
     public void deleteGrade(long gradeId) {
         gradeDao.deleteGrade(gradeId);
     }
+
+    public void deleteAll() {
+        gradeDao.deleteAll();
+    }
 }

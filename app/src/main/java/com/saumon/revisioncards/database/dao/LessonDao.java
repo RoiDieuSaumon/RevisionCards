@@ -22,4 +22,7 @@ public interface LessonDao {
 
     @Query("DELETE FROM Lesson WHERE id = :lessonId")
     void deleteLesson(long lessonId);
+
+    @Query("DELETE FROM Lesson")
+    void deleteAll();
 }

@@ -22,4 +22,7 @@ public interface CardDao {
 
     @Query("DELETE FROM Card WHERE id = :cardId")
     void deleteCard(long cardId);
+
+    @Query("DELETE FROM Card")
+    void deleteAll();
 }

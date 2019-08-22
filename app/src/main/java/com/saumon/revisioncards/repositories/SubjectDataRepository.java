@@ -28,4 +28,8 @@ public class SubjectDataRepository {
     public void deleteSubject(long subjectId) {
         subjectDao.deleteSubject(subjectId);
     }
+
+    public void deleteAll() {
+        subjectDao.deleteAll();
+    }
 }

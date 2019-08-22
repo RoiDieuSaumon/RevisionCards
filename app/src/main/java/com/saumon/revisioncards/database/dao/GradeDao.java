@@ -25,4 +25,7 @@ public interface GradeDao {
 
     @Query("DELETE FROM Grade WHERE id = :gradeId")
     void deleteGrade(long gradeId);
+
+    @Query("DELETE FROM Grade")
+    void deleteAll();
 }

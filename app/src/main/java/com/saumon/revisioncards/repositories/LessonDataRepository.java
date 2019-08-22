@@ -28,4 +28,8 @@ public class LessonDataRepository {
     public void deleteLesson(long lessonId) {
         lessonDao.deleteLesson(lessonId);
     }
+
+    public void deleteAll() {
+        lessonDao.deleteAll();
+    }
 }
