@@ -39,4 +39,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.github.bmelnychuk:atv:1.2.9'
     implementation 'com.github.johnkil.print:print:1.2.2'
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.0'
 }
