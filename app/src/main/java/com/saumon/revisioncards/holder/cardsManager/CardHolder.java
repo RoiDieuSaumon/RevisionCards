@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,7 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
     }
 
     @Override
-    public View createNodeView(TreeNode node, CardHolder.IconTreeItem iconTreeItem) {
+    public View createNodeView(TreeNode node, @NonNull CardHolder.IconTreeItem iconTreeItem) {
         this.node = node;
         this.iconTreeItem = iconTreeItem;
         LayoutInflater inflater = LayoutInflater.from(context);

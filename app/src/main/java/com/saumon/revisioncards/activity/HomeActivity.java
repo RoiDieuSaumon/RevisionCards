@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.saumon.revisioncards.R;
-import com.saumon.revisioncards.utils.DatabaseFiller;
+import com.saumon.revisioncards.utils.DatabaseUtils;
 import com.saumon.revisioncards.utils.StorageUtils;
 
 import java.util.List;
@@ -118,7 +118,7 @@ public class HomeActivity extends BaseActivity implements EasyPermissions.Permis
 
     @OnClick(R.id.activity_main_fill_database_btn)
     public void onClickFillDatabaseButton() {
-        DatabaseFiller.fillDatabase(this);
+        DatabaseUtils.fillDatabase(this);
         Toast.makeText(this, R.string.Fill_database_end, Toast.LENGTH_LONG).show();
         fillDatabaseButton.setVisibility(View.GONE);
     }

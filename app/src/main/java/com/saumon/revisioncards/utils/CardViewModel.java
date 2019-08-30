@@ -2,6 +2,7 @@ package com.saumon.revisioncards.utils;
 
 import android.arch.lifecycle.ViewModel;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 
 import com.saumon.revisioncards.models.Card;
 import com.saumon.revisioncards.models.Grade;
@@ -133,6 +134,10 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> gradeDataSource.createGrade(grade));
     }
 
+    public void createGradeSync(Grade grade) {
+        gradeDataSource.createGrade(grade);
+    }
+
     private void updateGrade(Grade grade) {
         executor.execute(() -> gradeDataSource.updateGrade(grade));
     }
@@ -141,7 +146,7 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> gradeDataSource.deleteGrade(gradeId));
     }
 
-    public void addGradeToCard(Card card, int gradeValue) {
+    public void addGradeToCard(@NonNull Card card, int gradeValue) {
         List<Grade> gradeList = getGradesFromCard(card.getId());
         int position;
         if (10 == gradeList.size()) {
@@ -180,7 +185,7 @@ public class CardViewModel extends ViewModel {
         return score;
     }
 
-    public void reverseSideToShow(Card card) {
+    public void reverseSideToShow(@NonNull Card card) {
         card.reverseSideToShow();
         updateCard(card);
     }

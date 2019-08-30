@@ -1,6 +1,7 @@
 package com.saumon.revisioncards.holder.cardsSelector;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -25,7 +26,7 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
     }
 
     @Override
-    public View createNodeView(TreeNode node, IconTreeItem iconTreeItem) {
+    public View createNodeView(TreeNode node, @NonNull IconTreeItem iconTreeItem) {
         this.node = node;
         this.iconTreeItem = iconTreeItem;
         LayoutInflater inflater = LayoutInflater.from(context);

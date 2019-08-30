@@ -3,6 +3,7 @@ package com.saumon.revisioncards.activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.widget.Button;
@@ -54,7 +55,7 @@ public class CardsRevisionActivity extends BaseActivity {
     }
 
     @OnClick(R.id.activity_cards_revision_text2_text)
-    public void onClickText2Text(TextView textView) {
+    public void onClickText2Text(@NonNull TextView textView) {
         textView.setText(card.getTextToHide());
         textView.setBackgroundResource(R.drawable.borders);
         enableButtons();

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,7 @@ public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconT
     }
 
     @Override
-    public View createNodeView(TreeNode node, LessonHolder.IconTreeItem iconTreeItem) {
+    public View createNodeView(TreeNode node, @NonNull LessonHolder.IconTreeItem iconTreeItem) {
         this.node = node;
         this.iconTreeItem = iconTreeItem;
         LayoutInflater inflater = LayoutInflater.from(context);

@@ -2,6 +2,9 @@ package com.saumon.revisioncards.utils;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 
 import com.saumon.revisioncards.injection.Injection;
@@ -11,11 +14,15 @@ import com.saumon.revisioncards.models.Lesson;
 import com.saumon.revisioncards.models.Part;
 import com.saumon.revisioncards.models.Subject;
 
-public class DatabaseFiller {
-    public static void fillDatabase(Context context) {
+import static android.database.sqlite.SQLiteDatabase.OPEN_READWRITE;
+
+public class DatabaseUtils {
+    public static void fillDatabase(@NonNull Context context) {
+        DatabaseUtils.emptyDatabase(context);
+
         ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(context);
         CardViewModel cardViewModel = ViewModelProviders.of((FragmentActivity) context, viewModelFactory).get(CardViewModel.class);
-        cardViewModel.deleteAll();
+
         for (int is = 1; is < 6; is++) {
             Subject subject = new Subject("Matière " + is, is);
             cardViewModel.createSubjectSync(subject);
@@ -32,5 +39,19 @@ public class DatabaseFiller {
                 }
             }
         }
+    }
+
+    static void emptyDatabase(@NonNull Context context) {
+        SQLiteDatabase database = SQLiteDatabase.openDatabase(context.getDatabasePath("RevisionCardsDatabase.db").getPath(), null, OPEN_READWRITE);
+        String[] tableList = {"Subject", "Lesson", "Part", "Card", "Grade"};
+        for (String table :tableList) {
+            try {
+                database.execSQL("DELETE FROM " + table);
+            } catch (SQLiteException ignored) {}
+            try {
+                database.execSQL("DELETE FROM sqlite_sequence WHERE name='" + table + "'");
+            } catch (SQLiteException ignored) {}
+        }
+        database.close();
     }
 }

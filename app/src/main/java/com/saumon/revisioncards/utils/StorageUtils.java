@@ -258,9 +258,10 @@ public class StorageUtils {
     }
 
     private static boolean jsonToDatabase(@NonNull Activity activity, @NonNull JSONObject json) {
+        DatabaseUtils.emptyDatabase(activity);
+
         ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(activity);
         CardViewModel cardViewModel = ViewModelProviders.of((FragmentActivity) activity, viewModelFactory).get(CardViewModel.class);
-        cardViewModel.deleteAll();
 
         try {
             JSONArray subjectsJson = json.getJSONArray("subject");
@@ -268,6 +269,34 @@ public class StorageUtils {
                 JSONObject subjectJson = subjectsJson.getJSONObject(is);
                 Subject subject = new Subject(subjectJson.getLong("id"), subjectJson.getString("name"), subjectJson.getInt("position"));
                 cardViewModel.createSubjectSync(subject);
+            }
+
+            JSONArray lessonsJson = json.getJSONArray("lesson");
+            for (int il = 0; il < lessonsJson.length(); il++) {
+                JSONObject lessonJson = lessonsJson.getJSONObject(il);
+                Lesson lesson = new Lesson(lessonJson.getLong("id"), lessonJson.getString("name"), lessonJson.getInt("position"), lessonJson.getLong("subjectId"));
+                cardViewModel.createLessonSync(lesson);
+            }
+
+            JSONArray partsJson = json.getJSONArray("part");
+            for (int ip = 0; ip < partsJson.length(); ip++) {
+                JSONObject partJson = partsJson.getJSONObject(ip);
+                Part part = new Part(partJson.getLong("id"), partJson.getString("name"), partJson.getInt("position"), partJson.getLong("lessonId"));
+                cardViewModel.createPartSync(part);
+            }
+
+            JSONArray cardsJson = json.getJSONArray("card");
+            for (int ic = 0; ic < cardsJson.length(); ic++) {
+                JSONObject cardJson = cardsJson.getJSONObject(ic);
+                Card card = new Card(cardJson.getLong("id"), cardJson.getString("name"), cardJson.getString("text1"), cardJson.getString("text2"), cardJson.getInt("position"), cardJson.getInt("sideToShow"), cardJson.getLong("partId"));
+                cardViewModel.createCardSync(card);
+            }
+
+            JSONArray gradesJson = json.getJSONArray("grade");
+            for (int ig = 0; ig < gradesJson.length(); ig++) {
+                JSONObject gradeJson = gradesJson.getJSONObject(ig);
+                Grade grade = new Grade(gradeJson.getLong("id"), gradeJson.getInt("value"), gradeJson.getInt("position"), gradeJson.getLong("cardId"));
+                cardViewModel.createGradeSync(grade);
             }
         } catch (JSONException e) {
             return false;
