@@ -138,6 +138,7 @@ public class CardsRevisionActivity extends BaseActivity {
         TextView textView = findViewById(R.id.activity_cards_revision_score_text);
         if (-1 == score) {
             textView.setText(getString(R.string.No_score));
+            textView.setBackgroundResource(android.R.color.transparent);
             return;
         }
         textView.setText(getString(R.string.Score_display, score));
