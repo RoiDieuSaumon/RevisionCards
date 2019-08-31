@@ -1,6 +1,7 @@
 package com.saumon.revisioncards.database.dao;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
@@ -20,9 +21,6 @@ public interface SubjectDao {
     @Update
     void updateSubject(Subject subject);
 
-    @Query("DELETE FROM Subject WHERE id = :subjectId")
-    void deleteSubject(long subjectId);
-
-    @Query("DELETE FROM Subject")
-    void deleteAll();
+    @Delete
+    void deleteSubject(Subject subject);
 }

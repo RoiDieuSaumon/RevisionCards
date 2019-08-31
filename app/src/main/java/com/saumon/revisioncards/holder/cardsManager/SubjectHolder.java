@@ -178,7 +178,7 @@ public class SubjectHolder extends TreeNode.BaseNodeViewHolder<SubjectHolder.Ico
     private void deleteSubject(DialogInterface dialog, int which) {
         TreeNode parentNode = node.getParent();
         getTreeView().removeNode(node);
-        cardViewModel.deleteSubject(iconTreeItem.subject.getId());
+        cardViewModel.deleteSubject(iconTreeItem.subject);
         List<TreeNode> subjectNodes = parentNode.getChildren();
         int nbSubjectNodes = subjectNodes.size();
         for (int is = 0; is < nbSubjectNodes; is++) {

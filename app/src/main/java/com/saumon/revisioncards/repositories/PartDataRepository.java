@@ -25,11 +25,7 @@ public class PartDataRepository {
         partDao.updatePart(part);
     }
 
-    public void deletePart(long partId) {
-        partDao.deletePart(partId);
-    }
-
-    public void deleteAll() {
-        partDao.deleteAll();
+    public void deletePart(Part part) {
+        partDao.deletePart(part);
     }
 }

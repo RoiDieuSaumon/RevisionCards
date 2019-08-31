@@ -1,6 +1,7 @@
 package com.saumon.revisioncards.database.dao;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
@@ -23,9 +24,6 @@ public interface GradeDao {
     @Update
     void updateGrade(Grade grade);
 
-    @Query("DELETE FROM Grade WHERE id = :gradeId")
-    void deleteGrade(long gradeId);
-
-    @Query("DELETE FROM Grade")
-    void deleteAll();
+    @Delete
+    void deleteGrade(Grade grade);
 }

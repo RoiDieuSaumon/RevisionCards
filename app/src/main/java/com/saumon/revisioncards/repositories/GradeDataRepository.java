@@ -29,11 +29,7 @@ public class GradeDataRepository {
         gradeDao.updateGrade(grade);
     }
 
-    public void deleteGrade(long gradeId) {
-        gradeDao.deleteGrade(gradeId);
-    }
-
-    public void deleteAll() {
-        gradeDao.deleteAll();
+    public void deleteGrade(Grade grade) {
+        gradeDao.deleteGrade(grade);
     }
 }

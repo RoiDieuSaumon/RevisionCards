@@ -157,7 +157,7 @@ public class CardHolder extends TreeNode.BaseNodeViewHolder<CardHolder.IconTreeI
     private void deleteCard(DialogInterface dialog, int which) {
         TreeNode parentNode = node.getParent();
         getTreeView().removeNode(node);
-        cardViewModel.deleteCard(iconTreeItem.card.getId());
+        cardViewModel.deleteCard(iconTreeItem.card);
         List<TreeNode> cardNodes = parentNode.getChildren();
         int nbCardNodes = cardNodes.size();
         for (int ic = 0; ic < nbCardNodes; ic++) {

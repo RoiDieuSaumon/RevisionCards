@@ -25,11 +25,7 @@ public class LessonDataRepository {
         lessonDao.updateLesson(lesson);
     }
 
-    public void deleteLesson(long lessonId) {
-        lessonDao.deleteLesson(lessonId);
-    }
-
-    public void deleteAll() {
-        lessonDao.deleteAll();
+    public void deleteLesson(Lesson lesson) {
+        lessonDao.deleteLesson(lesson);
     }
 }

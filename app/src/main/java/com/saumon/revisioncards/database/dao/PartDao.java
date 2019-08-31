@@ -1,6 +1,7 @@
 package com.saumon.revisioncards.database.dao;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
@@ -20,9 +21,6 @@ public interface PartDao {
     @Update
     void updatePart(Part part);
 
-    @Query("DELETE FROM Part WHERE id = :partId")
-    void deletePart(long partId);
-
-    @Query("DELETE FROM Part")
-    void deleteAll();
+    @Delete
+    void deletePart(Part part);
 }

@@ -25,11 +25,7 @@ public class CardDataRepository {
         cardDao.updateCard(card);
     }
 
-    public void deleteCard(long cardId) {
-        cardDao.deleteCard(cardId);
-    }
-
-    public void deleteAll() {
-        cardDao.deleteAll();
+    public void deleteCard(Card card) {
+        cardDao.deleteCard(card);
     }
 }

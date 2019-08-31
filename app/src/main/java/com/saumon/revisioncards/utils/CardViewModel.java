@@ -58,8 +58,8 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> subjectDataSource.updateSubject(subject));
     }
 
-    public void deleteSubject(long subjectId) {
-        executor.execute(() -> subjectDataSource.deleteSubject(subjectId));
+    public void deleteSubject(Subject subject) {
+        executor.execute(() -> subjectDataSource.deleteSubject(subject));
     }
 
     public List<Lesson> getLessons() {
@@ -78,8 +78,8 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> lessonDataSource.updateLesson(lesson));
     }
 
-    public void deleteLesson(long lessonId) {
-        executor.execute(() -> lessonDataSource.deleteLesson(lessonId));
+    public void deleteLesson(Lesson lesson) {
+        executor.execute(() -> lessonDataSource.deleteLesson(lesson));
     }
 
     public List<Part> getParts() {
@@ -98,8 +98,8 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> partDataSource.updatePart(part));
     }
 
-    public void deletePart(long partId) {
-        executor.execute(() -> partDataSource.deletePart(partId));
+    public void deletePart(Part part) {
+        executor.execute(() -> partDataSource.deletePart(part));
     }
 
     public List<Card> getCards() {
@@ -118,8 +118,8 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> cardDataSource.updateCard(card));
     }
 
-    public void deleteCard(long cardId) {
-        executor.execute(() -> cardDataSource.deleteCard(cardId));
+    public void deleteCard(Card card) {
+        executor.execute(() -> cardDataSource.deleteCard(card));
     }
 
     public List<Grade> getGrades() {
@@ -142,8 +142,8 @@ public class CardViewModel extends ViewModel {
         executor.execute(() -> gradeDataSource.updateGrade(grade));
     }
 
-    private void deleteGrade(long gradeId) {
-        executor.execute(() -> gradeDataSource.deleteGrade(gradeId));
+    private void deleteGrade(Grade grade) {
+        executor.execute(() -> gradeDataSource.deleteGrade(grade));
     }
 
     public void addGradeToCard(@NonNull Card card, int gradeValue) {
@@ -152,7 +152,7 @@ public class CardViewModel extends ViewModel {
         if (10 == gradeList.size()) {
             for (int i = 0; i < 10; i++) {
                 if (0 == i) {
-                    deleteGrade(gradeList.get(0).getId());
+                    deleteGrade(gradeList.get(0));
                 } else {
                     gradeList.get(i).setPosition(i);
                     updateGrade(gradeList.get(i));
@@ -188,13 +188,5 @@ public class CardViewModel extends ViewModel {
     public void reverseSideToShow(@NonNull Card card) {
         card.reverseSideToShow();
         updateCard(card);
-    }
-
-    public void deleteAll() {
-        gradeDataSource.deleteAll();
-        cardDataSource.deleteAll();
-        partDataSource.deleteAll();
-        lessonDataSource.deleteAll();
-        subjectDataSource.deleteAll();
     }
 }

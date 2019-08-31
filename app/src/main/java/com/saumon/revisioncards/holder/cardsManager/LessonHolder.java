@@ -173,7 +173,7 @@ public class LessonHolder extends TreeNode.BaseNodeViewHolder<LessonHolder.IconT
     private void deleteLesson(DialogInterface dialog, int which) {
         TreeNode parentNode = node.getParent();
         getTreeView().removeNode(node);
-        cardViewModel.deleteLesson(iconTreeItem.lesson.getId());
+        cardViewModel.deleteLesson(iconTreeItem.lesson);
         List<TreeNode> lessonNodes = parentNode.getChildren();
         int nbLessonNodes = lessonNodes.size();
         for (int il = 0; il < nbLessonNodes; il++) {

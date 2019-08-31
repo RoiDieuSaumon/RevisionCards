@@ -25,11 +25,7 @@ public class SubjectDataRepository {
         subjectDao.updateSubject(subject);
     }
 
-    public void deleteSubject(long subjectId) {
-        subjectDao.deleteSubject(subjectId);
-    }
-
-    public void deleteAll() {
-        subjectDao.deleteAll();
+    public void deleteSubject(Subject subject) {
+        subjectDao.deleteSubject(subject);
     }
 }

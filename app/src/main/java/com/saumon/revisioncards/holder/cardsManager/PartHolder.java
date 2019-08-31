@@ -173,7 +173,7 @@ public class PartHolder extends TreeNode.BaseNodeViewHolder<PartHolder.IconTreeI
     private void deletePart(DialogInterface dialog, int which) {
         TreeNode parentNode = node.getParent();
         getTreeView().removeNode(node);
-        cardViewModel.deletePart(iconTreeItem.part.getId());
+        cardViewModel.deletePart(iconTreeItem.part);
         List<TreeNode> partNodes = parentNode.getChildren();
         int nbPartNodes = partNodes.size();
         for (int ip = 0; ip < nbPartNodes; ip++) {
