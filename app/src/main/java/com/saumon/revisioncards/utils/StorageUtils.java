@@ -40,6 +40,7 @@ public class StorageUtils {
     private static final int RC_STORAGE_WRITE_PERMS = 100;
     private static final String BACKUP_FILENAME = "backup.json";
     private static final String BACKUP_FOLDERNAME = "revisionCards";
+    private static final int BACKUP_VERSION = 1;
 
     @NonNull
     private static File createOrGetFile(File destination, String fileName, String folderName) {
@@ -220,6 +221,7 @@ public class StorageUtils {
         }
 
         try {
+            json.put("version", BACKUP_VERSION);
             json.put("subject", subjectsJson);
             json.put("lesson", lessonsJson);
             json.put("part", partsJson);
@@ -246,7 +248,6 @@ public class StorageUtils {
                     return;
                 }
                 if (!jsonToDatabase(activity, json)) {
-                    Toast.makeText(activity, R.string.Restore_fail, Toast.LENGTH_LONG).show();
                     return;
                 }
             } catch (JSONException e) {
@@ -258,6 +259,21 @@ public class StorageUtils {
     }
 
     private static boolean jsonToDatabase(@NonNull Activity activity, @NonNull JSONObject json) {
+        if (!json.has("version")) {
+            Toast.makeText(activity, R.string.Restore_fail_no_version, Toast.LENGTH_LONG).show();
+            return false;
+        }
+        try {
+            int version = json.getInt("version");
+            if (BACKUP_VERSION != version) {
+                Toast.makeText(activity, activity.getString(R.string.Restore_fail_wrong_version, version), Toast.LENGTH_LONG).show();
+                return false;
+            }
+        } catch (JSONException e) {
+            Toast.makeText(activity, R.string.Restore_fail, Toast.LENGTH_LONG).show();
+            return false;
+        }
+
         DatabaseUtils.emptyDatabase(activity);
 
         ViewModelFactory viewModelFactory = Injection.provideViewModelFactory(activity);
@@ -299,6 +315,7 @@ public class StorageUtils {
                 cardViewModel.createGradeSync(grade);
             }
         } catch (JSONException e) {
+            Toast.makeText(activity, R.string.Restore_fail, Toast.LENGTH_LONG).show();
             return false;
         }
 

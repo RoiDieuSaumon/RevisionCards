@@ -69,6 +69,8 @@
     <string name="No_data_to_restore">Aucune donnée à restaurer</string>
     <string name="Restore_success">Données restaurées</string>
     <string name="Restore_fail">Erreur à la restauration des données</string>
+    <string name="Restore_fail_no_version">Erreur à la restauration des données, numéro de version manquant</string>
+    <string name="Restore_fail_wrong_version">Erreur à la restauration des données, numéro de version inconnu : %d</string>
 
     <string name="Fill_database">Remplir</string>
     <string name="Fill_database_end">Base de données remplit</string>
