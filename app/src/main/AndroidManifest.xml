@@ -16,12 +16,15 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".activity.CardsRevisionActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".activity.HomeActivity" />
         <activity
             android:name=".activity.CardsRevisionSelectorActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".activity.HomeActivity" />
         <activity
             android:name=".activity.CardsManagerActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".activity.HomeActivity" />
         <activity
             android:name=".activity.HomeActivity"
