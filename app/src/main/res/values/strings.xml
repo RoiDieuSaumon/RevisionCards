@@ -73,6 +73,7 @@
     <string name="Restore_fail_wrong_version">Erreur à la restauration des données, numéro de version inconnu : %d</string>
 
     <string name="Fill_database">Remplir</string>
+    <string name="Filling_database">Remplissage en cours</string>
     <string name="Fill_database_end">Base de données remplit</string>
 
     <string name="ic_access_alarms">&#xe000;</string>

@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/Review"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="15dp"
         android:width="210dp"
         android:height="70dp"
         android:textSize="25sp" />
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/Cards"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="15dp"
         android:width="210dp"
         android:height="70dp"
         android:textSize="25sp" />
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/Backup"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="15dp"
         android:width="210dp"
         android:height="70dp"
         android:textSize="25sp" />
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/Restore"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="15dp"
         android:width="210dp"
         android:height="70dp"
         android:textSize="25sp" />
@@ -62,9 +62,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/Fill_database"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="15dp"
         android:width="210dp"
         android:height="70dp"
         android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/activity_main_message_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:width="210dp"
+        android:textSize="25sp"
+        android:textColor="@android:color/black" />
 
 </LinearLayout>

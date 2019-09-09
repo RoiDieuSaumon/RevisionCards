@@ -8,10 +8,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.saumon.revisioncards.R;
-import com.saumon.revisioncards.utils.DatabaseUtils;
+import com.saumon.revisioncards.utils.FillDatabaseTask;
 import com.saumon.revisioncards.utils.StorageUtils;
 
 import java.util.List;
@@ -22,10 +23,11 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class HomeActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
+public class HomeActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks, FillDatabaseTask.Listeners {
     @BindView(R.id.activity_main_fill_database_btn) Button fillDatabaseButton;
     @BindView(R.id.activity_main_backup_btn) Button backupButton;
     @BindView(R.id.activity_main_restore_btn) Button restoreButton;
+    @BindView(R.id.activity_main_message_txt) TextView messageTextView;
 
     private boolean hasClickBackupButton = false;
     private boolean hasClickRestoreButton = false;
@@ -118,8 +120,22 @@ public class HomeActivity extends BaseActivity implements EasyPermissions.Permis
 
     @OnClick(R.id.activity_main_fill_database_btn)
     public void onClickFillDatabaseButton() {
-        DatabaseUtils.fillDatabase(this);
+        new FillDatabaseTask(this).execute(this);
+    }
+
+    @Override
+    public void onPreExecute() {
+        fillDatabaseButton.setEnabled(false);
+        messageTextView.setText(getString(R.string.Filling_database));
+    }
+
+    @Override
+    public void doInBackground() {}
+
+    @Override
+    public void onPostExecute(Void aVoid) {
+        messageTextView.setText("");
+        fillDatabaseButton.setEnabled(true);
         Toast.makeText(this, R.string.Fill_database_end, Toast.LENGTH_LONG).show();
-        fillDatabaseButton.setVisibility(View.GONE);
     }
 }

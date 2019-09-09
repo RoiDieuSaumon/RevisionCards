@@ -116,9 +116,9 @@ public class CardsRevisionActivity extends BaseActivity {
         okBtn.setBackgroundResource(R.color.gray);
         middleBtn.setBackgroundResource(R.color.gray);
         koBtn.setBackgroundResource(R.color.gray);
-        okBtn.setTextColor(getResources().getColor(R.color.grayTxt));
-        middleBtn.setTextColor(getResources().getColor(R.color.grayTxt));
-        koBtn.setTextColor(getResources().getColor(R.color.grayTxt));
+        okBtn.setTextColor(getResources().getColor(android.R.color.darker_gray));
+        middleBtn.setTextColor(getResources().getColor(android.R.color.darker_gray));
+        koBtn.setTextColor(getResources().getColor(android.R.color.darker_gray));
     }
 
     private void enableButtons() {
@@ -128,9 +128,9 @@ public class CardsRevisionActivity extends BaseActivity {
         okBtn.setBackgroundResource(R.color.green);
         middleBtn.setBackgroundResource(R.color.orange);
         koBtn.setBackgroundResource(R.color.red);
-        okBtn.setTextColor(getResources().getColor(R.color.blackTxt));
-        middleBtn.setTextColor(getResources().getColor(R.color.blackTxt));
-        koBtn.setTextColor(getResources().getColor(R.color.blackTxt));
+        okBtn.setTextColor(getResources().getColor(android.R.color.black));
+        middleBtn.setTextColor(getResources().getColor(android.R.color.black));
+        koBtn.setTextColor(getResources().getColor(android.R.color.black));
     }
 
     private void showScore() {
