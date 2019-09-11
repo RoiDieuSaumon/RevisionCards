@@ -66,6 +66,7 @@ public class HomeActivity extends BaseActivity implements EasyPermissions.Permis
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
         if (StorageUtils.isBackupPermissionsPermanentlyDenied(this)) {
             backupButton.setVisibility(View.GONE);
+            restoreButton.setVisibility(View.GONE);
         }
     }
 
